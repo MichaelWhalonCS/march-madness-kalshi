@@ -1,0 +1,1026 @@
+[
+  {
+    "team": "Duke",
+    "seed": 1,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.932,
+      "R32": 0.727,
+      "S16": 0.474,
+      "E8": 0.288,
+      "F4": 0.12,
+      "Championship": 0.049
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.932
+  },
+  {
+    "team": "Alabama",
+    "seed": 2,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.94,
+      "R32": 0.712,
+      "S16": 0.477,
+      "E8": 0.255,
+      "F4": 0.127,
+      "Championship": 0.06
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.94
+  },
+  {
+    "team": "Wisconsin",
+    "seed": 3,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.875,
+      "R32": 0.64,
+      "S16": 0.356,
+      "E8": 0.187,
+      "F4": 0.071,
+      "Championship": 0.033
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.875
+  },
+  {
+    "team": "Arizona",
+    "seed": 4,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.795,
+      "R32": 0.586,
+      "S16": 0.352,
+      "E8": 0.181,
+      "F4": 0.068,
+      "Championship": 0.024
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.795
+  },
+  {
+    "team": "Oregon",
+    "seed": 5,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.756,
+      "R32": 0.547,
+      "S16": 0.326,
+      "E8": 0.176,
+      "F4": 0.072,
+      "Championship": 0.022
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.756
+  },
+  {
+    "team": "BYU",
+    "seed": 6,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.598,
+      "R32": 0.379,
+      "S16": 0.184,
+      "E8": 0.08,
+      "F4": 0.035,
+      "Championship": 0.014
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.598
+  },
+  {
+    "team": "St. Mary's",
+    "seed": 7,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.625,
+      "R32": 0.323,
+      "S16": 0.171,
+      "E8": 0.068,
+      "F4": 0.024,
+      "Championship": 0.008
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.625
+  },
+  {
+    "team": "Mississippi St.",
+    "seed": 8,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.537,
+      "R32": 0.302,
+      "S16": 0.123,
+      "E8": 0.049,
+      "F4": 0.019,
+      "Championship": 0.006
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.537
+  },
+  {
+    "team": "Baylor",
+    "seed": 9,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.478,
+      "R32": 0.286,
+      "S16": 0.115,
+      "E8": 0.042,
+      "F4": 0.016,
+      "Championship": 0.005
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.478
+  },
+  {
+    "team": "Vanderbilt",
+    "seed": 10,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.394,
+      "R32": 0.167,
+      "S16": 0.062,
+      "E8": 0.018,
+      "F4": 0.004,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.394
+  },
+  {
+    "team": "VCU",
+    "seed": 11,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.447,
+      "R32": 0.181,
+      "S16": 0.074,
+      "E8": 0.024,
+      "F4": 0.007,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.447
+  },
+  {
+    "team": "Liberty",
+    "seed": 12,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.417,
+      "R32": 0.191,
+      "S16": 0.068,
+      "E8": 0.021,
+      "F4": 0.007,
+      "Championship": 0.002
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.417
+  },
+  {
+    "team": "Yale",
+    "seed": 13,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.209,
+      "R32": 0.087,
+      "S16": 0.032,
+      "E8": 0.008,
+      "F4": 0.002,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.209
+  },
+  {
+    "team": "Lipscomb",
+    "seed": 14,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.146,
+      "R32": 0.064,
+      "S16": 0.019,
+      "E8": 0.004,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.146
+  },
+  {
+    "team": "Robert Morris",
+    "seed": 15,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.101,
+      "R32": 0.036,
+      "S16": 0.01,
+      "E8": 0.002,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.101
+  },
+  {
+    "team": "American",
+    "seed": 16,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.01,
+      "R32": 0.003,
+      "S16": 0.0,
+      "E8": 0.0,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.01
+  },
+  {
+    "team": "Houston",
+    "seed": 1,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.99,
+      "R32": 0.825,
+      "S16": 0.512,
+      "E8": 0.316,
+      "F4": 0.131,
+      "Championship": 0.063
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.99
+  },
+  {
+    "team": "Tennessee",
+    "seed": 2,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.959,
+      "R32": 0.72,
+      "S16": 0.444,
+      "E8": 0.267,
+      "F4": 0.143,
+      "Championship": 0.07
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.959
+  },
+  {
+    "team": "Kentucky",
+    "seed": 3,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.848,
+      "R32": 0.549,
+      "S16": 0.308,
+      "E8": 0.156,
+      "F4": 0.059,
+      "Championship": 0.027
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.848
+  },
+  {
+    "team": "Purdue",
+    "seed": 4,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.791,
+      "R32": 0.537,
+      "S16": 0.265,
+      "E8": 0.107,
+      "F4": 0.047,
+      "Championship": 0.022
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.791
+  },
+  {
+    "team": "Clemson",
+    "seed": 5,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.577,
+      "R32": 0.405,
+      "S16": 0.205,
+      "E8": 0.099,
+      "F4": 0.044,
+      "Championship": 0.02
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.577
+  },
+  {
+    "team": "Illinois",
+    "seed": 6,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.664,
+      "R32": 0.429,
+      "S16": 0.199,
+      "E8": 0.082,
+      "F4": 0.032,
+      "Championship": 0.013
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.664
+  },
+  {
+    "team": "UCLA",
+    "seed": 7,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.7,
+      "R32": 0.414,
+      "S16": 0.219,
+      "E8": 0.079,
+      "F4": 0.025,
+      "Championship": 0.009
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.7
+  },
+  {
+    "team": "Gonzaga",
+    "seed": 8,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.612,
+      "R32": 0.38,
+      "S16": 0.178,
+      "E8": 0.059,
+      "F4": 0.022,
+      "Championship": 0.009
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.612
+  },
+  {
+    "team": "Georgia",
+    "seed": 9,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.537,
+      "R32": 0.32,
+      "S16": 0.132,
+      "E8": 0.047,
+      "F4": 0.018,
+      "Championship": 0.006
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.537
+  },
+  {
+    "team": "Texas Tech",
+    "seed": 10,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.329,
+      "R32": 0.139,
+      "S16": 0.049,
+      "E8": 0.02,
+      "F4": 0.005,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.329
+  },
+  {
+    "team": "Drake",
+    "seed": 11,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.341,
+      "R32": 0.174,
+      "S16": 0.055,
+      "E8": 0.018,
+      "F4": 0.005,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.341
+  },
+  {
+    "team": "McNeese",
+    "seed": 12,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.305,
+      "R32": 0.115,
+      "S16": 0.05,
+      "E8": 0.016,
+      "F4": 0.005,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.305
+  },
+  {
+    "team": "High Point",
+    "seed": 13,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.204,
+      "R32": 0.081,
+      "S16": 0.025,
+      "E8": 0.008,
+      "F4": 0.002,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.204
+  },
+  {
+    "team": "Troy",
+    "seed": 14,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.13,
+      "R32": 0.042,
+      "S16": 0.016,
+      "E8": 0.003,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.13
+  },
+  {
+    "team": "Montana",
+    "seed": 15,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.06,
+      "R32": 0.023,
+      "S16": 0.005,
+      "E8": 0.0,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.06
+  },
+  {
+    "team": "Norfolk St.",
+    "seed": 16,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.026,
+      "R32": 0.009,
+      "S16": 0.002,
+      "E8": 0.0,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.026
+  },
+  {
+    "team": "Auburn",
+    "seed": 1,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.959,
+      "R32": 0.737,
+      "S16": 0.469,
+      "E8": 0.226,
+      "F4": 0.101,
+      "Championship": 0.043
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.959
+  },
+  {
+    "team": "Iowa St.",
+    "seed": 2,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.906,
+      "R32": 0.678,
+      "S16": 0.454,
+      "E8": 0.233,
+      "F4": 0.106,
+      "Championship": 0.043
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.906
+  },
+  {
+    "team": "Florida",
+    "seed": 3,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.848,
+      "R32": 0.557,
+      "S16": 0.36,
+      "E8": 0.199,
+      "F4": 0.098,
+      "Championship": 0.046
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.848
+  },
+  {
+    "team": "Texas A&M",
+    "seed": 4,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.773,
+      "R32": 0.587,
+      "S16": 0.371,
+      "E8": 0.188,
+      "F4": 0.077,
+      "Championship": 0.034
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.773
+  },
+  {
+    "team": "Michigan St.",
+    "seed": 5,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.73,
+      "R32": 0.498,
+      "S16": 0.309,
+      "E8": 0.135,
+      "F4": 0.047,
+      "Championship": 0.018
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.73
+  },
+  {
+    "team": "Missouri",
+    "seed": 6,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.644,
+      "R32": 0.406,
+      "S16": 0.186,
+      "E8": 0.088,
+      "F4": 0.035,
+      "Championship": 0.013
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.644
+  },
+  {
+    "team": "Marquette",
+    "seed": 7,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.553,
+      "R32": 0.31,
+      "S16": 0.141,
+      "E8": 0.06,
+      "F4": 0.018,
+      "Championship": 0.006
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.553
+  },
+  {
+    "team": "Louisville",
+    "seed": 8,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.611,
+      "R32": 0.311,
+      "S16": 0.155,
+      "E8": 0.068,
+      "F4": 0.026,
+      "Championship": 0.007
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.611
+  },
+  {
+    "team": "Creighton",
+    "seed": 9,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.506,
+      "R32": 0.269,
+      "S16": 0.109,
+      "E8": 0.047,
+      "F4": 0.014,
+      "Championship": 0.004
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.506
+  },
+  {
+    "team": "New Mexico",
+    "seed": 10,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.342,
+      "R32": 0.147,
+      "S16": 0.059,
+      "E8": 0.025,
+      "F4": 0.009,
+      "Championship": 0.002
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.342
+  },
+  {
+    "team": "San Diego St.",
+    "seed": 11,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.273,
+      "R32": 0.11,
+      "S16": 0.035,
+      "E8": 0.009,
+      "F4": 0.003,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.273
+  },
+  {
+    "team": "UC Irvine",
+    "seed": 12,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.427,
+      "R32": 0.176,
+      "S16": 0.072,
+      "E8": 0.023,
+      "F4": 0.007,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.427
+  },
+  {
+    "team": "Vermont",
+    "seed": 13,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.285,
+      "R32": 0.107,
+      "S16": 0.031,
+      "E8": 0.009,
+      "F4": 0.003,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.285
+  },
+  {
+    "team": "Grand Canyon",
+    "seed": 14,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.187,
+      "R32": 0.081,
+      "S16": 0.028,
+      "E8": 0.009,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.187
+  },
+  {
+    "team": "Colgate",
+    "seed": 15,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.041,
+      "R32": 0.016,
+      "S16": 0.004,
+      "E8": 0.0,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.041
+  },
+  {
+    "team": "Grambling",
+    "seed": 16,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.112,
+      "R32": 0.04,
+      "S16": 0.008,
+      "E8": 0.002,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.112
+  },
+  {
+    "team": "UConn",
+    "seed": 1,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.974,
+      "R32": 0.735,
+      "S16": 0.485,
+      "E8": 0.284,
+      "F4": 0.119,
+      "Championship": 0.056
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.974
+  },
+  {
+    "team": "St. John's",
+    "seed": 2,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.892,
+      "R32": 0.614,
+      "S16": 0.369,
+      "E8": 0.204,
+      "F4": 0.099,
+      "Championship": 0.035
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.892
+  },
+  {
+    "team": "Marquette",
+    "seed": 3,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.858,
+      "R32": 0.596,
+      "S16": 0.345,
+      "E8": 0.16,
+      "F4": 0.069,
+      "Championship": 0.025
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.858
+  },
+  {
+    "team": "North Carolina",
+    "seed": 4,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.763,
+      "R32": 0.529,
+      "S16": 0.316,
+      "E8": 0.175,
+      "F4": 0.079,
+      "Championship": 0.03
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.763
+  },
+  {
+    "team": "Memphis",
+    "seed": 5,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.611,
+      "R32": 0.366,
+      "S16": 0.172,
+      "E8": 0.073,
+      "F4": 0.029,
+      "Championship": 0.01
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.611
+  },
+  {
+    "team": "Ole Miss",
+    "seed": 6,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.593,
+      "R32": 0.412,
+      "S16": 0.22,
+      "E8": 0.109,
+      "F4": 0.043,
+      "Championship": 0.016
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.593
+  },
+  {
+    "team": "Kansas",
+    "seed": 7,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.702,
+      "R32": 0.418,
+      "S16": 0.191,
+      "E8": 0.084,
+      "F4": 0.034,
+      "Championship": 0.011
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.702
+  },
+  {
+    "team": "Pittsburgh",
+    "seed": 8,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.552,
+      "R32": 0.267,
+      "S16": 0.145,
+      "E8": 0.057,
+      "F4": 0.024,
+      "Championship": 0.008
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.552
+  },
+  {
+    "team": "Maryland",
+    "seed": 9,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.552,
+      "R32": 0.331,
+      "S16": 0.168,
+      "E8": 0.06,
+      "F4": 0.024,
+      "Championship": 0.009
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.552
+  },
+  {
+    "team": "Xavier",
+    "seed": 10,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.337,
+      "R32": 0.186,
+      "S16": 0.073,
+      "E8": 0.022,
+      "F4": 0.006,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.337
+  },
+  {
+    "team": "Nebraska",
+    "seed": 11,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.38,
+      "R32": 0.176,
+      "S16": 0.077,
+      "E8": 0.026,
+      "F4": 0.006,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.38
+  },
+  {
+    "team": "Colorado St.",
+    "seed": 12,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.271,
+      "R32": 0.135,
+      "S16": 0.059,
+      "E8": 0.021,
+      "F4": 0.007,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.271
+  },
+  {
+    "team": "Akron",
+    "seed": 13,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.259,
+      "R32": 0.111,
+      "S16": 0.03,
+      "E8": 0.008,
+      "F4": 0.002,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.259
+  },
+  {
+    "team": "Morehead St.",
+    "seed": 14,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.198,
+      "R32": 0.09,
+      "S16": 0.021,
+      "E8": 0.005,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.198
+  },
+  {
+    "team": "Wofford",
+    "seed": 15,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.085,
+      "R32": 0.035,
+      "S16": 0.009,
+      "E8": 0.003,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.085
+  },
+  {
+    "team": "FDU",
+    "seed": 16,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.01,
+      "R32": 0.003,
+      "S16": 0.0,
+      "E8": 0.0,
+      "F4": 0.0,
+      "Championship": 0.0
+    },
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.01
+  }
+]

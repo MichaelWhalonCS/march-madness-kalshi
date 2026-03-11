@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>March Madness Survivor Tool — Kalshi Odds</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 1rem;
+    min-height: 100vh;
+  }
+
+  .header {
+    max-width: 1400px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .header .meta {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .header .meta span {
+    margin-right: 1.5rem;
+  }
+
+  /* ── Filter bar ──────────────────────────────────────── */
+  .filters {
+    max-width: 1400px;
+    margin: 0 auto 1rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filters label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .filters select, .filters input {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .filters input[type="text"] { width: 160px; }
+
+  /* ── Table ───────────────────────────────────────────── */
+  .table-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  th {
+    background: var(--surface);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    text-align: left;
+  }
+
+  th:hover { color: var(--accent); }
+
+  th .sort-arrow {
+    margin-left: 0.3rem;
+    font-size: 0.6rem;
+    opacity: 0.4;
+  }
+
+  th.sorted .sort-arrow { opacity: 1; }
+
+  td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:hover td { background: rgba(88, 166, 255, 0.05); }
+
+  tr.eliminated td {
+    opacity: 0.35;
+    text-decoration: line-through;
+  }
+
+  /* Seed + region columns */
+  .col-seed { text-align: center; width: 3rem; }
+  .col-region { width: 5rem; }
+
+  /* Probability cells */
+  .prob-cell {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    min-width: 4.5rem;
+  }
+
+  .col-best {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* ── Region color chips ──────────────────────────────── */
+  .region-chip {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .region-East     { background: #1f3d5c; color: #58a6ff; }
+  .region-West     { background: #3b2a1a; color: #f0883e; }
+  .region-South    { background: #1a3a2a; color: #3fb950; }
+  .region-Midwest  { background: #3a1f3a; color: #d2a8ff; }
+
+  /* ── Mobile ──────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    body { padding: 0.5rem; }
+    .header h1 { font-size: 1.2rem; }
+    table { font-size: 0.75rem; }
+    td, th { padding: 0.35rem 0.4rem; }
+  }
+
+  /* ── No-data state ───────────────────────────────────── */
+  .no-data {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+  .no-data h2 { margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
+  <div class="meta">
+    <span>Last updated: {{ updated_at }}</span>
+    <span>{{ team_count }} teams</span>
+    <span>Source: <a href="https://kalshi.com" style="color:var(--accent)">Kalshi</a> prediction markets</span>
+  </div>
+</div>
+
+<div class="filters">
+  <label for="filter-region">Region:</label>
+  <select id="filter-region" onchange="applyFilters()">
+    <option value="">All</option>
+    <option value="East">East</option>
+    <option value="West">West</option>
+    <option value="South">South</option>
+    <option value="Midwest">Midwest</option>
+  </select>
+
+  <label for="filter-seed">Seed ≤</label>
+  <select id="filter-seed" onchange="applyFilters()">
+    <option value="16">All</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="4">4</option>
+    <option value="6">6</option>
+    <option value="8">8</option>
+  </select>
+
+  <label for="filter-search">Search:</label>
+  <input type="text" id="filter-search" placeholder="Team name…" oninput="applyFilters()">
+
+  <label>
+    <input type="checkbox" id="filter-eliminated" onchange="applyFilters()">
+    Show eliminated
+  </label>
+</div>
+
+{% if rows %}
+<div class="table-wrap">
+  <table id="odds-table">
+    <thead>
+      <tr>
+        <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">▲</span></th>
+        <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">▲</span></th>
+        <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">▲</span></th>
+        {% for rnd in rounds %}
+        <th data-col="{{ rnd }}" onclick="sortTable('{{ rnd }}')">{{ round_labels[rnd] }} <span class="sort-arrow">▲</span></th>
+        {% endfor %}
+        <th data-col="best" onclick="sortTable('best')">Best Pick <span class="sort-arrow">▲</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr class="{% if row.eliminated %}eliminated{% endif %}"
+          data-team="{{ row.team }}"
+          data-seed="{{ row.seed }}"
+          data-region="{{ row.region }}"
+          data-eliminated="{{ row.eliminated|lower }}">
+        <td><strong>{{ row.team }}</strong></td>
+        <td class="col-seed">{{ row.seed }}</td>
+        <td class="col-region"><span class="region-chip region-{{ row.region }}">{{ row.region }}</span></td>
+        {% for cell in row.round_cells %}
+        <td class="prob-cell"
+            data-prob="{{ cell.prob if cell.prob is not none else '' }}"
+            style="background: {{ cell.bg_color }}; color: {{ cell.text_color }};">
+          {{ cell.display }}
+        </td>
+        {% endfor %}
+        <td class="col-best">{{ row.best_pick }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="no-data">
+  <h2>No odds data yet</h2>
+  <p>Waiting for Kalshi March Madness markets to go live.<br>
+  Check back after Selection Sunday (March 15, 2026).</p>
+</div>
+{% endif %}
+
+<script>
+// ── Sorting ────────────────────────────────────────────────────────
+let currentSort = { col: null, asc: true };
+
+function sortTable(col) {
+  const table = document.getElementById('odds-table');
+  if (!table) return;
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+
+  if (currentSort.col === col) {
+    currentSort.asc = !currentSort.asc;
+  } else {
+    currentSort.col = col;
+    currentSort.asc = true;
+  }
+
+  // Update arrow indicators
+  table.querySelectorAll('th').forEach(th => {
+    th.classList.remove('sorted');
+    th.querySelector('.sort-arrow').textContent = '▲';
+  });
+  const th = table.querySelector(`th[data-col="${col}"]`);
+  if (th) {
+    th.classList.add('sorted');
+    th.querySelector('.sort-arrow').textContent = currentSort.asc ? '▲' : '▼';
+  }
+
+  const rounds = {{ rounds | tojson }};
+  const roundIdx = rounds.indexOf(col);
+
+  rows.sort((a, b) => {
+    let va, vb;
+
+    if (col === 'team') {
+      va = a.dataset.team.toLowerCase();
+      vb = b.dataset.team.toLowerCase();
+      return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    }
+
+    if (col === 'seed') {
+      va = parseInt(a.dataset.seed);
+      vb = parseInt(b.dataset.seed);
+    } else if (col === 'region') {
+      va = a.dataset.region;
+      vb = b.dataset.region;
+      return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    } else if (col === 'best') {
+      // Sort by best pick probability (last prob-cell)
+      const cellsA = a.querySelectorAll('.prob-cell');
+      const cellsB = b.querySelectorAll('.prob-cell');
+      va = parseMaxProb(cellsA);
+      vb = parseMaxProb(cellsB);
+    } else if (roundIdx >= 0) {
+      // Sort by specific round probability
+      const cellA = a.querySelectorAll('.prob-cell')[roundIdx];
+      const cellB = b.querySelectorAll('.prob-cell')[roundIdx];
+      va = cellA ? parseFloat(cellA.dataset.prob || '-1') : -1;
+      vb = cellB ? parseFloat(cellB.dataset.prob || '-1') : -1;
+    } else {
+      return 0;
+    }
+
+    if (va < vb) return currentSort.asc ? -1 : 1;
+    if (va > vb) return currentSort.asc ? 1 : -1;
+    return 0;
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+function parseMaxProb(cells) {
+  let max = -1;
+  cells.forEach(c => {
+    const v = parseFloat(c.dataset.prob || '-1');
+    if (v > max) max = v;
+  });
+  return max;
+}
+
+// ── Filtering ──────────────────────────────────────────────────────
+function applyFilters() {
+  const region = document.getElementById('filter-region').value;
+  const maxSeed = parseInt(document.getElementById('filter-seed').value);
+  const search = document.getElementById('filter-search').value.toLowerCase();
+  const showEliminated = document.getElementById('filter-eliminated').checked;
+
+  const table = document.getElementById('odds-table');
+  if (!table) return;
+  const rows = table.querySelectorAll('tbody tr');
+
+  rows.forEach(row => {
+    let show = true;
+    if (region && row.dataset.region !== region) show = false;
+    if (parseInt(row.dataset.seed) > maxSeed) show = false;
+    if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
+    if (!showEliminated && row.dataset.eliminated === 'true') show = false;
+    row.style.display = show ? '' : 'none';
+  });
+}
+
+// Initial filter
+applyFilters();
+</script>
+
+</body>
+</html>
