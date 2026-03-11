@@ -21,7 +21,7 @@ def test_prob_color_returns_rgb():
     color = _prob_color(0.5)
     assert color.startswith("rgb(")
     color_none = _prob_color(None)
-    assert color_none == "#f8f9fa"
+    assert color_none == "#1e2228"
 
 
 def test_generate_html_creates_file():

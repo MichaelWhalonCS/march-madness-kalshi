@@ -66,17 +66,53 @@ class TeamOdds:
     round_probs: dict[str, float | None] = field(default_factory=dict)
     # round_probs maps round code → implied probability (0.0–1.0), None if no market
 
+    # Minimum conditional win probability to consider a round "safe" for survivor
+    SAFE_THRESHOLD: float = 0.70
+
+    def conditional_probs(self) -> dict[str, float | None]:
+        """Conditional win probability for each round's game.
+
+        P(win R64 game) = P(make R32) = round_probs["R64"]
+        P(win R32 game) = P(make S16) / P(make R32)
+        etc.
+        """
+        result: dict[str, float | None] = {}
+        for i, rnd in enumerate(ROUNDS):
+            if rnd == "R64":
+                # R64 prob IS the conditional — it's the first game
+                result[rnd] = self.round_probs.get(rnd)
+            else:
+                prev_rnd = ROUNDS[i - 1]
+                prev = self.round_probs.get(prev_rnd)
+                curr = self.round_probs.get(rnd)
+                if prev and prev > 0 and curr is not None:
+                    result[rnd] = curr / prev
+                else:
+                    result[rnd] = None
+        return result
+
     @property
     def best_pick_round(self) -> str | None:
-        """The round where this team has the highest advancement probability.
+        """Latest round where this team's conditional win rate is >= SAFE_THRESHOLD.
 
-        For survivor strategy: you want to "use" a team in the round where they're
-        most likely to advance but still need to be used wisely (high probability
-        means safe, but you might want to save them for a later round).
+        Survivor strategy: save strong teams for the latest round where they
+        still have a high chance of winning their game. Don't waste a 1-seed
+        on R64 when they're also 75% to win their R32 game.
+
+        Falls back to the round with the highest conditional probability if
+        no round meets the threshold.
         """
+        conds = self.conditional_probs()
+        # Find latest round above threshold (iterate in reverse)
+        for rnd in reversed(ROUNDS):
+            prob = conds.get(rnd)
+            if prob is not None and prob >= self.SAFE_THRESHOLD:
+                return rnd
+
+        # Fallback: highest conditional prob
         best_round = None
         best_prob = -1.0
-        for rnd, prob in self.round_probs.items():
+        for rnd, prob in conds.items():
             if prob is not None and prob > best_prob:
                 best_prob = prob
                 best_round = rnd
@@ -84,29 +120,15 @@ class TeamOdds:
 
     @property
     def best_pick_prob(self) -> float | None:
-        """Probability for the best pick round."""
+        """Conditional win probability for the best pick round."""
         rnd = self.best_pick_round
-        return self.round_probs.get(rnd) if rnd else None
+        if rnd is None:
+            return None
+        return self.conditional_probs().get(rnd)
 
     def conditional_prob(self, round_code: str) -> float | None:
-        """P(win this round's game) = P(make next round) / P(make this round).
-
-        For example, P(win R32 game) = P(make S16) / P(make R32).
-        This is the conditional advancement probability, useful for survivor strategy.
-        """
-        idx = ROUNDS.index(round_code) if round_code in ROUNDS else -1
-        if idx < 0 or idx >= len(ROUNDS) - 1:
-            return self.round_probs.get(round_code)
-
-        current = self.round_probs.get(round_code)
-        next_round = ROUNDS[idx + 1]
-        next_prob = self.round_probs.get(next_round)
-
-        if current is None or current == 0:
-            return None
-        if next_prob is None:
-            return None
-        return next_prob / current
+        """P(win this round's game). Convenience wrapper around conditional_probs()."""
+        return self.conditional_probs().get(round_code)
 
 
 # ── Price → probability ────────────────────────────────────────────────────────

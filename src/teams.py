@@ -16,12 +16,12 @@ from dataclasses import dataclass, field
 ROUNDS = ["R64", "R32", "S16", "E8", "F4", "Championship"]
 
 ROUND_LABELS = {
-    "R64": "R64→R32",
-    "R32": "R32→S16",
-    "S16": "S16→E8",
-    "E8": "E8→F4",
-    "F4": "F4→Final",
-    "Championship": "Champ",
+    "R64": "Make R32",
+    "R32": "Make S16",
+    "S16": "Make E8",
+    "E8": "Make F4",
+    "F4": "Make Final",
+    "Championship": "Win Title",
 }
 
 
@@ -101,7 +101,7 @@ TEAMS: list[Team] = [
     # ── Midwest Region ─────────────────────────────────────
     Team("UConn", 1, "Midwest"),
     Team("St. John's", 2, "Midwest"),
-    Team("Marquette", 3, "Midwest"),
+    Team("Michigan", 3, "Midwest"),
     Team("North Carolina", 4, "Midwest"),
     Team("Memphis", 5, "Midwest"),
     Team("Ole Miss", 6, "Midwest"),

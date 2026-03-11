@@ -27,8 +27,11 @@ def test_team_odds_best_pick():
         team=team,
         round_probs={"R64": 0.97, "R32": 0.82, "S16": 0.55, "E8": 0.35},
     )
-    assert odds.best_pick_round == "R64"
-    assert odds.best_pick_prob == 0.97
+    # Conditional probs: R64=0.97, R32=0.82/0.97≈0.845, S16=0.55/0.82≈0.671, E8=0.35/0.55≈0.636
+    # Latest round with conditional >=70% is R32
+    assert odds.best_pick_round == "R32"
+    assert odds.best_pick_prob is not None
+    assert abs(odds.best_pick_prob - 0.82 / 0.97) < 0.001
 
 
 def test_team_odds_conditional_prob():
@@ -37,10 +40,17 @@ def test_team_odds_conditional_prob():
         team=team,
         round_probs={"R64": 0.97, "R32": 0.82, "S16": 0.55},
     )
-    # P(win R32 game) = P(make S16) / P(make R32) = 0.55 / 0.82
-    cond = odds.conditional_prob("R32")
-    assert cond is not None
-    assert abs(cond - 0.55 / 0.82) < 0.001
+    # P(win R32 game | made R32) = P(make S16) / P(make R32) = 0.82 / 0.97
+    cond_r32 = odds.conditional_prob("R32")
+    assert cond_r32 is not None
+    assert abs(cond_r32 - 0.82 / 0.97) < 0.001
+
+    # P(win S16 game | made S16) = P(make E8) / P(make S16) — but no E8 data
+    # so test S16 conditional differently:
+    # Actually in conditional_probs, S16 = round_probs["S16"] / round_probs["R32"]
+    cond_s16 = odds.conditional_prob("S16")
+    assert cond_s16 is not None
+    assert abs(cond_s16 - 0.55 / 0.82) < 0.001
 
 
 def test_team_odds_empty():

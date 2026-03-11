@@ -44,6 +44,71 @@
     margin-right: 1.5rem;
   }
 
+  /* ── Info section ────────────────────────────────────── */
+  .info-section {
+    max-width: 1400px;
+    margin: 0 auto 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .info-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .info-toggle:hover { color: var(--accent); }
+
+  .info-toggle .chevron {
+    font-size: 0.65rem;
+    transition: transform 0.2s;
+  }
+
+  .info-toggle.open .chevron { transform: rotate(90deg); }
+
+  .info-body {
+    display: none;
+    padding: 0 1rem 1rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .info-body.open { display: block; }
+
+  .info-body h3 {
+    color: var(--text);
+    font-size: 0.85rem;
+    margin: 1rem 0 0.4rem;
+  }
+
+  .info-body h3:first-child { margin-top: 0; }
+
+  .info-body ul {
+    margin-left: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-body li { margin-bottom: 0.25rem; }
+
+  .info-body strong { color: var(--text); }
+
+  .info-body code {
+    background: var(--bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.78rem;
+  }
+
   /* ── Filter bar ──────────────────────────────────────── */
   .filters {
     max-width: 1400px;
@@ -117,6 +182,65 @@
 
   th.sorted .sort-arrow { opacity: 1; }
 
+  /* ── Info icon tooltip ───────────────────────────────── */
+  .info-tip {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.3rem;
+    cursor: help;
+  }
+
+  .info-tip .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--text-muted);
+    font-size: 0.55rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    vertical-align: middle;
+  }
+
+  .info-tip .tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d333b;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.5;
+    white-space: normal;
+    width: 260px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .info-tip .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2d333b;
+  }
+
+  .info-tip:hover .tooltip { display: block; }
+
   td {
     padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--border);
@@ -140,6 +264,7 @@
     font-size: 0.8rem;
     border-radius: 4px;
     min-width: 4.5rem;
+    cursor: default;
   }
 
   .col-best {
@@ -167,6 +292,7 @@
     .header h1 { font-size: 1.2rem; }
     table { font-size: 0.75rem; }
     td, th { padding: 0.35rem 0.4rem; }
+    .info-tip .tooltip { width: 200px; }
   }
 
   /* ── No-data state ───────────────────────────────────── */
@@ -183,9 +309,38 @@
 <div class="header">
   <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
   <div class="meta">
-    <span>Last updated: 2026-03-11 16:45 UTC</span>
+    <span>Last updated: 2026-03-11 16:59 UTC</span>
     <span>64 teams</span>
     <span>Source: <a href="https://kalshi.com" style="color:var(--accent)">Kalshi</a> prediction markets</span>
+  </div>
+</div>
+
+<!-- ── Survivor Rules & How to Read ──────────────────────────────── -->
+<div class="info-section">
+  <div class="info-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open');">
+    <span class="chevron">&#9654;</span> How Survivor Pools Work &amp; How to Read This Table
+  </div>
+  <div class="info-body">
+    <h3>Survivor Pool Rules</h3>
+    <ul>
+      <li><strong>Pick one team per round</strong> that you think will win their game. If they win, you advance. If they lose, you're eliminated.</li>
+      <li><strong>You can only use each team once</strong> for the entire tournament. Once you pick Duke in Round 1, you can never pick Duke again.</li>
+      <li><strong>The goal is to survive all 6 rounds</strong> (R64 through the Championship). Last person standing wins the pool.</li>
+    </ul>
+
+    <h3>How to Read the Table</h3>
+    <ul>
+      <li><strong>Percentage columns</strong> show the probability that a team reaches that round (cumulative). Hover any cell to see the <em>conditional</em> win probability — their chance of winning that specific game given they made it there.</li>
+      <li>Colors go from <span style="color:#dc3c3c;">red</span> (low chance) to <span style="color:#28a745;">green</span> (high chance).</li>
+      <li><strong>Best Pick</strong> = the latest round where a team still has a 70%+ chance of winning that specific game. This tells you the optimal round to "use" them. Don't waste a 1-seed on R64 if they're also 80% to win their R32 game — save them.</li>
+    </ul>
+
+    <h3>Strategy Tips</h3>
+    <ul>
+      <li>Use mid-seeds (5-8) in early rounds where they're still heavy favorites. Save 1-2 seeds for later rounds when games get tighter.</li>
+      <li>Sort by "Best Pick" to see which teams give you the most value in each round.</li>
+      <li>If a team's conditional win % drops below 60% in a round, that's a risky pick for survivor.</li>
+    </ul>
   </div>
 </div>
 
@@ -199,7 +354,7 @@
     <option value="Midwest">Midwest</option>
   </select>
 
-  <label for="filter-seed">Seed ≤</label>
+  <label for="filter-seed">Seed &#8804;</label>
   <select id="filter-seed" onchange="applyFilters()">
     <option value="16">All</option>
     <option value="1">1</option>
@@ -210,7 +365,7 @@
   </select>
 
   <label for="filter-search">Search:</label>
-  <input type="text" id="filter-search" placeholder="Team name…" oninput="applyFilters()">
+  <input type="text" id="filter-search" placeholder="Team name..." oninput="applyFilters()">
 
   <label>
     <input type="checkbox" id="filter-eliminated" onchange="applyFilters()">
@@ -223,23 +378,72 @@
   <table id="odds-table">
     <thead>
       <tr>
-        <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">▲</span></th>
-        <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">▲</span></th>
-        <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">▲</span></th>
+        <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">&#9650;</span></th>
+        <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
+        <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
         
-        <th data-col="R64" onclick="sortTable('R64')">R64→R32 <span class="sort-arrow">▲</span></th>
+        <th data-col="R64" onclick="sortTable('R64')">
+          Make R32
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
-        <th data-col="R32" onclick="sortTable('R32')">R32→S16 <span class="sort-arrow">▲</span></th>
+        <th data-col="R32" onclick="sortTable('R32')">
+          Make S16
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
-        <th data-col="S16" onclick="sortTable('S16')">S16→E8 <span class="sort-arrow">▲</span></th>
+        <th data-col="S16" onclick="sortTable('S16')">
+          Make E8
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
-        <th data-col="E8" onclick="sortTable('E8')">E8→F4 <span class="sort-arrow">▲</span></th>
+        <th data-col="E8" onclick="sortTable('E8')">
+          Make F4
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
-        <th data-col="F4" onclick="sortTable('F4')">F4→Final <span class="sort-arrow">▲</span></th>
+        <th data-col="F4" onclick="sortTable('F4')">
+          Make Final
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
-        <th data-col="Championship" onclick="sortTable('Championship')">Champ <span class="sort-arrow">▲</span></th>
+        <th data-col="Championship" onclick="sortTable('Championship')">
+          Win Title
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
-        <th data-col="best" onclick="sortTable('best')">Best Pick <span class="sort-arrow">▲</span></th>
+        <th data-col="best" onclick="sortTable('best')">
+          Best Pick
+          <span class="info-tip">
+            <span class="info-icon">i</span>
+            <span class="tooltip">The latest round where this team has at least a 70% chance of winning that specific game. This is the optimal round to "use" this team in your survivor pool — save strong teams for as long as they're still safe picks.</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -248,331 +452,380 @@
           data-team="Duke"
           data-seed="1"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.780042918454935">
         <td><strong>Duke</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.932"
+            title="Game win: 93%"
             style="background: rgb(59,185,75); color: #ffffff;">
           93%
         </td>
         
         <td class="prob-cell"
             data-prob="0.727"
+            title="Game win: 78%"
             style="background: rgb(116,201,63); color: #1a1a1a;">
           73%
         </td>
         
         <td class="prob-cell"
             data-prob="0.474"
+            title="Game win: 65%"
             style="background: rgb(182,211,50); color: #1a1a1a;">
           47%
         </td>
         
         <td class="prob-cell"
             data-prob="0.288"
+            title="Game win: 61%"
             style="background: rgb(196,152,54); color: #1a1a1a;">
           29%
         </td>
         
         <td class="prob-cell"
             data-prob="0.12"
+            title="Game win: 42%"
             style="background: rgb(210,98,57); color: #ffffff;">
           12%
         </td>
         
         <td class="prob-cell"
             data-prob="0.049"
+            title="Game win: 41%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
-        <td class="col-best">R64 (93%)</td>
+        <td class="col-best">R32 (78%)</td>
       </tr>
       
       <tr class=""
           data-team="Alabama"
           data-seed="2"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.757446808510638">
         <td><strong>Alabama</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.94"
+            title="Game win: 94%"
             style="background: rgb(56,184,76); color: #ffffff;">
           94%
         </td>
         
         <td class="prob-cell"
             data-prob="0.712"
+            title="Game win: 76%"
             style="background: rgb(120,203,62); color: #1a1a1a;">
           71%
         </td>
         
         <td class="prob-cell"
             data-prob="0.477"
+            title="Game win: 67%"
             style="background: rgb(181,212,50); color: #1a1a1a;">
           48%
         </td>
         
         <td class="prob-cell"
             data-prob="0.255"
+            title="Game win: 53%"
             style="background: rgb(199,141,54); color: #1a1a1a;">
           26%
         </td>
         
         <td class="prob-cell"
             data-prob="0.127"
+            title="Game win: 50%"
             style="background: rgb(209,100,57); color: #ffffff;">
           13%
         </td>
         
         <td class="prob-cell"
             data-prob="0.06"
+            title="Game win: 47%"
             style="background: rgb(215,79,58); color: #ffffff;">
           6%
         </td>
         
-        <td class="col-best">R64 (94%)</td>
+        <td class="col-best">R32 (76%)</td>
       </tr>
       
       <tr class=""
           data-team="Wisconsin"
           data-seed="3"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.731428571428571">
         <td><strong>Wisconsin</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.875"
+            title="Game win: 88%"
             style="background: rgb(75,190,72); color: #1a1a1a;">
           88%
         </td>
         
         <td class="prob-cell"
             data-prob="0.64"
+            title="Game win: 73%"
             style="background: rgb(140,208,58); color: #1a1a1a;">
           64%
         </td>
         
         <td class="prob-cell"
             data-prob="0.356"
+            title="Game win: 56%"
             style="background: rgb(191,173,52); color: #1a1a1a;">
           36%
         </td>
         
         <td class="prob-cell"
             data-prob="0.187"
+            title="Game win: 53%"
             style="background: rgb(205,119,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.071"
+            title="Game win: 38%"
             style="background: rgb(214,82,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.033"
+            title="Game win: 46%"
             style="background: rgb(217,70,59); color: #ffffff;">
           3%
         </td>
         
-        <td class="col-best">R64 (88%)</td>
+        <td class="col-best">R32 (73%)</td>
       </tr>
       
       <tr class=""
           data-team="Arizona"
           data-seed="4"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.737106918238993">
         <td><strong>Arizona</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.795"
+            title="Game win: 80%"
             style="background: rgb(97,196,67); color: #1a1a1a;">
           80%
         </td>
         
         <td class="prob-cell"
             data-prob="0.586"
+            title="Game win: 74%"
             style="background: rgb(155,213,55); color: #1a1a1a;">
           59%
         </td>
         
         <td class="prob-cell"
             data-prob="0.352"
+            title="Game win: 60%"
             style="background: rgb(191,172,52); color: #1a1a1a;">
           35%
         </td>
         
         <td class="prob-cell"
             data-prob="0.181"
+            title="Game win: 51%"
             style="background: rgb(205,117,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.068"
+            title="Game win: 38%"
             style="background: rgb(214,81,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.024"
+            title="Game win: 35%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
-        <td class="col-best">R64 (80%)</td>
+        <td class="col-best">R32 (74%)</td>
       </tr>
       
       <tr class=""
           data-team="Oregon"
           data-seed="5"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.723544973544973">
         <td><strong>Oregon</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.756"
+            title="Game win: 76%"
             style="background: rgb(108,199,65); color: #1a1a1a;">
           76%
         </td>
         
         <td class="prob-cell"
             data-prob="0.547"
+            title="Game win: 72%"
             style="background: rgb(166,216,52); color: #1a1a1a;">
           55%
         </td>
         
         <td class="prob-cell"
             data-prob="0.326"
+            title="Game win: 60%"
             style="background: rgb(193,164,53); color: #1a1a1a;">
           33%
         </td>
         
         <td class="prob-cell"
             data-prob="0.176"
+            title="Game win: 54%"
             style="background: rgb(205,116,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.072"
+            title="Game win: 41%"
             style="background: rgb(214,83,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.022"
+            title="Game win: 31%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
-        <td class="col-best">R64 (76%)</td>
+        <td class="col-best">R32 (72%)</td>
       </tr>
       
       <tr class=""
           data-team="BYU"
           data-seed="6"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.633779264214047">
         <td><strong>BYU</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.598"
+            title="Game win: 60%"
             style="background: rgb(152,212,55); color: #1a1a1a;">
           60%
         </td>
         
         <td class="prob-cell"
             data-prob="0.379"
+            title="Game win: 63%"
             style="background: rgb(189,181,52); color: #1a1a1a;">
           38%
         </td>
         
         <td class="prob-cell"
             data-prob="0.184"
+            title="Game win: 49%"
             style="background: rgb(205,118,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.08"
+            title="Game win: 43%"
             style="background: rgb(213,85,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.035"
+            title="Game win: 44%"
             style="background: rgb(217,71,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.014"
+            title="Game win: 40%"
             style="background: rgb(218,64,59); color: #ffffff;">
           1%
         </td>
         
-        <td class="col-best">R64 (60%)</td>
+        <td class="col-best">R32 (63%)</td>
       </tr>
       
       <tr class=""
           data-team="St. Mary&#39;s"
           data-seed="7"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.625">
         <td><strong>St. Mary&#39;s</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.625"
+            title="Game win: 62%"
             style="background: rgb(145,210,57); color: #1a1a1a;">
           62%
         </td>
         
         <td class="prob-cell"
             data-prob="0.323"
+            title="Game win: 52%"
             style="background: rgb(194,163,53); color: #1a1a1a;">
           32%
         </td>
         
         <td class="prob-cell"
             data-prob="0.171"
+            title="Game win: 53%"
             style="background: rgb(206,114,56); color: #1a1a1a;">
           17%
         </td>
         
         <td class="prob-cell"
             data-prob="0.068"
+            title="Game win: 40%"
             style="background: rgb(214,81,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.024"
+            title="Game win: 35%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.008"
+            title="Game win: 33%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
@@ -584,187 +837,215 @@
           data-team="Mississippi St."
           data-seed="8"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.562383612662941">
         <td><strong>Mississippi St.</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.537"
+            title="Game win: 54%"
             style="background: rgb(169,217,52); color: #1a1a1a;">
           54%
         </td>
         
         <td class="prob-cell"
             data-prob="0.302"
+            title="Game win: 56%"
             style="background: rgb(195,156,53); color: #1a1a1a;">
           30%
         </td>
         
         <td class="prob-cell"
             data-prob="0.123"
+            title="Game win: 41%"
             style="background: rgb(210,99,57); color: #ffffff;">
           12%
         </td>
         
         <td class="prob-cell"
             data-prob="0.049"
+            title="Game win: 40%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.019"
+            title="Game win: 39%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.006"
+            title="Game win: 32%"
             style="background: rgb(219,61,59); color: #ffffff;">
           1%
         </td>
         
-        <td class="col-best">R64 (54%)</td>
+        <td class="col-best">R32 (56%)</td>
       </tr>
       
       <tr class=""
           data-team="Baylor"
           data-seed="9"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.598326359832637">
         <td><strong>Baylor</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.478"
+            title="Game win: 48%"
             style="background: rgb(181,212,50); color: #1a1a1a;">
           48%
         </td>
         
         <td class="prob-cell"
             data-prob="0.286"
+            title="Game win: 60%"
             style="background: rgb(197,151,54); color: #1a1a1a;">
           29%
         </td>
         
         <td class="prob-cell"
             data-prob="0.115"
+            title="Game win: 40%"
             style="background: rgb(210,96,57); color: #ffffff;">
           12%
         </td>
         
         <td class="prob-cell"
             data-prob="0.042"
+            title="Game win: 37%"
             style="background: rgb(216,73,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.016"
+            title="Game win: 38%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.005"
+            title="Game win: 31%"
             style="background: rgb(219,61,59); color: #ffffff;">
           0%
         </td>
         
-        <td class="col-best">R64 (48%)</td>
+        <td class="col-best">R32 (60%)</td>
       </tr>
       
       <tr class=""
           data-team="Vanderbilt"
           data-seed="10"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.423857868020304">
         <td><strong>Vanderbilt</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.394"
+            title="Game win: 39%"
             style="background: rgb(188,186,52); color: #1a1a1a;">
           39%
         </td>
         
         <td class="prob-cell"
             data-prob="0.167"
+            title="Game win: 42%"
             style="background: rgb(206,113,56); color: #1a1a1a;">
           17%
         </td>
         
         <td class="prob-cell"
             data-prob="0.062"
+            title="Game win: 37%"
             style="background: rgb(215,79,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.018"
+            title="Game win: 29%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.004"
+            title="Game win: 22%"
             style="background: rgb(219,61,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (39%)</td>
+        <td class="col-best">R32 (42%)</td>
       </tr>
       
       <tr class=""
           data-team="VCU"
           data-seed="11"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.447">
         <td><strong>VCU</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.447"
+            title="Game win: 45%"
             style="background: rgb(184,203,51); color: #1a1a1a;">
           45%
         </td>
         
         <td class="prob-cell"
             data-prob="0.181"
+            title="Game win: 40%"
             style="background: rgb(205,117,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.074"
+            title="Game win: 41%"
             style="background: rgb(214,83,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.024"
+            title="Game win: 32%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.007"
+            title="Game win: 29%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
@@ -776,331 +1057,380 @@
           data-team="Liberty"
           data-seed="12"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.458033573141487">
         <td><strong>Liberty</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.417"
+            title="Game win: 42%"
             style="background: rgb(186,193,51); color: #1a1a1a;">
           42%
         </td>
         
         <td class="prob-cell"
             data-prob="0.191"
+            title="Game win: 46%"
             style="background: rgb(204,121,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.068"
+            title="Game win: 36%"
             style="background: rgb(214,81,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.021"
+            title="Game win: 31%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.007"
+            title="Game win: 33%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 29%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (42%)</td>
+        <td class="col-best">R32 (46%)</td>
       </tr>
       
       <tr class=""
           data-team="Yale"
           data-seed="13"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.416267942583731">
         <td><strong>Yale</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.209"
+            title="Game win: 21%"
             style="background: rgb(203,126,55); color: #1a1a1a;">
           21%
         </td>
         
         <td class="prob-cell"
             data-prob="0.087"
+            title="Game win: 42%"
             style="background: rgb(213,87,58); color: #ffffff;">
           9%
         </td>
         
         <td class="prob-cell"
             data-prob="0.032"
+            title="Game win: 37%"
             style="background: rgb(217,70,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.008"
+            title="Game win: 25%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 25%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (21%)</td>
+        <td class="col-best">R32 (42%)</td>
       </tr>
       
       <tr class=""
           data-team="Lipscomb"
           data-seed="14"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.438356164383562">
         <td><strong>Lipscomb</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.146"
+            title="Game win: 15%"
             style="background: rgb(208,106,57); color: #ffffff;">
           15%
         </td>
         
         <td class="prob-cell"
             data-prob="0.064"
+            title="Game win: 44%"
             style="background: rgb(214,80,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.019"
+            title="Game win: 30%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.004"
+            title="Game win: 21%"
             style="background: rgb(219,61,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (15%)</td>
+        <td class="col-best">R32 (44%)</td>
       </tr>
       
       <tr class=""
           data-team="Robert Morris"
           data-seed="15"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.356435643564357">
         <td><strong>Robert Morris</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.101"
+            title="Game win: 10%"
             style="background: rgb(211,92,57); color: #ffffff;">
           10%
         </td>
         
         <td class="prob-cell"
             data-prob="0.036"
+            title="Game win: 36%"
             style="background: rgb(217,71,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.01"
+            title="Game win: 28%"
             style="background: rgb(219,63,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 20%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (10%)</td>
+        <td class="col-best">R32 (36%)</td>
       </tr>
       
       <tr class=""
           data-team="American"
           data-seed="16"
           data-region="East"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.3">
         <td><strong>American</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
         <td class="prob-cell"
             data-prob="0.01"
+            title="Game win: 1%"
             style="background: rgb(219,63,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.003"
+            title="Game win: 30%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (1%)</td>
+        <td class="col-best">R32 (30%)</td>
       </tr>
       
       <tr class=""
           data-team="UConn"
           data-seed="1"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.754620123203285">
         <td><strong>UConn</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.974"
+            title="Game win: 97%"
             style="background: rgb(47,182,78); color: #ffffff;">
           97%
         </td>
         
         <td class="prob-cell"
             data-prob="0.735"
+            title="Game win: 75%"
             style="background: rgb(114,201,64); color: #1a1a1a;">
           74%
         </td>
         
         <td class="prob-cell"
             data-prob="0.485"
+            title="Game win: 66%"
             style="background: rgb(181,215,50); color: #1a1a1a;">
           48%
         </td>
         
         <td class="prob-cell"
             data-prob="0.284"
+            title="Game win: 59%"
             style="background: rgb(197,150,54); color: #1a1a1a;">
           28%
         </td>
         
         <td class="prob-cell"
             data-prob="0.119"
+            title="Game win: 42%"
             style="background: rgb(210,98,57); color: #ffffff;">
           12%
         </td>
         
         <td class="prob-cell"
             data-prob="0.056"
+            title="Game win: 47%"
             style="background: rgb(215,77,58); color: #ffffff;">
           6%
         </td>
         
-        <td class="col-best">R64 (97%)</td>
+        <td class="col-best">R32 (75%)</td>
       </tr>
       
       <tr class=""
           data-team="St. John&#39;s"
           data-seed="2"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.892">
         <td><strong>St. John&#39;s</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.892"
+            title="Game win: 89%"
             style="background: rgb(70,188,73); color: #1a1a1a;">
           89%
         </td>
         
         <td class="prob-cell"
             data-prob="0.614"
+            title="Game win: 69%"
             style="background: rgb(148,210,56); color: #1a1a1a;">
           61%
         </td>
         
         <td class="prob-cell"
             data-prob="0.369"
+            title="Game win: 60%"
             style="background: rgb(190,178,52); color: #1a1a1a;">
           37%
         </td>
         
         <td class="prob-cell"
             data-prob="0.204"
+            title="Game win: 55%"
             style="background: rgb(203,125,55); color: #1a1a1a;">
           20%
         </td>
         
         <td class="prob-cell"
             data-prob="0.099"
+            title="Game win: 49%"
             style="background: rgb(212,91,58); color: #ffffff;">
           10%
         </td>
         
         <td class="prob-cell"
             data-prob="0.035"
+            title="Game win: 35%"
             style="background: rgb(217,71,59); color: #ffffff;">
           4%
         </td>
@@ -1109,46 +1439,53 @@
       </tr>
       
       <tr class=""
-          data-team="Marquette"
+          data-team="Michigan"
           data-seed="3"
           data-region="Midwest"
-          data-eliminated="false">
-        <td><strong>Marquette</strong></td>
+          data-eliminated="false"
+          data-best-sort="0.858">
+        <td><strong>Michigan</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.858"
+            title="Game win: 86%"
             style="background: rgb(79,191,71); color: #1a1a1a;">
           86%
         </td>
         
         <td class="prob-cell"
             data-prob="0.596"
+            title="Game win: 69%"
             style="background: rgb(153,212,55); color: #1a1a1a;">
           60%
         </td>
         
         <td class="prob-cell"
             data-prob="0.345"
+            title="Game win: 58%"
             style="background: rgb(192,170,53); color: #1a1a1a;">
           34%
         </td>
         
         <td class="prob-cell"
             data-prob="0.16"
+            title="Game win: 46%"
             style="background: rgb(207,111,56); color: #1a1a1a;">
           16%
         </td>
         
         <td class="prob-cell"
             data-prob="0.069"
+            title="Game win: 43%"
             style="background: rgb(214,82,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.025"
+            title="Game win: 36%"
             style="background: rgb(218,68,59); color: #ffffff;">
           2%
         </td>
@@ -1160,43 +1497,50 @@
           data-team="North Carolina"
           data-seed="4"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.763">
         <td><strong>North Carolina</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.763"
+            title="Game win: 76%"
             style="background: rgb(106,198,65); color: #1a1a1a;">
           76%
         </td>
         
         <td class="prob-cell"
             data-prob="0.529"
+            title="Game win: 69%"
             style="background: rgb(171,217,51); color: #1a1a1a;">
           53%
         </td>
         
         <td class="prob-cell"
             data-prob="0.316"
+            title="Game win: 60%"
             style="background: rgb(194,161,53); color: #1a1a1a;">
           32%
         </td>
         
         <td class="prob-cell"
             data-prob="0.175"
+            title="Game win: 55%"
             style="background: rgb(206,116,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.079"
+            title="Game win: 45%"
             style="background: rgb(213,85,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.03"
+            title="Game win: 38%"
             style="background: rgb(217,69,59); color: #ffffff;">
           3%
         </td>
@@ -1208,43 +1552,50 @@
           data-team="Memphis"
           data-seed="5"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.611">
         <td><strong>Memphis</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.611"
+            title="Game win: 61%"
             style="background: rgb(148,211,56); color: #1a1a1a;">
           61%
         </td>
         
         <td class="prob-cell"
             data-prob="0.366"
+            title="Game win: 60%"
             style="background: rgb(190,177,52); color: #1a1a1a;">
           37%
         </td>
         
         <td class="prob-cell"
             data-prob="0.172"
+            title="Game win: 47%"
             style="background: rgb(206,115,56); color: #1a1a1a;">
           17%
         </td>
         
         <td class="prob-cell"
             data-prob="0.073"
+            title="Game win: 42%"
             style="background: rgb(214,83,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.029"
+            title="Game win: 40%"
             style="background: rgb(217,69,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.01"
+            title="Game win: 34%"
             style="background: rgb(219,63,59); color: #ffffff;">
           1%
         </td>
@@ -1256,91 +1607,105 @@
           data-team="Ole Miss"
           data-seed="6"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.69477234401349">
         <td><strong>Ole Miss</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.593"
+            title="Game win: 59%"
             style="background: rgb(153,212,55); color: #1a1a1a;">
           59%
         </td>
         
         <td class="prob-cell"
             data-prob="0.412"
+            title="Game win: 69%"
             style="background: rgb(187,191,51); color: #1a1a1a;">
           41%
         </td>
         
         <td class="prob-cell"
             data-prob="0.22"
+            title="Game win: 53%"
             style="background: rgb(202,130,55); color: #1a1a1a;">
           22%
         </td>
         
         <td class="prob-cell"
             data-prob="0.109"
+            title="Game win: 50%"
             style="background: rgb(211,94,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.043"
+            title="Game win: 39%"
             style="background: rgb(216,73,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.016"
+            title="Game win: 37%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
-        <td class="col-best">R64 (59%)</td>
+        <td class="col-best">R32 (69%)</td>
       </tr>
       
       <tr class=""
           data-team="Kansas"
           data-seed="7"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.702">
         <td><strong>Kansas</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.702"
+            title="Game win: 70%"
             style="background: rgb(123,203,62); color: #1a1a1a;">
           70%
         </td>
         
         <td class="prob-cell"
             data-prob="0.418"
+            title="Game win: 60%"
             style="background: rgb(186,193,51); color: #1a1a1a;">
           42%
         </td>
         
         <td class="prob-cell"
             data-prob="0.191"
+            title="Game win: 46%"
             style="background: rgb(204,121,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.084"
+            title="Game win: 44%"
             style="background: rgb(213,86,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.034"
+            title="Game win: 40%"
             style="background: rgb(217,70,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.011"
+            title="Game win: 32%"
             style="background: rgb(219,63,59); color: #ffffff;">
           1%
         </td>
@@ -1352,43 +1717,50 @@
           data-team="Pittsburgh"
           data-seed="8"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.552">
         <td><strong>Pittsburgh</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.552"
+            title="Game win: 55%"
             style="background: rgb(165,215,53); color: #1a1a1a;">
           55%
         </td>
         
         <td class="prob-cell"
             data-prob="0.267"
+            title="Game win: 48%"
             style="background: rgb(198,145,54); color: #1a1a1a;">
           27%
         </td>
         
         <td class="prob-cell"
             data-prob="0.145"
+            title="Game win: 54%"
             style="background: rgb(208,106,57); color: #ffffff;">
           14%
         </td>
         
         <td class="prob-cell"
             data-prob="0.057"
+            title="Game win: 39%"
             style="background: rgb(215,78,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.024"
+            title="Game win: 42%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.008"
+            title="Game win: 33%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
@@ -1400,523 +1772,600 @@
           data-team="Maryland"
           data-seed="9"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.59963768115942">
         <td><strong>Maryland</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.552"
+            title="Game win: 55%"
             style="background: rgb(165,215,53); color: #1a1a1a;">
           55%
         </td>
         
         <td class="prob-cell"
             data-prob="0.331"
+            title="Game win: 60%"
             style="background: rgb(193,165,53); color: #1a1a1a;">
           33%
         </td>
         
         <td class="prob-cell"
             data-prob="0.168"
+            title="Game win: 51%"
             style="background: rgb(206,113,56); color: #1a1a1a;">
           17%
         </td>
         
         <td class="prob-cell"
             data-prob="0.06"
+            title="Game win: 36%"
             style="background: rgb(215,79,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.024"
+            title="Game win: 40%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 37%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
-        <td class="col-best">R64 (55%)</td>
+        <td class="col-best">R32 (60%)</td>
       </tr>
       
       <tr class=""
           data-team="Xavier"
           data-seed="10"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.55192878338279">
         <td><strong>Xavier</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.337"
+            title="Game win: 34%"
             style="background: rgb(193,167,53); color: #1a1a1a;">
           34%
         </td>
         
         <td class="prob-cell"
             data-prob="0.186"
+            title="Game win: 55%"
             style="background: rgb(205,119,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.073"
+            title="Game win: 39%"
             style="background: rgb(214,83,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.022"
+            title="Game win: 30%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.006"
+            title="Game win: 27%"
             style="background: rgb(219,61,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (34%)</td>
+        <td class="col-best">R32 (55%)</td>
       </tr>
       
       <tr class=""
           data-team="Nebraska"
           data-seed="11"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.463157894736842">
         <td><strong>Nebraska</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.38"
+            title="Game win: 38%"
             style="background: rgb(189,181,52); color: #1a1a1a;">
           38%
         </td>
         
         <td class="prob-cell"
             data-prob="0.176"
+            title="Game win: 46%"
             style="background: rgb(205,116,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.077"
+            title="Game win: 44%"
             style="background: rgb(213,84,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.026"
+            title="Game win: 34%"
             style="background: rgb(217,68,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.006"
+            title="Game win: 23%"
             style="background: rgb(219,61,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (38%)</td>
+        <td class="col-best">R32 (46%)</td>
       </tr>
       
       <tr class=""
           data-team="Colorado St."
           data-seed="12"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.498154981549815">
         <td><strong>Colorado St.</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.271"
+            title="Game win: 27%"
             style="background: rgb(198,146,54); color: #1a1a1a;">
           27%
         </td>
         
         <td class="prob-cell"
             data-prob="0.135"
+            title="Game win: 50%"
             style="background: rgb(209,103,57); color: #ffffff;">
           14%
         </td>
         
         <td class="prob-cell"
             data-prob="0.059"
+            title="Game win: 44%"
             style="background: rgb(215,78,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.021"
+            title="Game win: 36%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.007"
+            title="Game win: 33%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (27%)</td>
+        <td class="col-best">R32 (50%)</td>
       </tr>
       
       <tr class=""
           data-team="Akron"
           data-seed="13"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.428571428571429">
         <td><strong>Akron</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.259"
+            title="Game win: 26%"
             style="background: rgb(199,142,54); color: #1a1a1a;">
           26%
         </td>
         
         <td class="prob-cell"
             data-prob="0.111"
+            title="Game win: 43%"
             style="background: rgb(211,95,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.03"
+            title="Game win: 27%"
             style="background: rgb(217,69,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.008"
+            title="Game win: 27%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 25%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (26%)</td>
+        <td class="col-best">R32 (43%)</td>
       </tr>
       
       <tr class=""
           data-team="Morehead St."
           data-seed="14"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.454545454545455">
         <td><strong>Morehead St.</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.198"
+            title="Game win: 20%"
             style="background: rgb(204,123,56); color: #1a1a1a;">
           20%
         </td>
         
         <td class="prob-cell"
             data-prob="0.09"
+            title="Game win: 45%"
             style="background: rgb(212,88,58); color: #ffffff;">
           9%
         </td>
         
         <td class="prob-cell"
             data-prob="0.021"
+            title="Game win: 23%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.005"
+            title="Game win: 24%"
             style="background: rgb(219,61,59); color: #ffffff;">
           0%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (20%)</td>
+        <td class="col-best">R32 (45%)</td>
       </tr>
       
       <tr class=""
           data-team="Wofford"
           data-seed="15"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.411764705882353">
         <td><strong>Wofford</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.085"
+            title="Game win: 8%"
             style="background: rgb(213,87,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.035"
+            title="Game win: 41%"
             style="background: rgb(217,71,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 26%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.003"
+            title="Game win: 33%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (8%)</td>
+        <td class="col-best">R32 (41%)</td>
       </tr>
       
       <tr class=""
           data-team="FDU"
           data-seed="16"
           data-region="Midwest"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.3">
         <td><strong>FDU</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
         <td class="prob-cell"
             data-prob="0.01"
+            title="Game win: 1%"
             style="background: rgb(219,63,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.003"
+            title="Game win: 30%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (1%)</td>
+        <td class="col-best">R32 (30%)</td>
       </tr>
       
       <tr class=""
           data-team="Auburn"
           data-seed="1"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.768508863399374">
         <td><strong>Auburn</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.959"
+            title="Game win: 96%"
             style="background: rgb(51,183,77); color: #ffffff;">
           96%
         </td>
         
         <td class="prob-cell"
             data-prob="0.737"
+            title="Game win: 77%"
             style="background: rgb(113,201,64); color: #1a1a1a;">
           74%
         </td>
         
         <td class="prob-cell"
             data-prob="0.469"
+            title="Game win: 64%"
             style="background: rgb(182,210,50); color: #1a1a1a;">
           47%
         </td>
         
         <td class="prob-cell"
             data-prob="0.226"
+            title="Game win: 48%"
             style="background: rgb(201,132,55); color: #1a1a1a;">
           23%
         </td>
         
         <td class="prob-cell"
             data-prob="0.101"
+            title="Game win: 45%"
             style="background: rgb(211,92,57); color: #ffffff;">
           10%
         </td>
         
         <td class="prob-cell"
             data-prob="0.043"
+            title="Game win: 43%"
             style="background: rgb(216,73,59); color: #ffffff;">
           4%
         </td>
         
-        <td class="col-best">R64 (96%)</td>
+        <td class="col-best">R32 (77%)</td>
       </tr>
       
       <tr class=""
           data-team="Iowa St."
           data-seed="2"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.748344370860927">
         <td><strong>Iowa St.</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.906"
+            title="Game win: 91%"
             style="background: rgb(66,187,74); color: #ffffff;">
           91%
         </td>
         
         <td class="prob-cell"
             data-prob="0.678"
+            title="Game win: 75%"
             style="background: rgb(130,205,60); color: #1a1a1a;">
           68%
         </td>
         
         <td class="prob-cell"
             data-prob="0.454"
+            title="Game win: 67%"
             style="background: rgb(183,205,50); color: #1a1a1a;">
           45%
         </td>
         
         <td class="prob-cell"
             data-prob="0.233"
+            title="Game win: 51%"
             style="background: rgb(201,134,55); color: #1a1a1a;">
           23%
         </td>
         
         <td class="prob-cell"
             data-prob="0.106"
+            title="Game win: 45%"
             style="background: rgb(211,93,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.043"
+            title="Game win: 41%"
             style="background: rgb(216,73,59); color: #ffffff;">
           4%
         </td>
         
-        <td class="col-best">R64 (91%)</td>
+        <td class="col-best">R32 (75%)</td>
       </tr>
       
       <tr class=""
           data-team="Florida"
           data-seed="3"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.848">
         <td><strong>Florida</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.848"
+            title="Game win: 85%"
             style="background: rgb(82,192,70); color: #1a1a1a;">
           85%
         </td>
         
         <td class="prob-cell"
             data-prob="0.557"
+            title="Game win: 66%"
             style="background: rgb(164,215,53); color: #1a1a1a;">
           56%
         </td>
         
         <td class="prob-cell"
             data-prob="0.36"
+            title="Game win: 65%"
             style="background: rgb(191,175,52); color: #1a1a1a;">
           36%
         </td>
         
         <td class="prob-cell"
             data-prob="0.199"
+            title="Game win: 55%"
             style="background: rgb(204,123,56); color: #1a1a1a;">
           20%
         </td>
         
         <td class="prob-cell"
             data-prob="0.098"
+            title="Game win: 49%"
             style="background: rgb(212,91,58); color: #ffffff;">
           10%
         </td>
         
         <td class="prob-cell"
             data-prob="0.046"
+            title="Game win: 47%"
             style="background: rgb(216,74,59); color: #ffffff;">
           5%
         </td>
@@ -1928,91 +2377,105 @@
           data-team="Texas A&amp;M"
           data-seed="4"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.759379042690815">
         <td><strong>Texas A&amp;M</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.773"
+            title="Game win: 77%"
             style="background: rgb(103,198,66); color: #1a1a1a;">
           77%
         </td>
         
         <td class="prob-cell"
             data-prob="0.587"
+            title="Game win: 76%"
             style="background: rgb(155,213,55); color: #1a1a1a;">
           59%
         </td>
         
         <td class="prob-cell"
             data-prob="0.371"
+            title="Game win: 63%"
             style="background: rgb(190,178,52); color: #1a1a1a;">
           37%
         </td>
         
         <td class="prob-cell"
             data-prob="0.188"
+            title="Game win: 51%"
             style="background: rgb(204,120,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.077"
+            title="Game win: 41%"
             style="background: rgb(213,84,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.034"
+            title="Game win: 44%"
             style="background: rgb(217,70,59); color: #ffffff;">
           3%
         </td>
         
-        <td class="col-best">R64 (77%)</td>
+        <td class="col-best">R32 (76%)</td>
       </tr>
       
       <tr class=""
           data-team="Michigan St."
           data-seed="5"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.73">
         <td><strong>Michigan St.</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.73"
+            title="Game win: 73%"
             style="background: rgb(115,201,63); color: #1a1a1a;">
           73%
         </td>
         
         <td class="prob-cell"
             data-prob="0.498"
+            title="Game win: 68%"
             style="background: rgb(180,219,50); color: #1a1a1a;">
           50%
         </td>
         
         <td class="prob-cell"
             data-prob="0.309"
+            title="Game win: 62%"
             style="background: rgb(195,158,53); color: #1a1a1a;">
           31%
         </td>
         
         <td class="prob-cell"
             data-prob="0.135"
+            title="Game win: 44%"
             style="background: rgb(209,103,57); color: #ffffff;">
           14%
         </td>
         
         <td class="prob-cell"
             data-prob="0.047"
+            title="Game win: 35%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.018"
+            title="Game win: 38%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
@@ -2024,43 +2487,50 @@
           data-team="Missouri"
           data-seed="6"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.644">
         <td><strong>Missouri</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.644"
+            title="Game win: 64%"
             style="background: rgb(139,208,58); color: #1a1a1a;">
           64%
         </td>
         
         <td class="prob-cell"
             data-prob="0.406"
+            title="Game win: 63%"
             style="background: rgb(187,189,51); color: #1a1a1a;">
           41%
         </td>
         
         <td class="prob-cell"
             data-prob="0.186"
+            title="Game win: 46%"
             style="background: rgb(205,119,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.088"
+            title="Game win: 47%"
             style="background: rgb(212,88,58); color: #ffffff;">
           9%
         </td>
         
         <td class="prob-cell"
             data-prob="0.035"
+            title="Game win: 40%"
             style="background: rgb(217,71,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.013"
+            title="Game win: 37%"
             style="background: rgb(218,64,59); color: #ffffff;">
           1%
         </td>
@@ -2072,91 +2542,105 @@
           data-team="Marquette"
           data-seed="7"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.560578661844485">
         <td><strong>Marquette</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.553"
+            title="Game win: 55%"
             style="background: rgb(165,215,53); color: #1a1a1a;">
           55%
         </td>
         
         <td class="prob-cell"
             data-prob="0.31"
+            title="Game win: 56%"
             style="background: rgb(195,159,53); color: #1a1a1a;">
           31%
         </td>
         
         <td class="prob-cell"
             data-prob="0.141"
+            title="Game win: 45%"
             style="background: rgb(208,105,57); color: #ffffff;">
           14%
         </td>
         
         <td class="prob-cell"
             data-prob="0.06"
+            title="Game win: 43%"
             style="background: rgb(215,79,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.018"
+            title="Game win: 30%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.006"
+            title="Game win: 33%"
             style="background: rgb(219,61,59); color: #ffffff;">
           1%
         </td>
         
-        <td class="col-best">R64 (55%)</td>
+        <td class="col-best">R32 (56%)</td>
       </tr>
       
       <tr class=""
           data-team="Louisville"
           data-seed="8"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.611">
         <td><strong>Louisville</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.611"
+            title="Game win: 61%"
             style="background: rgb(148,211,56); color: #1a1a1a;">
           61%
         </td>
         
         <td class="prob-cell"
             data-prob="0.311"
+            title="Game win: 51%"
             style="background: rgb(195,159,53); color: #1a1a1a;">
           31%
         </td>
         
         <td class="prob-cell"
             data-prob="0.155"
+            title="Game win: 50%"
             style="background: rgb(207,109,56); color: #1a1a1a;">
           16%
         </td>
         
         <td class="prob-cell"
             data-prob="0.068"
+            title="Game win: 44%"
             style="background: rgb(214,81,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.026"
+            title="Game win: 38%"
             style="background: rgb(217,68,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.007"
+            title="Game win: 27%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
@@ -2168,187 +2652,215 @@
           data-team="Creighton"
           data-seed="9"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.531620553359684">
         <td><strong>Creighton</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.506"
+            title="Game win: 51%"
             style="background: rgb(178,219,50); color: #1a1a1a;">
           51%
         </td>
         
         <td class="prob-cell"
             data-prob="0.269"
+            title="Game win: 53%"
             style="background: rgb(198,146,54); color: #1a1a1a;">
           27%
         </td>
         
         <td class="prob-cell"
             data-prob="0.109"
+            title="Game win: 41%"
             style="background: rgb(211,94,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.047"
+            title="Game win: 43%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.014"
+            title="Game win: 30%"
             style="background: rgb(218,64,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.004"
+            title="Game win: 29%"
             style="background: rgb(219,61,59); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (51%)</td>
+        <td class="col-best">R32 (53%)</td>
       </tr>
       
       <tr class=""
           data-team="New Mexico"
           data-seed="10"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.429824561403509">
         <td><strong>New Mexico</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.342"
+            title="Game win: 34%"
             style="background: rgb(192,169,53); color: #1a1a1a;">
           34%
         </td>
         
         <td class="prob-cell"
             data-prob="0.147"
+            title="Game win: 43%"
             style="background: rgb(208,107,57); color: #ffffff;">
           15%
         </td>
         
         <td class="prob-cell"
             data-prob="0.059"
+            title="Game win: 40%"
             style="background: rgb(215,78,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.025"
+            title="Game win: 42%"
             style="background: rgb(218,68,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 36%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 22%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (34%)</td>
+        <td class="col-best">R32 (43%)</td>
       </tr>
       
       <tr class=""
           data-team="San Diego St."
           data-seed="11"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.402930402930403">
         <td><strong>San Diego St.</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.273"
+            title="Game win: 27%"
             style="background: rgb(198,147,54); color: #1a1a1a;">
           27%
         </td>
         
         <td class="prob-cell"
             data-prob="0.11"
+            title="Game win: 40%"
             style="background: rgb(211,95,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.035"
+            title="Game win: 32%"
             style="background: rgb(217,71,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 26%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.003"
+            title="Game win: 33%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (27%)</td>
+        <td class="col-best">R32 (40%)</td>
       </tr>
       
       <tr class=""
           data-team="UC Irvine"
           data-seed="12"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.427">
         <td><strong>UC Irvine</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.427"
+            title="Game win: 43%"
             style="background: rgb(185,196,51); color: #1a1a1a;">
           43%
         </td>
         
         <td class="prob-cell"
             data-prob="0.176"
+            title="Game win: 41%"
             style="background: rgb(205,116,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.072"
+            title="Game win: 41%"
             style="background: rgb(214,83,58); color: #ffffff;">
           7%
         </td>
         
         <td class="prob-cell"
             data-prob="0.023"
+            title="Game win: 32%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.007"
+            title="Game win: 30%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
@@ -2360,331 +2872,380 @@
           data-team="Vermont"
           data-seed="13"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.375438596491229">
         <td><strong>Vermont</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.285"
+            title="Game win: 28%"
             style="background: rgb(197,151,54); color: #1a1a1a;">
           28%
         </td>
         
         <td class="prob-cell"
             data-prob="0.107"
+            title="Game win: 38%"
             style="background: rgb(211,94,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.031"
+            title="Game win: 29%"
             style="background: rgb(217,69,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 29%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.003"
+            title="Game win: 33%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (28%)</td>
+        <td class="col-best">R32 (38%)</td>
       </tr>
       
       <tr class=""
           data-team="Grand Canyon"
           data-seed="14"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.433155080213904">
         <td><strong>Grand Canyon</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.187"
+            title="Game win: 19%"
             style="background: rgb(205,119,56); color: #1a1a1a;">
           19%
         </td>
         
         <td class="prob-cell"
             data-prob="0.081"
+            title="Game win: 43%"
             style="background: rgb(213,85,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.028"
+            title="Game win: 35%"
             style="background: rgb(217,68,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 32%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (19%)</td>
+        <td class="col-best">R32 (43%)</td>
       </tr>
       
       <tr class=""
           data-team="Colgate"
           data-seed="15"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.390243902439025">
         <td><strong>Colgate</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.041"
+            title="Game win: 4%"
             style="background: rgb(216,73,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.016"
+            title="Game win: 39%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.004"
+            title="Game win: 25%"
             style="background: rgb(219,61,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (4%)</td>
+        <td class="col-best">R32 (39%)</td>
       </tr>
       
       <tr class=""
           data-team="Grambling"
           data-seed="16"
           data-region="South"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.357142857142858">
         <td><strong>Grambling</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
         <td class="prob-cell"
             data-prob="0.112"
+            title="Game win: 11%"
             style="background: rgb(211,95,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.04"
+            title="Game win: 36%"
             style="background: rgb(216,72,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.008"
+            title="Game win: 20%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 25%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (11%)</td>
+        <td class="col-best">R32 (36%)</td>
       </tr>
       
       <tr class=""
           data-team="Houston"
           data-seed="1"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.833333333333334">
         <td><strong>Houston</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.99"
+            title="Game win: 99%"
             style="background: rgb(42,180,79); color: #ffffff;">
           99%
         </td>
         
         <td class="prob-cell"
             data-prob="0.825"
+            title="Game win: 83%"
             style="background: rgb(89,194,69); color: #1a1a1a;">
           82%
         </td>
         
         <td class="prob-cell"
             data-prob="0.512"
+            title="Game win: 62%"
             style="background: rgb(176,219,50); color: #1a1a1a;">
           51%
         </td>
         
         <td class="prob-cell"
             data-prob="0.316"
+            title="Game win: 62%"
             style="background: rgb(194,161,53); color: #1a1a1a;">
           32%
         </td>
         
         <td class="prob-cell"
             data-prob="0.131"
+            title="Game win: 41%"
             style="background: rgb(209,101,57); color: #ffffff;">
           13%
         </td>
         
         <td class="prob-cell"
             data-prob="0.063"
+            title="Game win: 48%"
             style="background: rgb(214,80,58); color: #ffffff;">
           6%
         </td>
         
-        <td class="col-best">R64 (99%)</td>
+        <td class="col-best">R32 (83%)</td>
       </tr>
       
       <tr class=""
           data-team="Tennessee"
           data-seed="2"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.750782064650679">
         <td><strong>Tennessee</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.959"
+            title="Game win: 96%"
             style="background: rgb(51,183,77); color: #ffffff;">
           96%
         </td>
         
         <td class="prob-cell"
             data-prob="0.72"
+            title="Game win: 75%"
             style="background: rgb(118,202,63); color: #1a1a1a;">
           72%
         </td>
         
         <td class="prob-cell"
             data-prob="0.444"
+            title="Game win: 62%"
             style="background: rgb(184,202,51); color: #1a1a1a;">
           44%
         </td>
         
         <td class="prob-cell"
             data-prob="0.267"
+            title="Game win: 60%"
             style="background: rgb(198,145,54); color: #1a1a1a;">
           27%
         </td>
         
         <td class="prob-cell"
             data-prob="0.143"
+            title="Game win: 54%"
             style="background: rgb(208,105,57); color: #ffffff;">
           14%
         </td>
         
         <td class="prob-cell"
             data-prob="0.07"
+            title="Game win: 49%"
             style="background: rgb(214,82,58); color: #ffffff;">
           7%
         </td>
         
-        <td class="col-best">R64 (96%)</td>
+        <td class="col-best">R32 (75%)</td>
       </tr>
       
       <tr class=""
           data-team="Kentucky"
           data-seed="3"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.848">
         <td><strong>Kentucky</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.848"
+            title="Game win: 85%"
             style="background: rgb(82,192,70); color: #1a1a1a;">
           85%
         </td>
         
         <td class="prob-cell"
             data-prob="0.549"
+            title="Game win: 65%"
             style="background: rgb(166,216,52); color: #1a1a1a;">
           55%
         </td>
         
         <td class="prob-cell"
             data-prob="0.308"
+            title="Game win: 56%"
             style="background: rgb(195,158,53); color: #1a1a1a;">
           31%
         </td>
         
         <td class="prob-cell"
             data-prob="0.156"
+            title="Game win: 51%"
             style="background: rgb(207,109,56); color: #1a1a1a;">
           16%
         </td>
         
         <td class="prob-cell"
             data-prob="0.059"
+            title="Game win: 38%"
             style="background: rgb(215,78,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.027"
+            title="Game win: 46%"
             style="background: rgb(217,68,59); color: #ffffff;">
           3%
         </td>
@@ -2696,43 +3257,50 @@
           data-team="Purdue"
           data-seed="4"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.791">
         <td><strong>Purdue</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.791"
+            title="Game win: 79%"
             style="background: rgb(98,196,67); color: #1a1a1a;">
           79%
         </td>
         
         <td class="prob-cell"
             data-prob="0.537"
+            title="Game win: 68%"
             style="background: rgb(169,217,52); color: #1a1a1a;">
           54%
         </td>
         
         <td class="prob-cell"
             data-prob="0.265"
+            title="Game win: 49%"
             style="background: rgb(198,144,54); color: #1a1a1a;">
           26%
         </td>
         
         <td class="prob-cell"
             data-prob="0.107"
+            title="Game win: 40%"
             style="background: rgb(211,94,57); color: #ffffff;">
           11%
         </td>
         
         <td class="prob-cell"
             data-prob="0.047"
+            title="Game win: 44%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.022"
+            title="Game win: 47%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
@@ -2744,91 +3312,105 @@
           data-team="Clemson"
           data-seed="5"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.701906412478337">
         <td><strong>Clemson</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.577"
+            title="Game win: 58%"
             style="background: rgb(158,213,54); color: #1a1a1a;">
           58%
         </td>
         
         <td class="prob-cell"
             data-prob="0.405"
+            title="Game win: 70%"
             style="background: rgb(187,189,51); color: #1a1a1a;">
           40%
         </td>
         
         <td class="prob-cell"
             data-prob="0.205"
+            title="Game win: 51%"
             style="background: rgb(203,125,55); color: #1a1a1a;">
           20%
         </td>
         
         <td class="prob-cell"
             data-prob="0.099"
+            title="Game win: 48%"
             style="background: rgb(212,91,58); color: #ffffff;">
           10%
         </td>
         
         <td class="prob-cell"
             data-prob="0.044"
+            title="Game win: 44%"
             style="background: rgb(216,74,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.02"
+            title="Game win: 45%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
-        <td class="col-best">R64 (58%)</td>
+        <td class="col-best">R32 (70%)</td>
       </tr>
       
       <tr class=""
           data-team="Illinois"
           data-seed="6"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.664">
         <td><strong>Illinois</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.664"
+            title="Game win: 66%"
             style="background: rgb(134,206,59); color: #1a1a1a;">
           66%
         </td>
         
         <td class="prob-cell"
             data-prob="0.429"
+            title="Game win: 65%"
             style="background: rgb(185,197,51); color: #1a1a1a;">
           43%
         </td>
         
         <td class="prob-cell"
             data-prob="0.199"
+            title="Game win: 46%"
             style="background: rgb(204,123,56); color: #1a1a1a;">
           20%
         </td>
         
         <td class="prob-cell"
             data-prob="0.082"
+            title="Game win: 41%"
             style="background: rgb(213,86,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.032"
+            title="Game win: 39%"
             style="background: rgb(217,70,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.013"
+            title="Game win: 41%"
             style="background: rgb(218,64,59); color: #ffffff;">
           1%
         </td>
@@ -2840,43 +3422,50 @@
           data-team="UCLA"
           data-seed="7"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="0.7">
         <td><strong>UCLA</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.7"
+            title="Game win: 70%"
             style="background: rgb(124,204,62); color: #1a1a1a;">
           70%
         </td>
         
         <td class="prob-cell"
             data-prob="0.414"
+            title="Game win: 59%"
             style="background: rgb(186,192,51); color: #1a1a1a;">
           41%
         </td>
         
         <td class="prob-cell"
             data-prob="0.219"
+            title="Game win: 53%"
             style="background: rgb(202,130,55); color: #1a1a1a;">
           22%
         </td>
         
         <td class="prob-cell"
             data-prob="0.079"
+            title="Game win: 36%"
             style="background: rgb(213,85,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.025"
+            title="Game win: 32%"
             style="background: rgb(218,68,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 36%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
@@ -2888,432 +3477,495 @@
           data-team="Gonzaga"
           data-seed="8"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.620915032679738">
         <td><strong>Gonzaga</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.612"
+            title="Game win: 61%"
             style="background: rgb(148,211,56); color: #1a1a1a;">
           61%
         </td>
         
         <td class="prob-cell"
             data-prob="0.38"
+            title="Game win: 62%"
             style="background: rgb(189,181,52); color: #1a1a1a;">
           38%
         </td>
         
         <td class="prob-cell"
             data-prob="0.178"
+            title="Game win: 47%"
             style="background: rgb(205,116,56); color: #1a1a1a;">
           18%
         </td>
         
         <td class="prob-cell"
             data-prob="0.059"
+            title="Game win: 33%"
             style="background: rgb(215,78,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.022"
+            title="Game win: 37%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 41%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
-        <td class="col-best">R64 (61%)</td>
+        <td class="col-best">R32 (62%)</td>
       </tr>
       
       <tr class=""
           data-team="Georgia"
           data-seed="9"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.595903165735567">
         <td><strong>Georgia</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.537"
+            title="Game win: 54%"
             style="background: rgb(169,217,52); color: #1a1a1a;">
           54%
         </td>
         
         <td class="prob-cell"
             data-prob="0.32"
+            title="Game win: 60%"
             style="background: rgb(194,162,53); color: #1a1a1a;">
           32%
         </td>
         
         <td class="prob-cell"
             data-prob="0.132"
+            title="Game win: 41%"
             style="background: rgb(209,102,57); color: #ffffff;">
           13%
         </td>
         
         <td class="prob-cell"
             data-prob="0.047"
+            title="Game win: 36%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.018"
+            title="Game win: 38%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.006"
+            title="Game win: 33%"
             style="background: rgb(219,61,59); color: #ffffff;">
           1%
         </td>
         
-        <td class="col-best">R64 (54%)</td>
+        <td class="col-best">R32 (60%)</td>
       </tr>
       
       <tr class=""
           data-team="Texas Tech"
           data-seed="10"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.422492401215806">
         <td><strong>Texas Tech</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.329"
+            title="Game win: 33%"
             style="background: rgb(193,165,53); color: #1a1a1a;">
           33%
         </td>
         
         <td class="prob-cell"
             data-prob="0.139"
+            title="Game win: 42%"
             style="background: rgb(208,104,57); color: #ffffff;">
           14%
         </td>
         
         <td class="prob-cell"
             data-prob="0.049"
+            title="Game win: 35%"
             style="background: rgb(216,75,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.02"
+            title="Game win: 41%"
             style="background: rgb(218,66,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.005"
+            title="Game win: 25%"
             style="background: rgb(219,61,59); color: #ffffff;">
           0%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (33%)</td>
+        <td class="col-best">R32 (42%)</td>
       </tr>
       
       <tr class=""
           data-team="Drake"
           data-seed="11"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.510263929618768">
         <td><strong>Drake</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.341"
+            title="Game win: 34%"
             style="background: rgb(192,169,53); color: #1a1a1a;">
           34%
         </td>
         
         <td class="prob-cell"
             data-prob="0.174"
+            title="Game win: 51%"
             style="background: rgb(206,115,56); color: #1a1a1a;">
           17%
         </td>
         
         <td class="prob-cell"
             data-prob="0.055"
+            title="Game win: 32%"
             style="background: rgb(215,77,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.018"
+            title="Game win: 33%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.005"
+            title="Game win: 28%"
             style="background: rgb(219,61,59); color: #ffffff;">
           0%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (34%)</td>
+        <td class="col-best">R32 (51%)</td>
       </tr>
       
       <tr class=""
           data-team="McNeese"
           data-seed="12"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="20.434782608695652">
         <td><strong>McNeese</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.305"
+            title="Game win: 30%"
             style="background: rgb(195,157,53); color: #1a1a1a;">
           30%
         </td>
         
         <td class="prob-cell"
             data-prob="0.115"
+            title="Game win: 38%"
             style="background: rgb(210,96,57); color: #ffffff;">
           12%
         </td>
         
         <td class="prob-cell"
             data-prob="0.05"
+            title="Game win: 43%"
             style="background: rgb(216,76,59); color: #ffffff;">
           5%
         </td>
         
         <td class="prob-cell"
             data-prob="0.016"
+            title="Game win: 32%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.005"
+            title="Game win: 31%"
             style="background: rgb(219,61,59); color: #ffffff;">
           0%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (30%)</td>
+        <td class="col-best">S16 (43%)</td>
       </tr>
       
       <tr class=""
           data-team="High Point"
           data-seed="13"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.397058823529411">
         <td><strong>High Point</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.204"
+            title="Game win: 20%"
             style="background: rgb(203,125,55); color: #1a1a1a;">
           20%
         </td>
         
         <td class="prob-cell"
             data-prob="0.081"
+            title="Game win: 40%"
             style="background: rgb(213,85,58); color: #ffffff;">
           8%
         </td>
         
         <td class="prob-cell"
             data-prob="0.025"
+            title="Game win: 31%"
             style="background: rgb(218,68,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.008"
+            title="Game win: 32%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 25%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (20%)</td>
+        <td class="col-best">R32 (40%)</td>
       </tr>
       
       <tr class=""
           data-team="Troy"
           data-seed="14"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="20.38095238095238">
         <td><strong>Troy</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.13"
+            title="Game win: 13%"
             style="background: rgb(209,101,57); color: #ffffff;">
           13%
         </td>
         
         <td class="prob-cell"
             data-prob="0.042"
+            title="Game win: 32%"
             style="background: rgb(216,73,59); color: #ffffff;">
           4%
         </td>
         
         <td class="prob-cell"
             data-prob="0.016"
+            title="Game win: 38%"
             style="background: rgb(218,65,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.003"
+            title="Game win: 19%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (13%)</td>
+        <td class="col-best">S16 (38%)</td>
       </tr>
       
       <tr class=""
           data-team="Montana"
           data-seed="15"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.383333333333333">
         <td><strong>Montana</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.06"
+            title="Game win: 6%"
             style="background: rgb(215,79,58); color: #ffffff;">
           6%
         </td>
         
         <td class="prob-cell"
             data-prob="0.023"
+            title="Game win: 38%"
             style="background: rgb(218,67,59); color: #ffffff;">
           2%
         </td>
         
         <td class="prob-cell"
             data-prob="0.005"
+            title="Game win: 22%"
             style="background: rgb(219,61,59); color: #ffffff;">
           0%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (6%)</td>
+        <td class="col-best">R32 (38%)</td>
       </tr>
       
       <tr class=""
           data-team="Norfolk St."
           data-seed="16"
           data-region="West"
-          data-eliminated="false">
+          data-eliminated="false"
+          data-best-sort="10.346153846153847">
         <td><strong>Norfolk St.</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
         <td class="prob-cell"
             data-prob="0.026"
+            title="Game win: 3%"
             style="background: rgb(217,68,59); color: #ffffff;">
           3%
         </td>
         
         <td class="prob-cell"
             data-prob="0.009"
+            title="Game win: 35%"
             style="background: rgb(219,62,59); color: #ffffff;">
           1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.002"
+            title="Game win: 22%"
             style="background: rgb(219,60,59); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: &lt;1%"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
         <td class="prob-cell"
             data-prob="0.0"
+            title="Game win: —"
             style="background: rgb(220,60,60); color: #ffffff;">
           &lt;1%
         </td>
         
-        <td class="col-best">R64 (3%)</td>
+        <td class="col-best">R32 (35%)</td>
       </tr>
       
     </tbody>
@@ -3335,25 +3987,28 @@ function sortTable(col) {
     currentSort.asc = !currentSort.asc;
   } else {
     currentSort.col = col;
-    currentSort.asc = true;
+    // Default descending for numeric columns so high values show first
+    currentSort.asc = (col === 'team' || col === 'region' || col === 'seed');
   }
 
   // Update arrow indicators
   table.querySelectorAll('th').forEach(th => {
     th.classList.remove('sorted');
-    th.querySelector('.sort-arrow').textContent = '▲';
+    const arrow = th.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = '\u25B2';
   });
-  const th = table.querySelector(`th[data-col="${col}"]`);
+  const th = table.querySelector('th[data-col="' + col + '"]');
   if (th) {
     th.classList.add('sorted');
-    th.querySelector('.sort-arrow').textContent = currentSort.asc ? '▲' : '▼';
+    const arrow = th.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = currentSort.asc ? '\u25B2' : '\u25BC';
   }
 
   const rounds = ["R64", "R32", "S16", "E8", "F4", "Championship"];
   const roundIdx = rounds.indexOf(col);
 
-  rows.sort((a, b) => {
-    let va, vb;
+  rows.sort(function(a, b) {
+    var va, vb;
 
     if (col === 'team') {
       va = a.dataset.team.toLowerCase();
@@ -3369,15 +4024,11 @@ function sortTable(col) {
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
     } else if (col === 'best') {
-      // Sort by best pick probability (last prob-cell)
-      const cellsA = a.querySelectorAll('.prob-cell');
-      const cellsB = b.querySelectorAll('.prob-cell');
-      va = parseMaxProb(cellsA);
-      vb = parseMaxProb(cellsB);
+      va = parseFloat(a.dataset.bestSort || '-1');
+      vb = parseFloat(b.dataset.bestSort || '-1');
     } else if (roundIdx >= 0) {
-      // Sort by specific round probability
-      const cellA = a.querySelectorAll('.prob-cell')[roundIdx];
-      const cellB = b.querySelectorAll('.prob-cell')[roundIdx];
+      var cellA = a.querySelectorAll('.prob-cell')[roundIdx];
+      var cellB = b.querySelectorAll('.prob-cell')[roundIdx];
       va = cellA ? parseFloat(cellA.dataset.prob || '-1') : -1;
       vb = cellB ? parseFloat(cellB.dataset.prob || '-1') : -1;
     } else {
@@ -3389,31 +4040,22 @@ function sortTable(col) {
     return 0;
   });
 
-  rows.forEach(r => tbody.appendChild(r));
-}
-
-function parseMaxProb(cells) {
-  let max = -1;
-  cells.forEach(c => {
-    const v = parseFloat(c.dataset.prob || '-1');
-    if (v > max) max = v;
-  });
-  return max;
+  rows.forEach(function(r) { tbody.appendChild(r); });
 }
 
 // ── Filtering ──────────────────────────────────────────────────────
 function applyFilters() {
-  const region = document.getElementById('filter-region').value;
-  const maxSeed = parseInt(document.getElementById('filter-seed').value);
-  const search = document.getElementById('filter-search').value.toLowerCase();
-  const showEliminated = document.getElementById('filter-eliminated').checked;
+  var region = document.getElementById('filter-region').value;
+  var maxSeed = parseInt(document.getElementById('filter-seed').value);
+  var search = document.getElementById('filter-search').value.toLowerCase();
+  var showEliminated = document.getElementById('filter-eliminated').checked;
 
-  const table = document.getElementById('odds-table');
+  var table = document.getElementById('odds-table');
   if (!table) return;
-  const rows = table.querySelectorAll('tbody tr');
+  var rows = table.querySelectorAll('tbody tr');
 
-  rows.forEach(row => {
-    let show = true;
+  rows.forEach(function(row) {
+    var show = true;
     if (region && row.dataset.region !== region) show = false;
     if (parseInt(row.dataset.seed) > maxSeed) show = false;
     if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
