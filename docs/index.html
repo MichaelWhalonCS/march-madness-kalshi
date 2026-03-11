@@ -182,9 +182,8 @@
 
   th.sorted .sort-arrow { opacity: 1; }
 
-  /* ── Info icon tooltip ───────────────────────────────── */
+  /* ── Info icon ────────────────────────────────────────── */
   .info-tip {
-    position: relative;
     display: inline-block;
     margin-left: 0.3rem;
     cursor: help;
@@ -207,12 +206,15 @@
     vertical-align: middle;
   }
 
-  .info-tip .tooltip {
+  .info-tip:hover .info-icon {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Floating tooltip (appended to body via JS) ──────── */
+  #floating-tooltip {
     display: none;
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
     background: #2d333b;
     color: var(--text);
     border: 1px solid var(--border);
@@ -224,12 +226,13 @@
     letter-spacing: 0;
     line-height: 1.5;
     white-space: normal;
-    width: 260px;
-    z-index: 100;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    max-width: 280px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    pointer-events: none;
   }
 
-  .info-tip .tooltip::after {
+  #floating-tooltip::after {
     content: '';
     position: absolute;
     top: 100%;
@@ -238,8 +241,6 @@
     border: 6px solid transparent;
     border-top-color: #2d333b;
   }
-
-  .info-tip:hover .tooltip { display: block; }
 
   td {
     padding: 0.5rem 0.75rem;
@@ -309,7 +310,7 @@
 <div class="header">
   <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
   <div class="meta">
-    <span>Last updated: 2026-03-11 16:59 UTC</span>
+    <span>Last updated: 2026-03-11 17:06 UTC</span>
     <span>64 teams</span>
     <span>Source: <a href="https://kalshi.com" style="color:var(--accent)">Kalshi</a> prediction markets</span>
   </div>
@@ -384,63 +385,56 @@
         
         <th data-col="R64" onclick="sortTable('R64')">
           Make R32
-          <span class="info-tip">
+          <span class="info-tip" data-tip="Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.">
             <span class="info-icon">i</span>
-            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
         
         <th data-col="R32" onclick="sortTable('R32')">
           Make S16
-          <span class="info-tip">
+          <span class="info-tip" data-tip="Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.">
             <span class="info-icon">i</span>
-            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
         
         <th data-col="S16" onclick="sortTable('S16')">
           Make E8
-          <span class="info-tip">
+          <span class="info-tip" data-tip="Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.">
             <span class="info-icon">i</span>
-            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
         
         <th data-col="E8" onclick="sortTable('E8')">
           Make F4
-          <span class="info-tip">
+          <span class="info-tip" data-tip="Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.">
             <span class="info-icon">i</span>
-            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
         
         <th data-col="F4" onclick="sortTable('F4')">
           Make Final
-          <span class="info-tip">
+          <span class="info-tip" data-tip="Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.">
             <span class="info-icon">i</span>
-            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
         
         <th data-col="Championship" onclick="sortTable('Championship')">
           Win Title
-          <span class="info-tip">
+          <span class="info-tip" data-tip="Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.">
             <span class="info-icon">i</span>
-            <span class="tooltip">Probability of reaching this point in the tournament. Hover a cell to see the conditional game-win probability.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
         
         <th data-col="best" onclick="sortTable('best')">
           Best Pick
-          <span class="info-tip">
+          <span class="info-tip" data-tip="The latest round where this team has at least a 70% chance of winning that specific game. This is the optimal round to use this team in your survivor pool &mdash; save strong teams for as long as they're still safe picks.">
             <span class="info-icon">i</span>
-            <span class="tooltip">The latest round where this team has at least a 70% chance of winning that specific game. This is the optimal round to "use" this team in your survivor pool — save strong teams for as long as they're still safe picks.</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
         </th>
@@ -4066,6 +4060,51 @@ function applyFilters() {
 
 // Initial filter
 applyFilters();
+
+// ── Floating tooltip for info icons ────────────────────────────────
+(function() {
+  var tip = document.createElement('div');
+  tip.id = 'floating-tooltip';
+  document.body.appendChild(tip);
+
+  document.querySelectorAll('.info-tip[data-tip]').forEach(function(el) {
+    el.addEventListener('mouseenter', function(e) {
+      e.stopPropagation(); // don't trigger column sort
+      tip.textContent = el.getAttribute('data-tip');
+      tip.style.display = 'block';
+
+      var rect = el.getBoundingClientRect();
+      var tipRect = tip.getBoundingClientRect();
+
+      // Position above the icon, centered
+      var left = rect.left + rect.width / 2 - tipRect.width / 2;
+      var top = rect.top - tipRect.height - 10;
+
+      // If it would go off the top, show below instead
+      if (top < 4) {
+        top = rect.bottom + 10;
+        tip.style.setProperty('--arrow', 'bottom');
+      }
+      // Keep within viewport horizontally
+      if (left < 4) left = 4;
+      if (left + tipRect.width > window.innerWidth - 4) {
+        left = window.innerWidth - tipRect.width - 4;
+      }
+
+      tip.style.left = left + 'px';
+      tip.style.top = top + 'px';
+    });
+
+    el.addEventListener('mouseleave', function() {
+      tip.style.display = 'none';
+    });
+
+    // Prevent click on info icon from sorting the column
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+})();
 </script>
 
 </body>
