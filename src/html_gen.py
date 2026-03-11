@@ -10,6 +10,7 @@ import structlog
 
 from .odds import TeamOdds
 from .teams import ROUNDS, ROUND_LABELS
+from .config import settings
 
 logger = structlog.get_logger()
 
@@ -101,12 +102,25 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
 
     now = datetime.now(timezone.utc)
 
+    # Determine which rounds to show based on current round
+    current_round = settings.current_round
+    current_idx = ROUNDS.index(current_round) if current_round in ROUNDS else 0
+    visible_rounds = ROUNDS[current_idx:]
+
+    # "Win & Out" = P(advance past current round) - P(advance past next round)
+    # i.e. wins the current game but loses the following one
+    win_rnd = current_round  # the round being played now
+    next_idx = current_idx + 1
+    lose_rnd = ROUNDS[next_idx] if next_idx < len(ROUNDS) else None
+
+    win_out_label = f"Win {ROUND_LABELS.get(win_rnd, win_rnd).replace('Make ', '')} & Out"
+
     # Build row data for the template
     rows = []
     for to in sorted_odds:
         conds = to.conditional_probs()
         round_cells = []
-        for rnd in ROUNDS:
+        for rnd in visible_rounds:
             cum_prob = to.round_probs.get(rnd)
             cond_prob = conds.get(rnd)
             round_cells.append({
@@ -119,14 +133,14 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
                 "text_color": _prob_text_color(cum_prob),
             })
 
-        # "Win & Out" = P(Make R32) - P(Make S16)
-        # i.e. wins their first game but loses the second
-        r32 = to.round_probs.get("R32")
-        s16 = to.round_probs.get("S16")
-        if r32 is not None and s16 is not None:
-            win_and_out = r32 - s16
-        elif r32 is not None:
-            win_and_out = r32
+        # "Win & Out" = P(Make next round) - P(Make round after that)
+        win_prob = to.round_probs.get(win_rnd)
+        lose_prob = to.round_probs.get(lose_rnd) if lose_rnd else None
+        if win_prob is not None and lose_prob is not None:
+            win_and_out = win_prob - lose_prob
+        elif win_prob is not None and lose_rnd is None:
+            # Championship round — no "and out", just win prob
+            win_and_out = win_prob
         else:
             win_and_out = None
 
@@ -147,7 +161,9 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     html = template.render(
         rows=rows,
         round_labels=ROUND_LABELS,
-        rounds=ROUNDS,
+        rounds=visible_rounds,
+        current_round=current_round,
+        win_out_label=win_out_label,
         updated_at=now.strftime("%Y-%m-%d %H:%M UTC"),
         team_count=len([r for r in rows if not r["eliminated"]]),
     )

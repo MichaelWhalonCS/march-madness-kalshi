@@ -383,8 +383,8 @@
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
         <th data-col="winout" onclick="sortTable('winout')">
-          Win &amp; Out
-          <span class="info-tip" data-tip="Probability of winning the first game (R64) but losing the second (R32). Equals Make R32% minus Make S16%. Higher means the team is likely a one-and-done — good to use early and not save.">
+          {{ win_out_label }}
+          <span class="info-tip" data-tip="Probability of winning the current round's game but losing the next one. Higher means the team is a likely one-and-done — good to use now rather than save for later.">
             <span class="info-icon">i</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
