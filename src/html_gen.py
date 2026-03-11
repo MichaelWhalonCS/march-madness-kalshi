@@ -119,11 +119,26 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
                 "text_color": _prob_text_color(cum_prob),
             })
 
+        # "Win & Out" = P(Make R32) - P(Make S16)
+        # i.e. wins their first game but loses the second
+        r32 = to.round_probs.get("R32")
+        s16 = to.round_probs.get("S16")
+        if r32 is not None and s16 is not None:
+            win_and_out = r32 - s16
+        elif r32 is not None:
+            win_and_out = r32
+        else:
+            win_and_out = None
+
         rows.append({
             "team": to.team.name,
             "seed": to.team.seed,
             "region": to.team.region,
             "eliminated": to.team.eliminated,
+            "win_and_out": win_and_out,
+            "win_and_out_display": _prob_display(win_and_out),
+            "win_and_out_bg": _prob_color(win_and_out),
+            "win_and_out_text": _prob_text_color(win_and_out),
             "round_cells": round_cells,
             "best_pick": _best_pick_display(to),
             "best_pick_sort": _best_pick_sort_value(to),

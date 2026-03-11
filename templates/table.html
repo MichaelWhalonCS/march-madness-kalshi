@@ -382,6 +382,13 @@
         <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">&#9650;</span></th>
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
+        <th data-col="winout" onclick="sortTable('winout')">
+          Win &amp; Out
+          <span class="info-tip" data-tip="Probability of winning the first game (R64) but losing the second (R32). Equals Make R32% minus Make S16%. Higher means the team is likely a one-and-done — good to use early and not save.">
+            <span class="info-icon">i</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         {% for rnd in rounds %}
         <th data-col="{{ rnd }}" onclick="sortTable('{{ rnd }}')">
           {{ round_labels[rnd] }}
@@ -411,6 +418,11 @@
         <td><strong>{{ row.team }}</strong></td>
         <td class="col-seed">{{ row.seed }}</td>
         <td class="col-region"><span class="region-chip region-{{ row.region }}">{{ row.region }}</span></td>
+        <td class="prob-cell"
+            data-winout="{{ row.win_and_out if row.win_and_out is not none else '' }}"
+            style="background: {{ row.win_and_out_bg }}; color: {{ row.win_and_out_text }};">
+          {{ row.win_and_out_display }}
+        </td>
         {% for cell in row.round_cells %}
         <td class="prob-cell"
             data-prob="{{ cell.prob if cell.prob is not none else '' }}"
@@ -483,6 +495,11 @@ function sortTable(col) {
       va = a.dataset.region;
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    } else if (col === 'winout') {
+      var woA = a.querySelector('[data-winout]');
+      var woB = b.querySelector('[data-winout]');
+      va = woA ? parseFloat(woA.dataset.winout || '-1') : -1;
+      vb = woB ? parseFloat(woB.dataset.winout || '-1') : -1;
     } else if (col === 'best') {
       va = parseFloat(a.dataset.bestSort || '-1');
       vb = parseFloat(b.dataset.bestSort || '-1');

@@ -310,7 +310,7 @@
 <div class="header">
   <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
   <div class="meta">
-    <span>Last updated: 2026-03-11 17:06 UTC</span>
+    <span>Last updated: 2026-03-11 17:16 UTC</span>
     <span>64 teams</span>
     <span>Source: <a href="https://kalshi.com" style="color:var(--accent)">Kalshi</a> prediction markets</span>
   </div>
@@ -382,6 +382,13 @@
         <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">&#9650;</span></th>
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
+        <th data-col="winout" onclick="sortTable('winout')">
+          Win &amp; Out
+          <span class="info-tip" data-tip="Probability of winning the first game (R64) but losing the second (R32). Equals Make R32% minus Make S16%. Higher means the team is likely a one-and-done — good to use early and not save.">
+            <span class="info-icon">i</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         
         <th data-col="R64" onclick="sortTable('R64')">
           Make R32
@@ -451,6 +458,11 @@
         <td><strong>Duke</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.253"
+            style="background: rgb(199,140,54); color: #1a1a1a;">
+          25%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.932"
@@ -506,6 +518,11 @@
         <td><strong>Alabama</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.235"
+            style="background: rgb(201,135,55); color: #1a1a1a;">
+          24%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.94"
@@ -561,6 +578,11 @@
         <td><strong>Wisconsin</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.28400000000000003"
+            style="background: rgb(197,150,54); color: #1a1a1a;">
+          28%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.875"
@@ -616,6 +638,11 @@
         <td><strong>Arizona</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.23399999999999999"
+            style="background: rgb(201,134,55); color: #1a1a1a;">
+          23%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.795"
@@ -671,6 +698,11 @@
         <td><strong>Oregon</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.22100000000000003"
+            style="background: rgb(202,130,55); color: #1a1a1a;">
+          22%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.756"
@@ -726,6 +758,11 @@
         <td><strong>BYU</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.195"
+            style="background: rgb(204,122,56); color: #1a1a1a;">
+          20%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.598"
@@ -781,6 +818,11 @@
         <td><strong>St. Mary&#39;s</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.152"
+            style="background: rgb(207,108,56); color: #1a1a1a;">
+          15%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.625"
@@ -836,6 +878,11 @@
         <td><strong>Mississippi St.</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.179"
+            style="background: rgb(205,117,56); color: #1a1a1a;">
+          18%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.537"
@@ -891,6 +938,11 @@
         <td><strong>Baylor</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.17099999999999999"
+            style="background: rgb(206,114,56); color: #1a1a1a;">
+          17%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.478"
@@ -946,6 +998,11 @@
         <td><strong>Vanderbilt</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.10500000000000001"
+            style="background: rgb(211,93,57); color: #ffffff;">
+          11%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.394"
@@ -1001,6 +1058,11 @@
         <td><strong>VCU</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.107"
+            style="background: rgb(211,94,57); color: #ffffff;">
+          11%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.447"
@@ -1056,6 +1118,11 @@
         <td><strong>Liberty</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.123"
+            style="background: rgb(210,99,57); color: #ffffff;">
+          12%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.417"
@@ -1111,6 +1178,11 @@
         <td><strong>Yale</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.05499999999999999"
+            style="background: rgb(215,77,58); color: #ffffff;">
+          5%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.209"
@@ -1166,6 +1238,11 @@
         <td><strong>Lipscomb</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.045"
+            style="background: rgb(216,74,59); color: #ffffff;">
+          4%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.146"
@@ -1221,6 +1298,11 @@
         <td><strong>Robert Morris</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.025999999999999995"
+            style="background: rgb(217,68,59); color: #ffffff;">
+          3%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.101"
@@ -1276,6 +1358,11 @@
         <td><strong>American</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
+        <td class="prob-cell"
+            data-winout="0.003"
+            style="background: rgb(219,60,59); color: #ffffff;">
+          &lt;1%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.01"
@@ -1331,6 +1418,11 @@
         <td><strong>UConn</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.25"
+            style="background: rgb(200,140,55); color: #1a1a1a;">
+          25%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.974"
@@ -1386,6 +1478,11 @@
         <td><strong>St. John&#39;s</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.245"
+            style="background: rgb(200,138,55); color: #1a1a1a;">
+          24%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.892"
@@ -1441,6 +1538,11 @@
         <td><strong>Michigan</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.251"
+            style="background: rgb(199,140,54); color: #1a1a1a;">
+          25%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.858"
@@ -1496,6 +1598,11 @@
         <td><strong>North Carolina</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.21300000000000002"
+            style="background: rgb(202,128,55); color: #1a1a1a;">
+          21%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.763"
@@ -1551,6 +1658,11 @@
         <td><strong>Memphis</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.194"
+            style="background: rgb(204,122,56); color: #1a1a1a;">
+          19%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.611"
@@ -1606,6 +1718,11 @@
         <td><strong>Ole Miss</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.19199999999999998"
+            style="background: rgb(204,121,56); color: #1a1a1a;">
+          19%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.593"
@@ -1661,6 +1778,11 @@
         <td><strong>Kansas</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.22699999999999998"
+            style="background: rgb(201,132,55); color: #1a1a1a;">
+          23%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.702"
@@ -1716,6 +1838,11 @@
         <td><strong>Pittsburgh</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.12200000000000003"
+            style="background: rgb(210,99,57); color: #ffffff;">
+          12%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.552"
@@ -1771,6 +1898,11 @@
         <td><strong>Maryland</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.163"
+            style="background: rgb(206,112,56); color: #1a1a1a;">
+          16%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.552"
@@ -1826,6 +1958,11 @@
         <td><strong>Xavier</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.113"
+            style="background: rgb(210,96,57); color: #ffffff;">
+          11%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.337"
@@ -1881,6 +2018,11 @@
         <td><strong>Nebraska</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.09899999999999999"
+            style="background: rgb(212,91,58); color: #ffffff;">
+          10%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.38"
@@ -1936,6 +2078,11 @@
         <td><strong>Colorado St.</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.07600000000000001"
+            style="background: rgb(213,84,58); color: #ffffff;">
+          8%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.271"
@@ -1991,6 +2138,11 @@
         <td><strong>Akron</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.081"
+            style="background: rgb(213,85,58); color: #ffffff;">
+          8%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.259"
@@ -2046,6 +2198,11 @@
         <td><strong>Morehead St.</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.06899999999999999"
+            style="background: rgb(214,82,58); color: #ffffff;">
+          7%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.198"
@@ -2101,6 +2258,11 @@
         <td><strong>Wofford</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.026000000000000002"
+            style="background: rgb(217,68,59); color: #ffffff;">
+          3%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.085"
@@ -2156,6 +2318,11 @@
         <td><strong>FDU</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+        <td class="prob-cell"
+            data-winout="0.003"
+            style="background: rgb(219,60,59); color: #ffffff;">
+          &lt;1%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.01"
@@ -2211,6 +2378,11 @@
         <td><strong>Auburn</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.268"
+            style="background: rgb(198,145,54); color: #1a1a1a;">
+          27%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.959"
@@ -2266,6 +2438,11 @@
         <td><strong>Iowa St.</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.22400000000000003"
+            style="background: rgb(202,131,55); color: #1a1a1a;">
+          22%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.906"
@@ -2321,6 +2498,11 @@
         <td><strong>Florida</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.19700000000000006"
+            style="background: rgb(204,123,56); color: #1a1a1a;">
+          20%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.848"
@@ -2376,6 +2558,11 @@
         <td><strong>Texas A&amp;M</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.21599999999999997"
+            style="background: rgb(202,129,55); color: #1a1a1a;">
+          22%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.773"
@@ -2431,6 +2618,11 @@
         <td><strong>Michigan St.</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.189"
+            style="background: rgb(204,120,56); color: #1a1a1a;">
+          19%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.73"
@@ -2486,6 +2678,11 @@
         <td><strong>Missouri</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.22000000000000003"
+            style="background: rgb(202,130,55); color: #1a1a1a;">
+          22%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.644"
@@ -2541,6 +2738,11 @@
         <td><strong>Marquette</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.169"
+            style="background: rgb(206,114,56); color: #1a1a1a;">
+          17%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.553"
@@ -2596,6 +2798,11 @@
         <td><strong>Louisville</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.156"
+            style="background: rgb(207,109,56); color: #1a1a1a;">
+          16%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.611"
@@ -2651,6 +2858,11 @@
         <td><strong>Creighton</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.16000000000000003"
+            style="background: rgb(207,111,56); color: #1a1a1a;">
+          16%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.506"
@@ -2706,6 +2918,11 @@
         <td><strong>New Mexico</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.088"
+            style="background: rgb(212,88,58); color: #ffffff;">
+          9%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.342"
@@ -2761,6 +2978,11 @@
         <td><strong>San Diego St.</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.075"
+            style="background: rgb(214,84,58); color: #ffffff;">
+          8%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.273"
@@ -2816,6 +3038,11 @@
         <td><strong>UC Irvine</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.104"
+            style="background: rgb(211,93,57); color: #ffffff;">
+          10%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.427"
@@ -2871,6 +3098,11 @@
         <td><strong>Vermont</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.076"
+            style="background: rgb(213,84,58); color: #ffffff;">
+          8%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.285"
@@ -2926,6 +3158,11 @@
         <td><strong>Grand Canyon</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.053000000000000005"
+            style="background: rgb(215,76,58); color: #ffffff;">
+          5%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.187"
@@ -2981,6 +3218,11 @@
         <td><strong>Colgate</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.012"
+            style="background: rgb(219,63,59); color: #ffffff;">
+          1%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.041"
@@ -3036,6 +3278,11 @@
         <td><strong>Grambling</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
+        <td class="prob-cell"
+            data-winout="0.032"
+            style="background: rgb(217,70,59); color: #ffffff;">
+          3%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.112"
@@ -3091,6 +3338,11 @@
         <td><strong>Houston</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.31299999999999994"
+            style="background: rgb(194,160,53); color: #1a1a1a;">
+          31%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.99"
@@ -3146,6 +3398,11 @@
         <td><strong>Tennessee</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.27599999999999997"
+            style="background: rgb(197,148,54); color: #1a1a1a;">
+          28%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.959"
@@ -3201,6 +3458,11 @@
         <td><strong>Kentucky</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.24100000000000005"
+            style="background: rgb(200,137,55); color: #1a1a1a;">
+          24%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.848"
@@ -3256,6 +3518,11 @@
         <td><strong>Purdue</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.272"
+            style="background: rgb(198,147,54); color: #1a1a1a;">
+          27%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.791"
@@ -3311,6 +3578,11 @@
         <td><strong>Clemson</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.20000000000000004"
+            style="background: rgb(204,124,56); color: #1a1a1a;">
+          20%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.577"
@@ -3366,6 +3638,11 @@
         <td><strong>Illinois</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.22999999999999998"
+            style="background: rgb(201,133,55); color: #1a1a1a;">
+          23%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.664"
@@ -3421,6 +3698,11 @@
         <td><strong>UCLA</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.19499999999999998"
+            style="background: rgb(204,122,56); color: #1a1a1a;">
+          19%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.7"
@@ -3476,6 +3758,11 @@
         <td><strong>Gonzaga</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.202"
+            style="background: rgb(203,124,55); color: #1a1a1a;">
+          20%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.612"
@@ -3531,6 +3818,11 @@
         <td><strong>Georgia</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.188"
+            style="background: rgb(204,120,56); color: #1a1a1a;">
+          19%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.537"
@@ -3586,6 +3878,11 @@
         <td><strong>Texas Tech</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.09000000000000001"
+            style="background: rgb(212,88,58); color: #ffffff;">
+          9%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.329"
@@ -3641,6 +3938,11 @@
         <td><strong>Drake</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.119"
+            style="background: rgb(210,98,57); color: #ffffff;">
+          12%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.341"
@@ -3696,6 +3998,11 @@
         <td><strong>McNeese</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.065"
+            style="background: rgb(214,80,58); color: #ffffff;">
+          6%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.305"
@@ -3751,6 +4058,11 @@
         <td><strong>High Point</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.056"
+            style="background: rgb(215,77,58); color: #ffffff;">
+          6%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.204"
@@ -3806,6 +4118,11 @@
         <td><strong>Troy</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.026000000000000002"
+            style="background: rgb(217,68,59); color: #ffffff;">
+          3%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.13"
@@ -3861,6 +4178,11 @@
         <td><strong>Montana</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.018"
+            style="background: rgb(218,65,59); color: #ffffff;">
+          2%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.06"
@@ -3916,6 +4238,11 @@
         <td><strong>Norfolk St.</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
+        <td class="prob-cell"
+            data-winout="0.006999999999999999"
+            style="background: rgb(219,62,59); color: #ffffff;">
+          1%
+        </td>
         
         <td class="prob-cell"
             data-prob="0.026"
@@ -4017,6 +4344,11 @@ function sortTable(col) {
       va = a.dataset.region;
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    } else if (col === 'winout') {
+      var woA = a.querySelector('[data-winout]');
+      var woB = b.querySelector('[data-winout]');
+      va = woA ? parseFloat(woA.dataset.winout || '-1') : -1;
+      vb = woB ? parseFloat(woB.dataset.winout || '-1') : -1;
     } else if (col === 'best') {
       va = parseFloat(a.dataset.bestSort || '-1');
       vb = parseFloat(b.dataset.bestSort || '-1');
