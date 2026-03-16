@@ -442,7 +442,7 @@
   <div class="meta">
     <span>Last updated: {{ updated_at }}</span>
     <span>{{ team_count }} teams</span>
-    <span>Sources: <a href="https://www.espn.com/mens-college-basketball/bpi/_/view/tournament" style="color:var(--accent)" target="_blank" rel="noopener">ESPN BPI</a> &amp; <a href="https://kalshi.com/markets/kxncaambgame" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi NCAA Markets</a></span>
+    <span>Source: <a href="https://kalshi.com/category/sports/basketball/cbb-tournament/futures" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi NCAA Tournament Markets</a></span>
   </div>
 </div>
 
@@ -461,26 +461,26 @@
 
     <h3>Data Sources</h3>
     <ul>
-      <li><strong><a href="https://www.espn.com/mens-college-basketball/bpi/_/view/tournament" style="color:var(--accent)" target="_blank" rel="noopener">ESPN BPI (Basketball Power Index)</a></strong> — ESPN's proprietary model that runs thousands of tournament simulations to estimate each team's probability of advancing to each round. BPI accounts for team strength, schedule difficulty, and matchup-specific factors. The percentage columns (Make R32, Make S16, etc.) come directly from BPI's cumulative advancement probabilities.</li>
-      <li><strong><a href="https://kalshi.com/markets/kxncaambgame" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi Prediction Markets</a></strong> — A CFTC-regulated prediction market where real money is traded on the outcome of each NCAA tournament game. The Kalshi column shows the market-implied probability for each team winning their current-round game, calculated as the midpoint of the best bid and ask prices. Each team's Kalshi cell links to the specific market for that game. Because real money is at stake, market prices aggregate the collective wisdom (and biases) of thousands of traders.</li>
+      <li><strong><a href="https://kalshi.com/category/sports/basketball/cbb-tournament/futures" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi Tournament Futures</a></strong> — Per-team, per-round advancement markets on a CFTC-regulated prediction exchange. For example, "Will Duke qualify for the Sweet Sixteen?" Real money is traded on every outcome, so prices aggregate the collective wisdom of thousands of traders. The percentage columns (Make R32, Make S16, etc.) are derived from these futures prices.</li>
+      <li><strong><a href="https://kalshi.com/markets/kxncaambgame" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi Per-Game Markets</a></strong> — Binary win/loss markets for each individual game. The Kalshi column shows the market-implied probability for each team winning their current-round game, calculated as the midpoint of the best bid and ask prices. Each team's Kalshi cell links directly to the specific market for that game.</li>
     </ul>
 
     <h3>How the Numbers Are Calculated</h3>
     <ul>
-      <li><strong>Cumulative probabilities</strong> (the round columns) are pulled directly from ESPN BPI. "Make S16 = 65%" means BPI's model gives that team a 65% chance of reaching the Sweet 16.</li>
-      <li><strong>Conditional (game-win) probabilities</strong> — shown when you hover a cell — are derived from BPI by dividing consecutive rounds:
+      <li><strong>Cumulative probabilities</strong> (the round columns) are derived from Kalshi tournament futures markets. "Make S16 = 65%" means the market gives that team a 65% chance of reaching the Sweet 16.</li>
+      <li><strong>Conditional (game-win) probabilities</strong> — shown when you hover a cell — are derived by dividing consecutive rounds:
         <code>P(win R32 game) = P(make S16) / P(make R32)</code>.
         This gives the probability of winning that specific game, <em>given the team made it there</em>.</li>
-      <li><strong>Kalshi probability</strong> = midpoint of the market bid/ask spread. For example, if a team's YES contract is bid $0.72 / ask $0.74, the implied probability is 73%.</li>
+      <li><strong>Kalshi probability</strong> (per-game column) = midpoint of the market bid/ask spread for the individual game market. For example, if a team's YES contract is bid $0.72 / ask $0.74, the implied probability is 73%.</li>
       <li><strong>Win &amp; Out</strong> = P(make next round) − P(make round after that). This is the probability a team wins now but loses its next game — a "one-and-done" indicator. High Win &amp; Out teams are best used in the current round rather than saved for later.</li>
       <li><strong>Best Pick</strong> = the latest round where a team's conditional game-win probability is ≥ 70%. This tells you the optimal round to "use" a team. Don't waste a 1-seed on R64 if they're still 80% to win in R32 — save them for when you need them.</li>
     </ul>
 
-    <h3>BPI vs. Kalshi — Why Both?</h3>
+    <h3>Futures vs. Per-Game Markets</h3>
     <ul>
-      <li>BPI is a <strong>model</strong> — it's based on statistics and simulations. It tends to be well-calibrated but doesn't react to last-minute news (injuries, lineup changes).</li>
-      <li>Kalshi is a <strong>market</strong> — it reflects real-time collective sentiment. It adjusts quickly to news but can be swayed by public bias (e.g., overvaluing big-name programs).</li>
-      <li>When Kalshi and BPI <strong>disagree significantly</strong>, it's worth investigating. If BPI says 85% but Kalshi says 70%, either the market knows something the model doesn't (injury news?) or you may have found a value pick.</li>
+      <li><strong>Futures</strong> (the round columns) are forward-looking — they price in the strength of opponents the team is likely to face in later rounds. A 1-seed might be 97% to win R64 but only 55% to make the Elite 8 because of a tough bracket path.</li>
+      <li><strong>Per-game</strong> (the Kalshi column) reflects only the current single game. It often matches the R64 futures closely but can diverge when late-breaking news (injuries, lineup changes) hits the per-game market faster.</li>
+      <li>When futures and per-game odds <strong>disagree significantly</strong>, it's worth investigating — one market may have priced in information the other hasn't yet.</li>
     </ul>
 
     <h3>Strategy Tips</h3>

@@ -48,8 +48,8 @@ def test_generate_html_creates_file():
         # Kalshi cell should link to the specific market
         assert "kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19test" in content
         # Info section should have methodology explanations
-        assert "ESPN BPI" in content
-        assert "Basketball Power Index" in content
+        assert "Tournament Futures" in content
+        assert "Per-Game Markets" in content
         assert "conditional" in content.lower()
 
 

@@ -1,15 +1,24 @@
 """Fetch March Madness odds from Kalshi and structure them for the table.
 
-Kalshi has per-game win markets under the KXNCAAMBGAME series.
-Each game has two markets (one per team), e.g.:
-  KXNCAAMBGAME-26MAR19SIEDUKE-DUKE  → "Siena at Duke Winner?"
-  KXNCAAMBGAME-26MAR19SIEDUKE-SIE   → "Siena at Duke Winner?"
+All data comes from Kalshi prediction markets:
 
-Market prices are in dollars (0.00–1.00).  We take the midpoint of
-yes_bid_dollars / yes_ask_dollars as the implied probability.
+1. **Per-game markets** (``KXNCAAMBGAME`` series)
+   Each game has two binary markets (one per team).  Prices are in dollars
+   (0.00–1.00).  We take the midpoint of yes_bid / yes_ask as the implied
+   win probability.
 
-Only the current round's games are available at any time — we map each
-team's game-win probability to its current round's cumulative probability.
+2. **Tournament futures** (``KXMARMADROUND`` + ``KXMARMAD`` series)
+   Per-team, per-round advancement markets — e.g. "Will Duke qualify for
+   the men's Sweet Sixteen?"  These provide cumulative advancement
+   probabilities for every round (R32 through Championship).
+
+   Kalshi round event → our round_probs key:
+     KXMARMADROUND-26RO32  → R64   (reaching R32 = surviving R64)
+     KXMARMADROUND-26S16   → R32   (reaching S16 = surviving R32)
+     KXMARMADROUND-26E8    → S16
+     KXMARMADROUND-26F4    → E8
+     KXMARMADROUND-26T2    → F4
+     KXMARMAD-26           → Championship   (winning it all)
 """
 
 from __future__ import annotations
@@ -46,6 +55,23 @@ _DATE_TO_ROUND: dict[str, str] = {
     "APR04": "F4",
     "APR06": "Championship",
 }
+
+# ── Futures configuration ──────────────────────────────────────────────────────
+
+FUTURES_SERIES = "KXMARMADROUND"       # per-round advancement futures
+CHAMP_EVENT   = "KXMARMAD-26"          # championship winner event
+
+# Kalshi futures event suffix → our cumulative round_probs key.
+# "Reach Round of 32" = survived R64, so maps to round_probs["R64"].
+_FUTURES_EVENT_TO_ROUND: dict[str, str] = {
+    "26RO32": "R64",
+    "26S16":  "R32",
+    "26E8":   "S16",
+    "26F4":   "E8",
+    "26T2":   "F4",
+}
+
+_KALSHI_FUTURES_URL_BASE = "https://kalshi.com/markets/kxmarmadround"
 
 
 # ── Data structures ────────────────────────────────────────────────────────────
@@ -193,6 +219,26 @@ def _parse_ticker(ticker: str) -> tuple[str | None, str | None]:
 _KALSHI_MARKET_URL_BASE = "https://kalshi.com/markets/kxncaambgame"
 
 
+def _market_to_dict(market) -> dict:
+    """Normalise a pykalshi market to a plain dict."""
+    if isinstance(market, dict):
+        return market
+    if hasattr(market, "data") and hasattr(market.data, "model_dump"):
+        return market.data.model_dump()
+    return market.__dict__
+
+
+# Settled / finalized statuses to skip — these are games already played
+_CLOSED_STATUSES = {"finalized", "settled", "closed", "determined"}
+
+
+def _is_closed(mdict: dict) -> bool:
+    """Return True if the market status indicates it's already resolved."""
+    status = mdict.get("status", "")
+    status_str = status.value if hasattr(status, "value") else str(status)
+    return status_str.lower() in _CLOSED_STATUSES
+
+
 def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
     """Fetch current-round Kalshi market probabilities, keyed by team name.
 
@@ -207,33 +253,19 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
         markets = client.get_markets(series_ticker=SERIES_TICKER, limit=1000)
         if isinstance(markets, dict):
             markets = markets.get("markets", [])
-        # pykalshi 0.4.0 may return a DataFrameList; coerce to list of dicts
         if hasattr(markets, "to_dicts"):
             markets = markets.to_dicts()
     except Exception:
-        logger.warning("Could not fetch Kalshi markets — continuing with ESPN BPI only")
+        logger.warning("Could not fetch Kalshi per-game markets")
         return {}, {}
-
-    # Settled / finalized statuses to skip — these are games already played
-    _CLOSED_STATUSES = {"finalized", "settled", "closed", "determined"}
 
     probs: dict[str, float] = {}
     urls: dict[str, str] = {}
     skipped = 0
     for market in markets:
-        # Convert pykalshi Market objects to dicts for uniform handling
-        if isinstance(market, dict):
-            mdict = market
-        elif hasattr(market, "data") and hasattr(market.data, "model_dump"):
-            # pykalshi 0.4+ Market wraps a Pydantic MarketModel in .data
-            mdict = market.data.model_dump()
-        else:
-            mdict = market.__dict__
+        mdict = _market_to_dict(market)
 
-        # Skip markets for games that have already been played
-        status = mdict.get("status", "")
-        status_str = status.value if hasattr(status, "value") else str(status)
-        if status_str.lower() in _CLOSED_STATUSES:
+        if _is_closed(mdict):
             skipped += 1
             continue
 
@@ -254,33 +286,134 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
                 urls[team_obj.name] = f"{_KALSHI_MARKET_URL_BASE}/{event_ticker.lower()}"
             logger.debug("Kalshi market", team=team_obj.name, prob=f"{prob:.1%}", ticker=ticker)
 
-    logger.info("Kalshi markets fetched", parsed=len(probs), skipped_closed=skipped)
+    logger.info("Kalshi per-game markets fetched", parsed=len(probs), skipped_closed=skipped)
     return probs, urls
 
 
-def fetch_odds() -> list[TeamOdds]:
-    """Fetch odds from ESPN BPI (all rounds) + Kalshi (current round).
+# ── Kalshi tournament futures ──────────────────────────────────────────────────
 
-    ESPN BPI provides cumulative advancement probabilities for all rounds.
-    Kalshi provides per-game win probabilities for the current round only.
-    Both are included so the user can compare model-based and market-based odds.
+def _fetch_all_markets(client, **kwargs) -> list[dict]:
+    """Fetch markets via pykalshi and convert to plain dicts.
+
+    pykalshi handles cursor-based pagination internally when limit > 200,
+    so a single call suffices.
     """
-    from .espn_bpi import fetch_bpi
+    result = client.get_markets(**kwargs, limit=1000)
+    # result may be a DataFrameList[Market], a dict, or a plain list
+    if isinstance(result, dict):
+        raw = result.get("markets", [])
+    elif hasattr(result, "to_dicts"):
+        raw = result.to_dicts()
+    else:
+        raw = list(result)
+    return [_market_to_dict(m) for m in raw]
 
-    # 1. ESPN BPI — multi-round advancement probabilities
-    bpi_data = fetch_bpi()  # dict: team_name → {round_code → prob}
 
-    if not bpi_data:
-        logger.warning("No ESPN BPI data — falling back to sample odds")
+def _fetch_kalshi_futures() -> dict[str, dict[str, float]]:
+    """Fetch Kalshi tournament futures and return cumulative round probabilities.
+
+    Combines the KXMARMADROUND series (R64 → F4) with the KXMARMAD-26
+    championship event to build a dict:
+        team_name → {round_code → probability (0.0–1.0)}
+
+    This replaces ESPN BPI as the source for multi-round advancement data.
+    """
+    try:
+        client = get_client()
+    except Exception:
+        logger.warning("Could not initialise Kalshi client for futures")
+        return {}
+
+    # ── 1. Fetch KXMARMADROUND advancement markets ─────────────────────────
+    try:
+        round_markets = _fetch_all_markets(client, series_ticker=FUTURES_SERIES)
+    except Exception:
+        logger.exception("Failed to fetch KXMARMADROUND markets")
+        round_markets = []
+
+    result: dict[str, dict[str, float]] = {}
+
+    for mdict in round_markets:
+        if _is_closed(mdict):
+            continue
+
+        ticker = mdict.get("ticker", "")
+        # KXMARMADROUND-26RO32-UGA → parts = ["KXMARMADROUND", "26RO32", "UGA"]
+        parts = ticker.split("-")
+        if len(parts) < 3:
+            continue
+
+        team_abbr = parts[-1]
+        event_suffix = parts[1]  # e.g. "26RO32"
+
+        round_code = _FUTURES_EVENT_TO_ROUND.get(event_suffix)
+        if round_code is None:
+            continue
+
+        team_obj = KALSHI_ABBR_MAP.get(team_abbr)
+        if team_obj is None:
+            continue
+
+        prob = price_to_prob(mdict)
+        if prob > 0:
+            result.setdefault(team_obj.name, {})[round_code] = prob
+
+    # ── 2. Fetch KXMARMAD-26 championship markets ──────────────────────────
+    try:
+        champ_markets = _fetch_all_markets(client, event_ticker=CHAMP_EVENT)
+    except Exception:
+        logger.exception("Failed to fetch KXMARMAD championship markets")
+        champ_markets = []
+
+    for mdict in champ_markets:
+        if _is_closed(mdict):
+            continue
+
+        ticker = mdict.get("ticker", "")
+        # KXMARMAD-26-UGA → parts = ["KXMARMAD", "26", "UGA"]
+        parts = ticker.split("-")
+        if len(parts) < 3:
+            continue
+
+        team_abbr = parts[-1]
+        team_obj = KALSHI_ABBR_MAP.get(team_abbr)
+        if team_obj is None:
+            continue
+
+        prob = price_to_prob(mdict)
+        if prob > 0:
+            result.setdefault(team_obj.name, {})["Championship"] = prob
+
+    logger.info(
+        "Kalshi futures fetched",
+        teams_with_futures=len(result),
+        rounds_found=sorted({r for probs in result.values() for r in probs}),
+    )
+    return result
+
+
+def fetch_odds() -> list[TeamOdds]:
+    """Fetch odds entirely from Kalshi prediction markets.
+
+    Kalshi tournament futures provide cumulative advancement probabilities
+    for all rounds (replacing ESPN BPI).  Per-game markets provide the
+    current-round win probability shown in the dedicated Kalshi column.
+    """
+
+    # 1. Kalshi futures — multi-round cumulative advancement probabilities
+    futures_data = _fetch_kalshi_futures()  # dict: team_name → {round → prob}
+
+    if not futures_data:
+        logger.warning("No Kalshi futures data — falling back to sample odds")
         return _generate_sample_odds()
 
-    # 2. Kalshi — current-round per-game market prices
-    kalshi_probs, kalshi_urls = _fetch_kalshi_probs()  # dicts: team_name → prob / url
+    # 2. Kalshi per-game — current round market prices
+    kalshi_probs, kalshi_urls = _fetch_kalshi_probs()
 
     # 3. Build TeamOdds for every team
     result: list[TeamOdds] = []
     for team in get_all_teams():
-        round_probs = bpi_data.get(team.name, {})
+        round_probs = futures_data.get(team.name, {})
         kalshi_prob = kalshi_probs.get(team.name)
         kalshi_url = kalshi_urls.get(team.name)
 
@@ -291,12 +424,12 @@ def fetch_odds() -> list[TeamOdds]:
             kalshi_url=kalshi_url,
         ))
 
-    teams_with_bpi = sum(1 for to in result if to.round_probs)
+    teams_with_futures = sum(1 for to in result if to.round_probs)
     teams_with_kalshi = sum(1 for to in result if to.kalshi_prob is not None)
     logger.info(
         "Odds assembled",
         total_teams=len(result),
-        with_bpi=teams_with_bpi,
+        with_futures=teams_with_futures,
         with_kalshi=teams_with_kalshi,
     )
     return result
