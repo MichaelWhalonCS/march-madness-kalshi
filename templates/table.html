@@ -531,8 +531,8 @@
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
         <th data-col="kalshi" onclick="sortTable('kalshi')">
-          Kalshi
-          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the current round's game. This reflects real-money market sentiment — compare with the BPI model column to spot value.">
+          Kalshi ({{ current_round }})
+          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the {{ current_round }} game. This reflects real-money market sentiment — compare with the BPI model column to spot value.">
             <span class="info-icon">i</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
