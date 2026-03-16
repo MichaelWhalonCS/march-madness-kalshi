@@ -66,13 +66,19 @@ def _best_pick_display(team_odds: TeamOdds) -> str:
     """Format the 'Best Pick' column.
 
     Shows the latest round where the team has >= 70% conditional win probability.
-    This is the round where Joel should 'use' this team in his survivor pool.
+    For teams with no safe round, shows the best available with a visual indicator.
     """
     rnd = team_odds.best_pick_round
     prob = team_odds.best_pick_prob
     if rnd is None or prob is None:
         return "—"
     return f"{rnd} ({prob:.0%})"
+
+
+def _best_pick_is_safe(team_odds: TeamOdds) -> bool:
+    """True if the best pick round has conditional probability >= SAFE_THRESHOLD."""
+    prob = team_odds.best_pick_prob
+    return prob is not None and prob >= team_odds.SAFE_THRESHOLD
 
 
 def _best_pick_sort_value(team_odds: TeamOdds) -> float:
@@ -160,6 +166,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "win_and_out_text": _prob_text_color(win_and_out),
             "round_cells": round_cells,
             "best_pick": _best_pick_display(to),
+            "best_pick_is_safe": _best_pick_is_safe(to),
             "best_pick_sort": _best_pick_sort_value(to),
         })
 

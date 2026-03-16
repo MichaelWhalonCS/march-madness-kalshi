@@ -281,6 +281,12 @@
     color: var(--accent);
   }
 
+  .col-best.best-risky {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-style: italic;
+  }
+
   /* Kalshi market link styling */
   .prob-cell a {
     text-decoration: none;
@@ -444,7 +450,7 @@
         {% endfor %}
         <th data-col="best" onclick="sortTable('best')">
           Best Pick
-          <span class="info-tip" data-tip="The latest round where this team has at least a 70% chance of winning that specific game. This is the optimal round to use this team in your survivor pool &mdash; save strong teams for as long as they're still safe picks.">
+          <span class="info-tip" data-tip="The latest round where this team has at least a 70% chance of winning that specific game. Bold blue = safe pick (≥70%). Italic gray = no safe round exists; shows the best available (risky for survivor).">
             <span class="info-icon">i</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
@@ -486,7 +492,7 @@
           {{ cell.display }}
         </td>
         {% endfor %}
-        <td class="col-best">{{ row.best_pick }}</td>
+        <td class="col-best{% if not row.best_pick_is_safe %} best-risky{% endif %}">{{ row.best_pick }}</td>
       </tr>
       {% endfor %}
     </tbody>
