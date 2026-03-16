@@ -328,6 +328,111 @@
     color: var(--text-muted);
   }
   .no-data h2 { margin-bottom: 0.5rem; }
+
+  /* ── Suggested series section ─────────────────────────── */
+  .series-section {
+    max-width: 1400px;
+    margin: 2.5rem auto 0;
+  }
+
+  .series-section h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .series-section .series-subtitle {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+  }
+
+  .series-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .series-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .series-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: rgba(88, 166, 255, 0.06);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .series-rank {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+
+  .series-survival {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .series-survival strong {
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+
+  .series-picks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0;
+  }
+
+  .series-pick {
+    padding: 0.6rem 0.75rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .series-pick:last-child { border-right: none; }
+
+  .series-pick-round {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .series-pick-team {
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .series-pick-meta {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .series-pick-prob {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+  }
+
+  @media (max-width: 768px) {
+    .series-picks {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+  }
 </style>
 </head>
 <body>
@@ -335,7 +440,7 @@
 <div class="header">
   <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
   <div class="meta">
-    <span>Last updated: 2026-03-16 04:44 UTC</span>
+    <span>Last updated: 2026-03-16 04:56 UTC</span>
     <span>68 teams</span>
     <span>Sources: <a href="https://www.espn.com/mens-college-basketball/bpi/_/view/tournament" style="color:var(--accent)" target="_blank" rel="noopener">ESPN BPI</a> &amp; <a href="https://kalshi.com/markets/kxncaambgame" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi NCAA Markets</a></span>
   </div>
@@ -1337,12 +1442,12 @@
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         <td class="prob-cell"
-            data-kalshi="0.10500000000000001"
-            style="background: rgb(211,93,57); color: #ffffff;">
+            data-kalshi="0.11499999999999999"
+            style="background: rgb(210,96,57); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20cbuku" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">11%</a>
+             title="View on Kalshi">12%</a>
           
         </td>
         <td class="prob-cell"
@@ -2023,8 +2128,8 @@
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         <td class="prob-cell"
-            data-kalshi="0.605"
-            style="background: rgb(150,211,56); color: #1a1a1a;">
+            data-kalshi="0.6"
+            style="background: rgb(152,212,56); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20scuuk" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
@@ -3125,8 +3230,8 @@
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         <td class="prob-cell"
-            data-kalshi="0.84"
-            style="background: rgb(84,192,70); color: #1a1a1a;">
+            data-kalshi="0.845"
+            style="background: rgb(83,192,70); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19mcnsvan" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
@@ -3194,8 +3299,8 @@
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         <td class="prob-cell"
-            data-kalshi="0.575"
-            style="background: rgb(159,214,54); color: #1a1a1a;">
+            data-kalshi="0.5700000000000001"
+            style="background: rgb(160,214,54); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19vcuunc" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
@@ -3332,8 +3437,8 @@
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         <td class="prob-cell"
-            data-kalshi="0.435"
-            style="background: rgb(185,199,51); color: #1a1a1a;">
+            data-kalshi="0.44"
+            style="background: rgb(184,200,51); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20iowaclem" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
@@ -3608,8 +3713,8 @@
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         <td class="prob-cell"
-            data-kalshi="0.155"
-            style="background: rgb(207,109,56); color: #1a1a1a;">
+            data-kalshi="0.16"
+            style="background: rgb(207,111,56); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19mcnsvan" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
@@ -5055,12 +5160,12 @@
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         <td class="prob-cell"
-            data-kalshi="0.035"
-            style="background: rgb(217,71,59); color: #ffffff;">
+            data-kalshi="0.025"
+            style="background: rgb(218,68,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20qucpur" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">4%</a>
+             title="View on Kalshi">2%</a>
           
         </td>
         <td class="prob-cell"
@@ -5185,6 +5290,173 @@
       
     </tbody>
   </table>
+</div>
+
+
+
+<div class="series-section">
+  <h2>🏆 Top Suggested Pick Series</h2>
+  <p class="series-subtitle">Optimal team-per-round combinations that maximize your probability of surviving the entire tournament. Each team is used only once.</p>
+
+  <div class="series-cards">
+    
+    <div class="series-card">
+      <div class="series-card-header">
+        <span class="series-rank">#1</span>
+        <span class="series-survival">Survival: <strong>16.8%</strong></span>
+      </div>
+      <div class="series-picks">
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make R32</span>
+          <span class="series-pick-team">Florida</span>
+          <span class="series-pick-meta">(1) South</span>
+          <span class="series-pick-prob" style="background: rgb(41,180,79); color: #ffffff;">100%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make S16</span>
+          <span class="series-pick-team">Purdue</span>
+          <span class="series-pick-meta">(2) West</span>
+          <span class="series-pick-prob" style="background: rgb(77,190,72); color: #1a1a1a;">87%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make E8</span>
+          <span class="series-pick-team">Arizona</span>
+          <span class="series-pick-meta">(1) West</span>
+          <span class="series-pick-prob" style="background: rgb(102,197,66); color: #1a1a1a;">78%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make F4</span>
+          <span class="series-pick-team">Duke</span>
+          <span class="series-pick-meta">(1) East</span>
+          <span class="series-pick-prob" style="background: rgb(106,198,65); color: #1a1a1a;">76%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make Final</span>
+          <span class="series-pick-team">Michigan</span>
+          <span class="series-pick-meta">(1) Midwest</span>
+          <span class="series-pick-prob" style="background: rgb(150,211,56); color: #1a1a1a;">60%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Win Title</span>
+          <span class="series-pick-team">Houston</span>
+          <span class="series-pick-meta">(2) South</span>
+          <span class="series-pick-prob" style="background: rgb(168,216,52); color: #1a1a1a;">54%</span>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="series-card">
+      <div class="series-card-header">
+        <span class="series-rank">#2</span>
+        <span class="series-survival">Survival: <strong>16.7%</strong></span>
+      </div>
+      <div class="series-picks">
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make R32</span>
+          <span class="series-pick-team">Florida</span>
+          <span class="series-pick-meta">(1) South</span>
+          <span class="series-pick-prob" style="background: rgb(41,180,79); color: #ffffff;">100%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make S16</span>
+          <span class="series-pick-team">Illinois</span>
+          <span class="series-pick-meta">(3) South</span>
+          <span class="series-pick-prob" style="background: rgb(79,191,71); color: #1a1a1a;">86%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make E8</span>
+          <span class="series-pick-team">Arizona</span>
+          <span class="series-pick-meta">(1) West</span>
+          <span class="series-pick-prob" style="background: rgb(102,197,66); color: #1a1a1a;">78%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make F4</span>
+          <span class="series-pick-team">Duke</span>
+          <span class="series-pick-meta">(1) East</span>
+          <span class="series-pick-prob" style="background: rgb(106,198,65); color: #1a1a1a;">76%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make Final</span>
+          <span class="series-pick-team">Michigan</span>
+          <span class="series-pick-meta">(1) Midwest</span>
+          <span class="series-pick-prob" style="background: rgb(150,211,56); color: #1a1a1a;">60%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Win Title</span>
+          <span class="series-pick-team">Houston</span>
+          <span class="series-pick-meta">(2) South</span>
+          <span class="series-pick-prob" style="background: rgb(168,216,52); color: #1a1a1a;">54%</span>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="series-card">
+      <div class="series-card-header">
+        <span class="series-rank">#3</span>
+        <span class="series-survival">Survival: <strong>16.6%</strong></span>
+      </div>
+      <div class="series-picks">
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make R32</span>
+          <span class="series-pick-team">Iowa St.</span>
+          <span class="series-pick-meta">(2) Midwest</span>
+          <span class="series-pick-prob" style="background: rgb(44,181,79); color: #ffffff;">98%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make S16</span>
+          <span class="series-pick-team">Purdue</span>
+          <span class="series-pick-meta">(2) West</span>
+          <span class="series-pick-prob" style="background: rgb(77,190,72); color: #1a1a1a;">87%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make E8</span>
+          <span class="series-pick-team">Arizona</span>
+          <span class="series-pick-meta">(1) West</span>
+          <span class="series-pick-prob" style="background: rgb(102,197,66); color: #1a1a1a;">78%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make F4</span>
+          <span class="series-pick-team">Duke</span>
+          <span class="series-pick-meta">(1) East</span>
+          <span class="series-pick-prob" style="background: rgb(106,198,65); color: #1a1a1a;">76%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Make Final</span>
+          <span class="series-pick-team">Michigan</span>
+          <span class="series-pick-meta">(1) Midwest</span>
+          <span class="series-pick-prob" style="background: rgb(150,211,56); color: #1a1a1a;">60%</span>
+        </div>
+        
+        <div class="series-pick">
+          <span class="series-pick-round">Win Title</span>
+          <span class="series-pick-team">Houston</span>
+          <span class="series-pick-meta">(2) South</span>
+          <span class="series-pick-prob" style="background: rgb(168,216,52); color: #1a1a1a;">54%</span>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
 </div>
 
 

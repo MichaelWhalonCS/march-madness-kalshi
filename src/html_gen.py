@@ -9,7 +9,7 @@ import jinja2
 import structlog
 
 from .config import settings
-from .odds import TeamOdds
+from .odds import TeamOdds, best_survivor_series
 from .teams import ROUND_LABELS, ROUNDS
 
 logger = structlog.get_logger()
@@ -170,6 +170,19 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "best_pick_sort": _best_pick_sort_value(to),
         })
 
+    # ── Suggested pick series ──────────────────────────────────────────
+    suggested_series = best_survivor_series(odds, visible_rounds, top_n=3)
+    # Format survival probability for display
+    for i, series in enumerate(suggested_series):
+        for pick in series:
+            pick["cond_display"] = _prob_display(pick["cond_prob"])
+            pick["cond_bg"] = _prob_color(pick["cond_prob"])
+            pick["cond_text"] = _prob_text_color(pick["cond_prob"])
+        survival = series[0]["survival"] if series else 0
+        for pick in series:
+            pick["survival_display"] = f"{survival:.1%}"
+            pick["series_rank"] = i + 1
+
     html = template.render(
         rows=rows,
         round_labels=ROUND_LABELS,
@@ -178,6 +191,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         win_out_label=win_out_label,
         updated_at=now.strftime("%Y-%m-%d %H:%M UTC"),
         team_count=len([r for r in rows if not r["eliminated"]]),
+        suggested_series=suggested_series,
     )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)

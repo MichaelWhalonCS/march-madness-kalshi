@@ -328,6 +328,111 @@
     color: var(--text-muted);
   }
   .no-data h2 { margin-bottom: 0.5rem; }
+
+  /* ── Suggested series section ─────────────────────────── */
+  .series-section {
+    max-width: 1400px;
+    margin: 2.5rem auto 0;
+  }
+
+  .series-section h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .series-section .series-subtitle {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+  }
+
+  .series-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .series-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .series-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: rgba(88, 166, 255, 0.06);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .series-rank {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+
+  .series-survival {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .series-survival strong {
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+
+  .series-picks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0;
+  }
+
+  .series-pick {
+    padding: 0.6rem 0.75rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .series-pick:last-child { border-right: none; }
+
+  .series-pick-round {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .series-pick-team {
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .series-pick-meta {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .series-pick-prob {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+  }
+
+  @media (max-width: 768px) {
+    .series-picks {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+  }
 </style>
 </head>
 <body>
@@ -503,6 +608,34 @@
   <h2>No odds data yet</h2>
   <p>Waiting for Kalshi March Madness markets to go live.<br>
   Check back after Selection Sunday (March 15, 2026).</p>
+</div>
+{% endif %}
+
+{% if suggested_series %}
+<div class="series-section">
+  <h2>🏆 Top Suggested Pick Series</h2>
+  <p class="series-subtitle">Optimal team-per-round combinations that maximize your probability of surviving the entire tournament. Each team is used only once.</p>
+
+  <div class="series-cards">
+    {% for series in suggested_series %}
+    <div class="series-card">
+      <div class="series-card-header">
+        <span class="series-rank">#{{ series[0].series_rank }}</span>
+        <span class="series-survival">Survival: <strong>{{ series[0].survival_display }}</strong></span>
+      </div>
+      <div class="series-picks">
+        {% for pick in series %}
+        <div class="series-pick">
+          <span class="series-pick-round">{{ round_labels[pick.round] }}</span>
+          <span class="series-pick-team">{{ pick.team }}</span>
+          <span class="series-pick-meta">({{ pick.seed }}) {{ pick.region }}</span>
+          <span class="series-pick-prob" style="background: {{ pick.cond_bg }}; color: {{ pick.cond_text }};">{{ pick.cond_display }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endif %}
 

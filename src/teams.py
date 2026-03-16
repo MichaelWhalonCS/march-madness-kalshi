@@ -68,7 +68,7 @@ TEAMS: list[Team] = [
     Team("Gonzaga",          3, "West",    "GONZ"),
     Team("Arkansas",         4, "West",    "ARK"),
     Team("Wisconsin",        5, "West",    "WIS"),
-    Team("BYU",              6, "West",    ""),       # R64 opponent is FF winner
+    Team("BYU",              6, "West",    "BYU"),   # R64 opponent is FF winner
     Team("Miami (FL)",       7, "West",    "MIA"),
     Team("Villanova",        8, "West",    "VILL"),
     Team("Utah St.",         9, "West",    "USU"),
@@ -82,7 +82,7 @@ TEAMS: list[Team] = [
     Team("LIU",             16, "West",    "LIU"),
 
     # ── South Region (Houston, TX) ─────────────────────────
-    Team("Florida",          1, "South",   ""),       # R64 opponent is FF winner
+    Team("Florida",          1, "South",   "FLA"),   # R64 opponent is FF winner
     Team("Houston",          2, "South",   "HOU"),
     Team("Illinois",         3, "South",   "ILL"),
     Team("Nebraska",         4, "South",   "NEB"),
@@ -101,12 +101,12 @@ TEAMS: list[Team] = [
     Team("Lehigh",          16, "South",   "LEH"),   # (FF) vs Prairie View A&M
 
     # ── Midwest Region (Chicago, IL) ───────────────────────
-    Team("Michigan",         1, "Midwest", ""),       # R64 opponent is FF winner
+    Team("Michigan",         1, "Midwest", "MICH"),  # R64 opponent is FF winner
     Team("Iowa St.",         2, "Midwest", "ISU"),
     Team("Virginia",         3, "Midwest", "UVA"),
     Team("Alabama",          4, "Midwest", "ALA"),
     Team("Texas Tech",       5, "Midwest", "TTU"),
-    Team("Tennessee",        6, "Midwest", ""),       # R64 opponent is FF winner
+    Team("Tennessee",        6, "Midwest", "TENN"),  # R64 opponent is FF winner
     Team("Kentucky",         7, "Midwest", "UK"),
     Team("Georgia",          8, "Midwest", "UGA"),
     Team("Saint Louis",      9, "Midwest", "SLU"),

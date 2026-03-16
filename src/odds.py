@@ -366,6 +366,89 @@ def _generate_sample_odds() -> list[TeamOdds]:
     return result
 
 
+def best_survivor_series(
+    odds: list[TeamOdds],
+    visible_rounds: list[str],
+    top_n: int = 3,
+) -> list[list[dict]]:
+    """Find the top-N pick series for a survivor pool.
+
+    A valid series assigns exactly one team to each visible round, with no
+    team used more than once.  The "score" is the product of conditional
+    game-win probabilities — i.e. the probability of surviving all rounds.
+
+    Uses a greedy beam-search (width=200) to keep it fast (~68 teams × 6 rounds).
+
+    Returns a list of series, each series being a list of dicts:
+        [{"round": "R64", "team": "Duke", "seed": 1, "region": "South",
+          "cond_prob": 0.97}, ...]
+    sorted by descending overall survival probability.
+    """
+    import heapq
+
+    if not visible_rounds or not odds:
+        return []
+
+    # Pre-compute conditional probs for every team
+    team_conds: list[tuple[TeamOdds, dict[str, float | None]]] = [
+        (to, to.conditional_probs()) for to in odds if not to.team.eliminated
+    ]
+
+    # Beam search: each state is (neg_log_score, picks_so_far, used_team_names)
+    # We use negative log-prob so heapq gives us highest-prob first.
+    import math
+
+    BEAM_WIDTH = 200
+    # Initial beam: empty picks
+    beam: list[tuple[float, list[dict], frozenset[str]]] = [(0.0, [], frozenset())]
+
+    for rnd in visible_rounds:
+        next_beam: list[tuple[float, list[dict], frozenset[str]]] = []
+        for neg_log, picks, used in beam:
+            for to, conds in team_conds:
+                if to.team.name in used:
+                    continue
+                cp = conds.get(rnd)
+                if cp is None or cp <= 0:
+                    continue
+                new_neg_log = neg_log - math.log(cp)
+                new_picks = picks + [{
+                    "round": rnd,
+                    "team": to.team.name,
+                    "seed": to.team.seed,
+                    "region": to.team.region,
+                    "cond_prob": cp,
+                }]
+                new_used = used | {to.team.name}
+                next_beam.append((new_neg_log, new_picks, new_used))
+        # Keep only the best BEAM_WIDTH candidates
+        if next_beam:
+            next_beam.sort(key=lambda x: x[0])
+            beam = next_beam[:BEAM_WIDTH]
+        else:
+            break  # no viable expansions
+
+    # Extract top-N unique series (by team set) and compute survival prob
+    seen: set[frozenset[str]] = set()
+    results: list[tuple[float, list[dict]]] = []
+    for neg_log, picks, used in beam:
+        if used in seen:
+            continue
+        seen.add(used)
+        survival = math.exp(-neg_log)
+        # Deep-copy picks so shared dicts across beam entries don't collide
+        picks_copy = [dict(p) for p in picks]
+        for pick in picks_copy:
+            pick["survival"] = survival
+        results.append((survival, picks_copy))
+        if len(results) >= top_n:
+            break
+
+    # Sort descending by survival probability
+    results.sort(key=lambda x: -x[0])
+    return [series for _, series in results]
+
+
 def odds_to_snapshot(odds: list[TeamOdds]) -> list[dict]:
     """Convert TeamOdds list to a JSON-serializable snapshot format."""
     snapshot = []
