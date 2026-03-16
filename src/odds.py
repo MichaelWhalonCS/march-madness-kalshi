@@ -214,8 +214,12 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
         logger.warning("Could not fetch Kalshi markets — continuing with ESPN BPI only")
         return {}, {}
 
+    # Settled / finalized statuses to skip — these are games already played
+    _CLOSED_STATUSES = {"finalized", "settled", "closed", "determined"}
+
     probs: dict[str, float] = {}
     urls: dict[str, str] = {}
+    skipped = 0
     for market in markets:
         # Convert pykalshi Market objects to dicts for uniform handling
         if isinstance(market, dict):
@@ -225,6 +229,13 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
             mdict = market.data.model_dump()
         else:
             mdict = market.__dict__
+
+        # Skip markets for games that have already been played
+        status = mdict.get("status", "")
+        status_str = status.value if hasattr(status, "value") else str(status)
+        if status_str.lower() in _CLOSED_STATUSES:
+            skipped += 1
+            continue
 
         ticker = mdict.get("ticker", "")
         event_ticker = mdict.get("event_ticker", "")
@@ -243,7 +254,7 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
                 urls[team_obj.name] = f"{_KALSHI_MARKET_URL_BASE}/{event_ticker.lower()}"
             logger.debug("Kalshi market", team=team_obj.name, prob=f"{prob:.1%}", ticker=ticker)
 
-    logger.info("Kalshi markets fetched", parsed=len(probs))
+    logger.info("Kalshi markets fetched", parsed=len(probs), skipped_closed=skipped)
     return probs, urls
 
 
