@@ -265,6 +265,7 @@
   /* Seed + region columns */
   .col-seed { text-align: center; width: 3rem; }
   .col-region { width: 5rem; }
+  .col-day { text-align: center; width: 3rem; font-weight: 600; }
 
   /* Probability cells */
   .prob-cell {
@@ -516,6 +517,16 @@
   <label for="filter-search">Search:</label>
   <input type="text" id="filter-search" placeholder="Team name..." oninput="applyFilters()">
 
+  {% if show_day_filter and game_days %}
+  <label for="filter-day">Day:</label>
+  <select id="filter-day" onchange="applyFilters()">
+    <option value="">All</option>
+    {% for day in game_days %}
+    <option value="{{ day }}">{{ day }}</option>
+    {% endfor %}
+  </select>
+  {% endif %}
+
   <label>
     <input type="checkbox" id="filter-eliminated" onchange="applyFilters()">
     Show eliminated
@@ -530,6 +541,9 @@
         <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">&#9650;</span></th>
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
+        {% if show_day_filter %}
+        <th data-col="day" onclick="sortTable('day')">Day <span class="sort-arrow">&#9650;</span></th>
+        {% endif %}
         <th data-col="kalshi" onclick="sortTable('kalshi')">
           Kalshi ({{ current_round }})
           <span class="info-tip" data-tip="Kalshi prediction market odds for winning the {{ current_round }} game. This reflects real-money market sentiment — compare with the BPI model column to spot value.">
@@ -569,10 +583,14 @@
           data-seed="{{ row.seed }}"
           data-region="{{ row.region }}"
           data-eliminated="{{ row.eliminated|lower }}"
+          data-day="{{ row.game_day }}"
           data-best-sort="{{ row.best_pick_sort }}">
         <td><strong>{{ row.team }}</strong></td>
         <td class="col-seed">{{ row.seed }}</td>
         <td class="col-region"><span class="region-chip region-{{ row.region }}">{{ row.region }}</span></td>
+        {% if show_day_filter %}
+        <td class="col-day">{{ row.game_day }}</td>
+        {% endif %}
         <td class="prob-cell"
             data-kalshi="{{ row.kalshi_prob if row.kalshi_prob is not none else '' }}"
             style="background: {{ row.kalshi_bg }}; color: {{ row.kalshi_text }};">
@@ -689,6 +707,10 @@ function sortTable(col) {
       va = a.dataset.region;
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    } else if (col === 'day') {
+      var dayOrder = {'Tue':0,'Wed':1,'Thu':2,'Fri':3,'Sat':4,'Sun':5,'Mon':6};
+      va = a.dataset.day ? (dayOrder[a.dataset.day] !== undefined ? dayOrder[a.dataset.day] : 99) : 99;
+      vb = b.dataset.day ? (dayOrder[b.dataset.day] !== undefined ? dayOrder[b.dataset.day] : 99) : 99;
     } else if (col === 'kalshi') {
       var kA = a.querySelector('[data-kalshi]');
       var kB = b.querySelector('[data-kalshi]');
@@ -726,6 +748,8 @@ function applyFilters() {
   var maxSeed = parseInt(document.getElementById('filter-seed').value);
   var search = document.getElementById('filter-search').value.toLowerCase();
   var showEliminated = document.getElementById('filter-eliminated').checked;
+  var dayEl = document.getElementById('filter-day');
+  var day = dayEl ? dayEl.value : '';
 
   var table = document.getElementById('odds-table');
   if (!table) return;
@@ -737,6 +761,7 @@ function applyFilters() {
     if (parseInt(row.dataset.seed) > maxSeed) show = false;
     if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
     if (!showEliminated && row.dataset.eliminated === 'true') show = false;
+    if (day && row.dataset.day !== day) show = false;
     row.style.display = show ? '' : 'none';
   });
 }

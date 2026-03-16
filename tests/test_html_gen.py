@@ -33,6 +33,7 @@ def test_generate_html_creates_file():
             round_probs={"R64": 0.95, "R32": 0.80},
             kalshi_prob=0.93,
             kalshi_url="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19test",
+            game_day="Thu",
         ),
     ]
 
@@ -48,6 +49,8 @@ def test_generate_html_creates_file():
         assert "March Madness" in content
         # Kalshi cell should link to the specific market
         assert "kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19test" in content
+        # Day column should show for R64
+        assert "Thu" in content
         # Info section should have methodology explanations
         assert "Tournament Futures" in content
         assert "Per-Game Markets" in content

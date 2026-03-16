@@ -155,6 +155,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "seed": to.team.seed,
             "region": to.team.region,
             "eliminated": to.team.eliminated,
+            "game_day": to.game_day or "",
             "kalshi_prob": to.kalshi_prob,
             "kalshi_url": to.kalshi_url,
             "kalshi_display": _prob_display(to.kalshi_prob),
@@ -172,6 +173,13 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
 
     # ── Suggested pick series ──────────────────────────────────────────
     suggested_series = best_survivor_series(odds, visible_rounds, top_n=3)
+
+    # Collect unique game days for the day-of-week filter (R64/R32 only)
+    show_day_filter = current_round in ("R64", "R32")
+    # Ordered list of unique days preserving natural weekday order
+    _DAY_ORDER = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]
+    game_days_set = {r["game_day"] for r in rows if r["game_day"]}
+    game_days = [d for d in _DAY_ORDER if d in game_days_set]
     # Format survival probability for display
     for i, series in enumerate(suggested_series):
         for pick in series:
@@ -192,6 +200,8 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         updated_at=now.strftime("%Y-%m-%d %H:%M UTC"),
         team_count=len([r for r in rows if not r["eliminated"]]),
         suggested_series=suggested_series,
+        show_day_filter=show_day_filter,
+        game_days=game_days,
     )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
