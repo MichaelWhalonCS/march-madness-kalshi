@@ -1,6 +1,6 @@
 """Tests for the odds module."""
 
-from src.odds import price_to_prob, TeamOdds
+from src.odds import TeamOdds, price_to_prob
 from src.teams import Team
 
 

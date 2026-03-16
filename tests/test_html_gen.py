@@ -1,9 +1,9 @@
 """Tests for the HTML generator."""
 
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
-from src.html_gen import generate_html, _prob_display, _prob_color
+from src.html_gen import _prob_color, _prob_display, generate_html
 from src.odds import TeamOdds
 from src.teams import Team
 

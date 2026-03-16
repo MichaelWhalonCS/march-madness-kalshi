@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import jinja2
 import structlog
 
-from .odds import TeamOdds
-from .teams import ROUNDS, ROUND_LABELS
 from .config import settings
+from .odds import TeamOdds
+from .teams import ROUND_LABELS, ROUNDS
 
 logger = structlog.get_logger()
 
@@ -100,7 +100,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     # Sort by region, then seed
     sorted_odds = sorted(odds, key=lambda o: (o.team.region, o.team.seed))
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     # Determine which rounds to show based on current round
     current_round = settings.current_round

@@ -13,7 +13,9 @@ def _create_client() -> KalshiClient:
     logger.info(
         "Connecting to Kalshi API",
         api_base=settings.kalshi_base_url,
-        api_key_id=settings.kalshi_api_key_id[:8] + "..." if settings.kalshi_api_key_id else "(empty)",
+        api_key_id=(
+            settings.kalshi_api_key_id[:8] + "..." if settings.kalshi_api_key_id else "(empty)"
+        ),
     )
     return KalshiClient(
         api_key_id=settings.kalshi_api_key_id,

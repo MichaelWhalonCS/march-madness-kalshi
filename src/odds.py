@@ -15,12 +15,12 @@ team's game-win probability to its current round's cumulative probability.
 from __future__ import annotations
 
 import random
-import structlog
 from dataclasses import dataclass, field
 
+import structlog
+
 from .kalshi_client import get_client
-from .teams import Team, find_team, get_all_teams, ROUNDS, KALSHI_ABBR_MAP
-from .config import settings
+from .teams import KALSHI_ABBR_MAP, ROUNDS, Team, get_all_teams
 
 logger = structlog.get_logger()
 
@@ -218,8 +218,12 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
     urls: dict[str, str] = {}
     for market in markets:
         # Handle both dict and object-style access
-        ticker = market.get("ticker", "") if isinstance(market, dict) else getattr(market, "ticker", "")
-        event_ticker = market.get("event_ticker", "") if isinstance(market, dict) else getattr(market, "event_ticker", "")
+        if isinstance(market, dict):
+            ticker = market.get("ticker", "")
+            event_ticker = market.get("event_ticker", "")
+        else:
+            ticker = getattr(market, "ticker", "")
+            event_ticker = getattr(market, "event_ticker", "")
         team_abbr, round_code = _parse_ticker(ticker)
         if not team_abbr:
             continue

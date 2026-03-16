@@ -10,8 +10,7 @@ The kalshi_abbr field on each Team maps to the Kalshi market ticker suffix
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-
+from dataclasses import dataclass
 
 # ── Round definitions ──────────────────────────────────────────────────────────
 

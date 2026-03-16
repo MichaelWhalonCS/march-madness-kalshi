@@ -24,8 +24,7 @@ structlog.configure(
 
 logger = structlog.get_logger()
 
-from src.kalshi_client import get_client
-
+from src.kalshi_client import get_client  # noqa: E402
 
 # Search terms to try — Kalshi's naming conventions may vary
 SEARCH_TERMS = [

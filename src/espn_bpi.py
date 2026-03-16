@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import urllib.request
+
 import structlog
 
 from .teams import find_team

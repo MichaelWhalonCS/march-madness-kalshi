@@ -1,6 +1,6 @@
 """Tests for the ESPN BPI module."""
 
-from src.espn_bpi import _match_espn_team, _ESPN_IDX_TO_ROUND
+from src.espn_bpi import _ESPN_IDX_TO_ROUND, _match_espn_team
 
 
 def test_match_espn_team_by_nickname():
