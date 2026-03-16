@@ -1,13 +1,15 @@
 """Fetch March Madness odds from Kalshi and structure them for the table.
 
-This module calls the Kalshi API, maps markets to (team, round) pairs,
-and returns structured odds data ready for HTML generation.
+Kalshi has per-game win markets under the KXNCAAMBGAME series.
+Each game has two markets (one per team), e.g.:
+  KXNCAAMBGAME-26MAR19SIEDUKE-DUKE  → "Siena at Duke Winner?"
+  KXNCAAMBGAME-26MAR19SIEDUKE-SIE   → "Siena at Duke Winner?"
 
-When SERIES_TICKERS is empty (markets not yet live), generates realistic
-sample odds based on seed so the full pipeline works end-to-end.
+Market prices are in dollars (0.00–1.00).  We take the midpoint of
+yes_bid_dollars / yes_ask_dollars as the implied probability.
 
-⚠️  MARKET_TICKERS needs to be populated once the markets go live on Kalshi
-    (expected Sunday night / Monday, March 15-16, 2026).
+Only the current round's games are available at any time — we map each
+team's game-win probability to its current round's cumulative probability.
 """
 
 from __future__ import annotations
@@ -17,42 +19,32 @@ import structlog
 from dataclasses import dataclass, field
 
 from .kalshi_client import get_client
-from .teams import Team, find_team, get_all_teams, ROUNDS
+from .teams import Team, find_team, get_all_teams, ROUNDS, KALSHI_ABBR_MAP
+from .config import settings
 
 logger = structlog.get_logger()
 
 
 # ── Market configuration ───────────────────────────────────────────────────────
-# How Kalshi structures March Madness markets determines how we fetch odds.
-#
-# Possible structures (to be confirmed via discover_tickers.py):
-# 1. Per-round advancement: "Will Duke make the Sweet 16?" → direct probability
-# 2. Per-game win: "Will Duke beat Vermont in R64?" → need to chain for advancement
-# 3. Championship only: "Will Duke win the tournament?" → only one column
-#
-# We'll map Kalshi event/series tickers here once we see them.
 
-# ⚠️  PLACEHOLDER — Fill after running discover_tickers.py
-# Format: series_ticker or event_ticker prefix that we search for
-SERIES_TICKERS: list[str] = [
-    # e.g. "MARCHMAD", "NCAA-2026", "NCAAT"
-    # Will be filled Sunday/Monday when markets go live
-]
+SERIES_TICKER = "KXNCAAMBGAME"
 
-# If markets are per-team-per-round, map round keywords in market titles
-ROUND_KEYWORDS: dict[str, str] = {
-    # Kalshi market title fragment → our round code
-    # e.g.:
-    # "round of 64": "R64",
-    # "round of 32": "R32",
-    # "sweet 16": "S16",
-    # "sweet sixteen": "S16",
-    # "elite 8": "E8",
-    # "elite eight": "E8",
-    # "final four": "F4",
-    # "championship": "Championship",
-    # "win the tournament": "Championship",
-    # "national champion": "Championship",
+# Dates → round mapping.  Kalshi tickers embed the date like "26MAR19".
+# First Four: March 17–18;  R64: March 19–20;  R32: March 21–22;
+# S16: March 26–27;  E8: March 28–29;  F4: April 4;  Championship: April 6
+_DATE_TO_ROUND: dict[str, str] = {
+    "MAR17": "R64",   # First Four (counts as R64 for survivor)
+    "MAR18": "R64",   # First Four
+    "MAR19": "R64",
+    "MAR20": "R64",
+    "MAR21": "R32",
+    "MAR22": "R32",
+    "MAR26": "S16",
+    "MAR27": "S16",
+    "MAR28": "E8",
+    "MAR29": "E8",
+    "APR04": "F4",
+    "APR06": "Championship",
 }
 
 
@@ -65,6 +57,11 @@ class TeamOdds:
     team: Team
     round_probs: dict[str, float | None] = field(default_factory=dict)
     # round_probs maps round code → implied probability (0.0–1.0), None if no market
+
+    # Kalshi per-game market probability for the current round (None if no market)
+    kalshi_prob: float | None = None
+    # Direct link to this team's Kalshi market page (None if no market)
+    kalshi_url: str | None = None
 
     # Minimum conditional win probability to consider a round "safe" for survivor
     SAFE_THRESHOLD: float = 0.70
@@ -137,120 +134,153 @@ def price_to_prob(market: dict) -> float:
     """Convert Kalshi market prices to implied probability.
 
     Strategy: midpoint of yes_bid / yes_ask. Fallback to last_price.
-    Kalshi prices are in cents (0–100).
+    Kalshi prices are in dollars (0.00–1.00).
     """
-    yes_bid = market.get("yes_bid")
-    yes_ask = market.get("yes_ask")
+    # New API uses dollar-denominated fields
+    yes_bid = market.get("yes_bid_dollars") or market.get("yes_bid")
+    yes_ask = market.get("yes_ask_dollars") or market.get("yes_ask")
 
-    if yes_bid is not None and yes_ask is not None and yes_bid > 0 and yes_ask > 0:
-        return (yes_bid + yes_ask) / 2 / 100
+    # Dollar prices are 0.00–1.00 already
+    if yes_bid is not None and yes_ask is not None:
+        bid = float(yes_bid)
+        ask = float(yes_ask)
+        if bid > 0 and ask > 0:
+            # If values look like cents (>1), divide by 100
+            if bid > 1 or ask > 1:
+                return (bid + ask) / 2 / 100
+            return (bid + ask) / 2
 
-    last_price = market.get("last_price", market.get("yes_price", 0))
-    if last_price and last_price > 0:
-        return last_price / 100
+    last_price = market.get("last_price_dollars") or market.get("last_price", 0)
+    if last_price:
+        lp = float(last_price)
+        if lp > 0:
+            return lp / 100 if lp > 1 else lp
 
     return 0.0
 
 
 # ── Market parsing ─────────────────────────────────────────────────────────────
 
-def _parse_team_round(market: dict) -> tuple[str | None, str | None]:
-    """Extract (team_name, round_code) from a Kalshi market.
+def _parse_ticker(ticker: str) -> tuple[str | None, str | None]:
+    """Extract (kalshi_abbr, round_code) from a Kalshi market ticker.
 
-    This is the main parsing function that interprets market titles/tickers
-    to figure out which team and which round they correspond to.
+    Ticker format: KXNCAAMBGAME-26MAR19SIEDUKE-DUKE
+                   ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^  ^^^^
+                   series        date+matchup      team abbr
 
-    ⚠️  This needs to be adapted once we see the actual market format.
+    Returns (team_kalshi_abbr, round_code) or (None, None).
     """
-    title = (market.get("title") or market.get("subtitle") or "").lower()
-    ticker = (market.get("ticker") or "").upper()
+    parts = ticker.split("-")
+    if len(parts) < 3 or parts[0] != SERIES_TICKER:
+        return None, None
 
-    # Try to identify the round from the title
-    round_code = None
-    for keyword, rnd in ROUND_KEYWORDS.items():
-        if keyword in title:
-            round_code = rnd
-            break
+    team_abbr = parts[-1]  # Last segment is the team abbreviation
+    game_part = parts[1]   # e.g. "26MAR19SIEDUKE"
 
-    # Try to identify the team from the title
-    team_name = None
-    # Strategy: iterate through known teams and check if their name appears in the title
-    for team in get_all_teams():
-        if team.name.lower() in title:
-            team_name = team.name
-            break
-        if team.kalshi_name and team.kalshi_name.lower() in title:
-            team_name = team.name
-            break
+    # Extract date: first 7 chars = "26MAR19" → take chars 2..7 = "MAR19"
+    if len(game_part) < 7:
+        return None, None
+    date_str = game_part[2:7]  # e.g. "MAR19"
 
-    return team_name, round_code
+    round_code = _DATE_TO_ROUND.get(date_str)
+    return team_abbr, round_code
 
 
 # ── Main fetch function ────────────────────────────────────────────────────────
 
-def fetch_odds() -> list[TeamOdds]:
-    """Fetch all March Madness odds from Kalshi and return structured TeamOdds.
+# Kalshi market page URL pattern:
+# https://kalshi.com/markets/kxncaambgame/{event_ticker_lowercase}
+_KALSHI_MARKET_URL_BASE = "https://kalshi.com/markets/kxncaambgame"
 
-    Returns a list of TeamOdds, one per team, with probabilities filled in
-    for each round where Kalshi has a market.
+
+def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
+    """Fetch current-round Kalshi market probabilities, keyed by team name.
+
+    Returns:
+        (probs, urls) where:
+            probs: dict team_name → implied probability (0.0–1.0)
+            urls:  dict team_name → Kalshi market page URL
+        Both empty if Kalshi API is unreachable or has no markets.
     """
-    if not SERIES_TICKERS:
-        logger.warning("No series tickers configured — using sample odds data")
+    try:
+        client = get_client()
+        markets = client.get_markets(series_ticker=SERIES_TICKER, limit=1000)
+        if isinstance(markets, dict):
+            markets = markets.get("markets", [])
+        # pykalshi 0.4.0 may return a DataFrameList; coerce to list of dicts
+        if hasattr(markets, "to_dicts"):
+            markets = markets.to_dicts()
+    except Exception:
+        logger.warning("Could not fetch Kalshi markets — continuing with ESPN BPI only")
+        return {}, {}
+
+    probs: dict[str, float] = {}
+    urls: dict[str, str] = {}
+    for market in markets:
+        # Handle both dict and object-style access
+        ticker = market.get("ticker", "") if isinstance(market, dict) else getattr(market, "ticker", "")
+        event_ticker = market.get("event_ticker", "") if isinstance(market, dict) else getattr(market, "event_ticker", "")
+        team_abbr, round_code = _parse_ticker(ticker)
+        if not team_abbr:
+            continue
+
+        team_obj = KALSHI_ABBR_MAP.get(team_abbr)
+        if not team_obj:
+            continue
+
+        prob = price_to_prob(market if isinstance(market, dict) else market.__dict__)
+        if prob > 0:
+            probs[team_obj.name] = prob
+            if event_ticker:
+                urls[team_obj.name] = f"{_KALSHI_MARKET_URL_BASE}/{event_ticker.lower()}"
+            logger.debug("Kalshi market", team=team_obj.name, prob=f"{prob:.1%}", ticker=ticker)
+
+    logger.info("Kalshi markets fetched", parsed=len(probs))
+    return probs, urls
+
+
+def fetch_odds() -> list[TeamOdds]:
+    """Fetch odds from ESPN BPI (all rounds) + Kalshi (current round).
+
+    ESPN BPI provides cumulative advancement probabilities for all rounds.
+    Kalshi provides per-game win probabilities for the current round only.
+    Both are included so the user can compare model-based and market-based odds.
+    """
+    from .espn_bpi import fetch_bpi
+
+    # 1. ESPN BPI — multi-round advancement probabilities
+    bpi_data = fetch_bpi()  # dict: team_name → {round_code → prob}
+
+    if not bpi_data:
+        logger.warning("No ESPN BPI data — falling back to sample odds")
         return _generate_sample_odds()
 
-    client = get_client()
-    all_markets = []
+    # 2. Kalshi — current-round per-game market prices
+    kalshi_probs, kalshi_urls = _fetch_kalshi_probs()  # dicts: team_name → prob / url
 
-    # Fetch markets for each configured series/event ticker
-    for ticker in SERIES_TICKERS:
-        logger.info("Fetching markets", series_ticker=ticker)
-        try:
-            markets = client.get_markets(
-                series_ticker=ticker,
-                limit=1000,
-            )
-            if isinstance(markets, dict):
-                markets = markets.get("markets", [])
-            all_markets.extend(markets)
-            logger.info("Fetched markets", count=len(markets), series_ticker=ticker)
-        except Exception:
-            logger.exception("Failed to fetch markets", series_ticker=ticker)
-
-    if not all_markets:
-        logger.warning("No markets found — returning empty odds")
-        return _empty_odds()
-
-    # Build team → TeamOdds mapping
-    odds_map: dict[str, TeamOdds] = {}
+    # 3. Build TeamOdds for every team
+    result: list[TeamOdds] = []
     for team in get_all_teams():
-        odds_map[team.name] = TeamOdds(team=team)
+        round_probs = bpi_data.get(team.name, {})
+        kalshi_prob = kalshi_probs.get(team.name)
+        kalshi_url = kalshi_urls.get(team.name)
 
-    # Parse each market and assign probabilities
-    parsed_count = 0
-    for market in all_markets:
-        team_name, round_code = _parse_team_round(market)
-        if team_name and round_code and team_name in odds_map:
-            prob = price_to_prob(market)
-            odds_map[team_name].round_probs[round_code] = prob
-            parsed_count += 1
-            logger.debug(
-                "Parsed market",
-                team=team_name,
-                round=round_code,
-                prob=f"{prob:.1%}",
-                ticker=market.get("ticker"),
-            )
-        else:
-            logger.debug(
-                "Skipped market",
-                title=market.get("title", "?")[:60],
-                ticker=market.get("ticker"),
-                team_found=team_name,
-                round_found=round_code,
-            )
+        result.append(TeamOdds(
+            team=team,
+            round_probs=round_probs,
+            kalshi_prob=kalshi_prob,
+            kalshi_url=kalshi_url,
+        ))
 
-    logger.info("Odds parsing complete", total_markets=len(all_markets), parsed=parsed_count)
-    return list(odds_map.values())
+    teams_with_bpi = sum(1 for to in result if to.round_probs)
+    teams_with_kalshi = sum(1 for to in result if to.kalshi_prob is not None)
+    logger.info(
+        "Odds assembled",
+        total_teams=len(result),
+        with_bpi=teams_with_bpi,
+        with_kalshi=teams_with_kalshi,
+    )
+    return result
 
 
 def _empty_odds() -> list[TeamOdds]:
@@ -329,6 +359,8 @@ def odds_to_snapshot(odds: list[TeamOdds]) -> list[dict]:
             "round_probs": {
                 rnd: prob for rnd, prob in to.round_probs.items()
             },
+            "kalshi_prob": to.kalshi_prob,
+            "kalshi_url": to.kalshi_url,
             "best_pick_round": to.best_pick_round,
             "best_pick_prob": to.best_pick_prob,
         })

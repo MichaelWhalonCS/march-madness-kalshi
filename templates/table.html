@@ -109,6 +109,14 @@
     font-size: 0.78rem;
   }
 
+  .info-body a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .info-body a:hover {
+    text-decoration: underline;
+  }
+
   /* ── Filter bar ──────────────────────────────────────── */
   .filters {
     max-width: 1400px;
@@ -273,6 +281,17 @@
     color: var(--accent);
   }
 
+  /* Kalshi market link styling */
+  .prob-cell a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .prob-cell a:hover {
+    text-decoration: underline;
+  }
+
   /* ── Region color chips ──────────────────────────────── */
   .region-chip {
     display: inline-block;
@@ -312,7 +331,7 @@
   <div class="meta">
     <span>Last updated: {{ updated_at }}</span>
     <span>{{ team_count }} teams</span>
-    <span>Source: <a href="https://kalshi.com" style="color:var(--accent)">Kalshi</a> prediction markets</span>
+    <span>Sources: <a href="https://www.espn.com/mens-college-basketball/bpi/_/view/tournament" style="color:var(--accent)" target="_blank" rel="noopener">ESPN BPI</a> &amp; <a href="https://kalshi.com/markets/kxncaambgame" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi NCAA Markets</a></span>
   </div>
 </div>
 
@@ -329,18 +348,36 @@
       <li><strong>The goal is to survive all 6 rounds</strong> (R64 through the Championship). Last person standing wins the pool.</li>
     </ul>
 
-    <h3>How to Read the Table</h3>
+    <h3>Data Sources</h3>
     <ul>
-      <li><strong>Percentage columns</strong> show the probability that a team reaches that round (cumulative). Hover any cell to see the <em>conditional</em> win probability — their chance of winning that specific game given they made it there.</li>
-      <li>Colors go from <span style="color:#dc3c3c;">red</span> (low chance) to <span style="color:#28a745;">green</span> (high chance).</li>
-      <li><strong>Best Pick</strong> = the latest round where a team still has a 70%+ chance of winning that specific game. This tells you the optimal round to "use" them. Don't waste a 1-seed on R64 if they're also 80% to win their R32 game — save them.</li>
+      <li><strong><a href="https://www.espn.com/mens-college-basketball/bpi/_/view/tournament" style="color:var(--accent)" target="_blank" rel="noopener">ESPN BPI (Basketball Power Index)</a></strong> — ESPN's proprietary model that runs thousands of tournament simulations to estimate each team's probability of advancing to each round. BPI accounts for team strength, schedule difficulty, and matchup-specific factors. The percentage columns (Make R32, Make S16, etc.) come directly from BPI's cumulative advancement probabilities.</li>
+      <li><strong><a href="https://kalshi.com/markets/kxncaambgame" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi Prediction Markets</a></strong> — A CFTC-regulated prediction market where real money is traded on the outcome of each NCAA tournament game. The Kalshi column shows the market-implied probability for each team winning their current-round game, calculated as the midpoint of the best bid and ask prices. Each team's Kalshi cell links to the specific market for that game. Because real money is at stake, market prices aggregate the collective wisdom (and biases) of thousands of traders.</li>
+    </ul>
+
+    <h3>How the Numbers Are Calculated</h3>
+    <ul>
+      <li><strong>Cumulative probabilities</strong> (the round columns) are pulled directly from ESPN BPI. "Make S16 = 65%" means BPI's model gives that team a 65% chance of reaching the Sweet 16.</li>
+      <li><strong>Conditional (game-win) probabilities</strong> — shown when you hover a cell — are derived from BPI by dividing consecutive rounds:
+        <code>P(win R32 game) = P(make S16) / P(make R32)</code>.
+        This gives the probability of winning that specific game, <em>given the team made it there</em>.</li>
+      <li><strong>Kalshi probability</strong> = midpoint of the market bid/ask spread. For example, if a team's YES contract is bid $0.72 / ask $0.74, the implied probability is 73%.</li>
+      <li><strong>Win &amp; Out</strong> = P(make next round) − P(make round after that). This is the probability a team wins now but loses its next game — a "one-and-done" indicator. High Win &amp; Out teams are best used in the current round rather than saved for later.</li>
+      <li><strong>Best Pick</strong> = the latest round where a team's conditional game-win probability is ≥ 70%. This tells you the optimal round to "use" a team. Don't waste a 1-seed on R64 if they're still 80% to win in R32 — save them for when you need them.</li>
+    </ul>
+
+    <h3>BPI vs. Kalshi — Why Both?</h3>
+    <ul>
+      <li>BPI is a <strong>model</strong> — it's based on statistics and simulations. It tends to be well-calibrated but doesn't react to last-minute news (injuries, lineup changes).</li>
+      <li>Kalshi is a <strong>market</strong> — it reflects real-time collective sentiment. It adjusts quickly to news but can be swayed by public bias (e.g., overvaluing big-name programs).</li>
+      <li>When Kalshi and BPI <strong>disagree significantly</strong>, it's worth investigating. If BPI says 85% but Kalshi says 70%, either the market knows something the model doesn't (injury news?) or you may have found a value pick.</li>
     </ul>
 
     <h3>Strategy Tips</h3>
     <ul>
-      <li>Use mid-seeds (5-8) in early rounds where they're still heavy favorites. Save 1-2 seeds for later rounds when games get tighter.</li>
+      <li>Use mid-seeds (5–8) in early rounds where they're still heavy favorites. Save 1–2 seeds for later rounds when games get tighter.</li>
       <li>Sort by "Best Pick" to see which teams give you the most value in each round.</li>
       <li>If a team's conditional win % drops below 60% in a round, that's a risky pick for survivor.</li>
+      <li>Check the Win &amp; Out column — teams with high Win &amp; Out are "use it or lose it" picks.</li>
     </ul>
   </div>
 </div>
@@ -382,6 +419,13 @@
         <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">&#9650;</span></th>
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
+        <th data-col="kalshi" onclick="sortTable('kalshi')">
+          Kalshi
+          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the current round's game. This reflects real-money market sentiment — compare with the BPI model column to spot value.">
+            <span class="info-icon">i</span>
+          </span>
+          <span class="sort-arrow">&#9650;</span>
+        </th>
         <th data-col="winout" onclick="sortTable('winout')">
           {{ win_out_label }}
           <span class="info-tip" data-tip="Probability of winning the current round's game but losing the next one. Higher means the team is a likely one-and-done — good to use now rather than save for later.">
@@ -418,6 +462,17 @@
         <td><strong>{{ row.team }}</strong></td>
         <td class="col-seed">{{ row.seed }}</td>
         <td class="col-region"><span class="region-chip region-{{ row.region }}">{{ row.region }}</span></td>
+        <td class="prob-cell"
+            data-kalshi="{{ row.kalshi_prob if row.kalshi_prob is not none else '' }}"
+            style="background: {{ row.kalshi_bg }}; color: {{ row.kalshi_text }};">
+          {% if row.kalshi_url %}
+          <a href="{{ row.kalshi_url }}" target="_blank" rel="noopener"
+             style="color: {{ row.kalshi_text }}; text-decoration: none;"
+             title="View on Kalshi">{{ row.kalshi_display }}</a>
+          {% else %}
+          {{ row.kalshi_display }}
+          {% endif %}
+        </td>
         <td class="prob-cell"
             data-winout="{{ row.win_and_out if row.win_and_out is not none else '' }}"
             style="background: {{ row.win_and_out_bg }}; color: {{ row.win_and_out_text }};">
@@ -495,6 +550,11 @@ function sortTable(col) {
       va = a.dataset.region;
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    } else if (col === 'kalshi') {
+      var kA = a.querySelector('[data-kalshi]');
+      var kB = b.querySelector('[data-kalshi]');
+      va = kA ? parseFloat(kA.dataset.kalshi || '-1') : -1;
+      vb = kB ? parseFloat(kB.dataset.kalshi || '-1') : -1;
     } else if (col === 'winout') {
       var woA = a.querySelector('[data-winout]');
       var woB = b.querySelector('[data-winout]');
@@ -504,8 +564,9 @@ function sortTable(col) {
       va = parseFloat(a.dataset.bestSort || '-1');
       vb = parseFloat(b.dataset.bestSort || '-1');
     } else if (roundIdx >= 0) {
-      var cellA = a.querySelectorAll('.prob-cell')[roundIdx];
-      var cellB = b.querySelectorAll('.prob-cell')[roundIdx];
+      // +2 to skip the kalshi and winout prob-cells at the start
+      var cellA = a.querySelectorAll('.prob-cell')[roundIdx + 2];
+      var cellB = b.querySelectorAll('.prob-cell')[roundIdx + 2];
       va = cellA ? parseFloat(cellA.dataset.prob || '-1') : -1;
       vb = cellB ? parseFloat(cellB.dataset.prob || '-1') : -1;
     } else {

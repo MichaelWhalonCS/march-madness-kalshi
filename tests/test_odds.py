@@ -4,21 +4,40 @@ from src.odds import price_to_prob, TeamOdds
 from src.teams import Team
 
 
-def test_price_to_prob_midpoint():
-    """Midpoint of bid/ask."""
+def test_price_to_prob_dollar_midpoint():
+    """Midpoint of dollar bid/ask (new API format)."""
+    market = {"yes_bid_dollars": 0.60, "yes_ask_dollars": 0.70}
+    assert abs(price_to_prob(market) - 0.65) < 1e-9
+
+
+def test_price_to_prob_cents_fallback():
+    """Cents-based bid/ask (>1) auto-divided by 100."""
     market = {"yes_bid": 60, "yes_ask": 70}
     assert price_to_prob(market) == 0.65
 
 
 def test_price_to_prob_last_price_fallback():
     """Falls back to last_price when no bid/ask."""
-    market = {"yes_bid": 0, "yes_ask": 0, "last_price": 45}
+    market = {"yes_bid_dollars": 0.0, "yes_ask_dollars": 0.0, "last_price_dollars": 0.45}
     assert price_to_prob(market) == 0.45
 
 
 def test_price_to_prob_zero():
     """Returns 0 when no price data."""
     assert price_to_prob({}) == 0.0
+
+
+def test_team_odds_kalshi_prob():
+    """TeamOdds carries kalshi_prob and kalshi_url fields."""
+    team = Team(name="Duke", seed=1, region="East")
+    odds = TeamOdds(
+        team=team,
+        round_probs={"R64": 0.97},
+        kalshi_prob=0.95,
+        kalshi_url="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sieduke",
+    )
+    assert odds.kalshi_prob == 0.95
+    assert odds.kalshi_url == "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sieduke"
 
 
 def test_team_odds_best_pick():

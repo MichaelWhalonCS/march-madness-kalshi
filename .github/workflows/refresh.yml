@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "KALSHI_API_KEY_ID=${{ secrets.KALSHI_API_KEY_ID }}" > .env
           echo "KALSHI_PRIVATE_KEY_PATH=secrets/kalshi_private_key.pem" >> .env
-          echo "KALSHI_BASE_URL=https://api.kalshi.co" >> .env
+          echo "KALSHI_BASE_URL=https://api.elections.kalshi.com" >> .env
 
       - name: Run refresh script
         run: python scripts/refresh.py

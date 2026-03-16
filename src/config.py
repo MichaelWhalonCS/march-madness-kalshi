@@ -8,7 +8,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     kalshi_api_key_id: str = ""
     kalshi_private_key_path: Path = Path("./kalshi_demo.key")
-    kalshi_base_url: str = "https://api.kalshi.co"
+    kalshi_base_url: str = "https://api.elections.kalshi.com"
     log_level: str = "INFO"
 
     # Output paths

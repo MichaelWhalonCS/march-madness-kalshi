@@ -27,7 +27,12 @@ def test_prob_color_returns_rgb():
 def test_generate_html_creates_file():
     team = Team(name="TestTeam", seed=1, region="East")
     odds = [
-        TeamOdds(team=team, round_probs={"R64": 0.95, "R32": 0.80}),
+        TeamOdds(
+            team=team,
+            round_probs={"R64": 0.95, "R32": 0.80},
+            kalshi_prob=0.93,
+            kalshi_url="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19test",
+        ),
     ]
 
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -37,7 +42,15 @@ def test_generate_html_creates_file():
         content = output.read_text(encoding="utf-8")
         assert "TestTeam" in content
         assert "95%" in content
+        assert "93%" in content  # Kalshi odds column
+        assert "Kalshi" in content
         assert "March Madness" in content
+        # Kalshi cell should link to the specific market
+        assert "kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19test" in content
+        # Info section should have methodology explanations
+        assert "ESPN BPI" in content
+        assert "Basketball Power Index" in content
+        assert "conditional" in content.lower()
 
 
 def test_generate_html_empty_odds():
