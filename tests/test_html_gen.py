@@ -10,11 +10,12 @@ from src.teams import Team
 
 def test_prob_display():
     assert _prob_display(None) == "—"
-    assert _prob_display(0.0) == "<1%"
-    assert _prob_display(0.003) == "<1%"
-    assert _prob_display(0.97) == "97%"
-    assert _prob_display(0.5) == "50%"
-    assert _prob_display(1.0) == "100%"
+    assert _prob_display(0.0) == "<0.1%"
+    assert _prob_display(0.003) == "<0.1%"
+    assert _prob_display(0.97) == "97.0%"
+    assert _prob_display(0.5) == "50.0%"
+    assert _prob_display(1.0) == "100.0%"
+    assert _prob_display(0.856) == "85.6%"
 
 
 def test_prob_color_returns_rgb():
@@ -41,8 +42,8 @@ def test_generate_html_creates_file():
         assert output.exists()
         content = output.read_text(encoding="utf-8")
         assert "TestTeam" in content
-        assert "95%" in content
-        assert "93%" in content  # Kalshi odds column
+        assert "95.0%" in content
+        assert "93.0%" in content  # Kalshi odds column
         assert "Kalshi" in content
         assert "March Madness" in content
         # Kalshi cell should link to the specific market

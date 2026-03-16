@@ -22,8 +22,8 @@ def _prob_display(prob: float | None) -> str:
     if prob is None:
         return "—"
     if prob < 0.005:
-        return "<1%"
-    return f"{prob:.0%}"
+        return "<0.1%"
+    return f"{prob:.1%}"
 
 
 def _prob_color(prob: float | None) -> str:
@@ -72,7 +72,7 @@ def _best_pick_display(team_odds: TeamOdds) -> str:
     prob = team_odds.best_pick_prob
     if rnd is None or prob is None:
         return "—"
-    return f"{rnd} ({prob:.0%})"
+    return f"{rnd} ({prob:.1%})"
 
 
 def _best_pick_is_safe(team_odds: TeamOdds) -> bool:
