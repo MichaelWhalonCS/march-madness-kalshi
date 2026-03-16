@@ -217,13 +217,17 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
     probs: dict[str, float] = {}
     urls: dict[str, str] = {}
     for market in markets:
-        # Handle both dict and object-style access
+        # Convert pykalshi Market objects to dicts for uniform handling
         if isinstance(market, dict):
-            ticker = market.get("ticker", "")
-            event_ticker = market.get("event_ticker", "")
+            mdict = market
+        elif hasattr(market, "data") and hasattr(market.data, "model_dump"):
+            # pykalshi 0.4+ Market wraps a Pydantic MarketModel in .data
+            mdict = market.data.model_dump()
         else:
-            ticker = getattr(market, "ticker", "")
-            event_ticker = getattr(market, "event_ticker", "")
+            mdict = market.__dict__
+
+        ticker = mdict.get("ticker", "")
+        event_ticker = mdict.get("event_ticker", "")
         team_abbr, round_code = _parse_ticker(ticker)
         if not team_abbr:
             continue
@@ -232,7 +236,7 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str]]:
         if not team_obj:
             continue
 
-        prob = price_to_prob(market if isinstance(market, dict) else market.__dict__)
+        prob = price_to_prob(mdict)
         if prob > 0:
             probs[team_obj.name] = prob
             if event_ticker:
