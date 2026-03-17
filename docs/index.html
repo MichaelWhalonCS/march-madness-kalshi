@@ -579,7 +579,7 @@
 <div class="header">
   <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
   <div class="meta">
-    <span>Last updated: 2026-03-17 04:20 PM CDT</span>
+    <span>Last updated: 2026-03-17 04:22 PM CDT</span>
     <span>68 teams</span>
     <span>Source: <a href="https://kalshi.com/category/sports/basketball/cbb-tournament/futures" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi NCAA Tournament Markets</a></span>
   </div>
@@ -661,29 +661,13 @@
   <select id="filter-date" onchange="applyFilters()">
     <option value="">All</option>
     
-    <option value="Mar 17">Mar 17</option>
+    <option value="Mar 17">Mar 17 Tues</option>
     
-    <option value="Mar 18">Mar 18</option>
+    <option value="Mar 18">Mar 18 Wed</option>
     
-    <option value="Mar 19">Mar 19</option>
+    <option value="Mar 19">Mar 19 Thurs</option>
     
-    <option value="Mar 20">Mar 20</option>
-    
-  </select>
-  
-
-  
-  <label for="filter-day">Day:</label>
-  <select id="filter-day" onchange="applyFilters()">
-    <option value="">All</option>
-    
-    <option value="Tue">Tue</option>
-    
-    <option value="Wed">Wed</option>
-    
-    <option value="Thu">Thu</option>
-    
-    <option value="Fri">Fri</option>
+    <option value="Mar 20">Mar 20 Fri</option>
     
   </select>
   
@@ -7475,28 +7459,13 @@
     <select id="fv-filter-date" onchange="applyFvFilters()">
       <option value="">All</option>
       
-      <option value="Mar 17">Mar 17</option>
+      <option value="Mar 17">Mar 17 Tues</option>
       
-      <option value="Mar 18">Mar 18</option>
+      <option value="Mar 18">Mar 18 Wed</option>
       
-      <option value="Mar 19">Mar 19</option>
+      <option value="Mar 19">Mar 19 Thurs</option>
       
-      <option value="Mar 20">Mar 20</option>
-      
-    </select>
-    
-    
-    <label for="fv-filter-day">Day:</label>
-    <select id="fv-filter-day" onchange="applyFvFilters()">
-      <option value="">All</option>
-      
-      <option value="Tue">Tue</option>
-      
-      <option value="Wed">Wed</option>
-      
-      <option value="Thu">Thu</option>
-      
-      <option value="Fri">Fri</option>
+      <option value="Mar 20">Mar 20 Fri</option>
       
     </select>
     
@@ -11152,8 +11121,6 @@ function applyFilters() {
   var maxSeed = parseInt(document.getElementById('filter-seed').value);
   var search = document.getElementById('filter-search').value.toLowerCase();
   var showEliminated = document.getElementById('filter-eliminated').checked;
-  var dayEl = document.getElementById('filter-day');
-  var day = dayEl ? dayEl.value : '';
   var dateEl = document.getElementById('filter-date');
   var dateVal = dateEl ? dateEl.value : '';
 
@@ -11167,7 +11134,6 @@ function applyFilters() {
     if (parseInt(row.dataset.seed) > maxSeed) show = false;
     if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
     if (!showEliminated && row.dataset.eliminated === 'true') show = false;
-    if (day && row.dataset.day !== day) show = false;
     if (dateVal && row.dataset.date !== dateVal) show = false;
     row.style.display = show ? '' : 'none';
   });
@@ -11252,8 +11218,6 @@ function applyFvFilters() {
   var search = document.getElementById('fv-filter-search').value.toLowerCase();
   var dateEl = document.getElementById('fv-filter-date');
   var dateVal = dateEl ? dateEl.value : '';
-  var dayEl = document.getElementById('fv-filter-day');
-  var dayVal = dayEl ? dayEl.value : '';
   var signEl = document.getElementById('fv-filter-sign');
   var signVal = signEl ? signEl.value : '';
 
@@ -11267,7 +11231,6 @@ function applyFvFilters() {
     if (parseInt(row.dataset.fvSeed) > maxSeed) show = false;
     if (search && !(row.dataset.fvTeam || '').toLowerCase().includes(search)) show = false;
     if (dateVal && row.dataset.fvDate !== dateVal) show = false;
-    if (dayVal && row.dataset.fvDay !== dayVal) show = false;
     if (signVal === 'use-now' && parseFloat(row.dataset.fvVal || '0') < 0) show = false;
     if (signVal === 'save-later' && parseFloat(row.dataset.fvVal || '0') >= 0) show = false;
     row.style.display = show ? '' : 'none';

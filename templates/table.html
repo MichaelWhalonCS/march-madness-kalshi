@@ -656,22 +656,12 @@
   <label for="filter-search">Search:</label>
   <input type="text" id="filter-search" placeholder="Team name..." oninput="applyFilters()">
 
-  {% if show_date_column and game_dates %}
+  {% if show_date_column and game_date_options %}
   <label for="filter-date">Date:</label>
   <select id="filter-date" onchange="applyFilters()">
     <option value="">All</option>
-    {% for dt in game_dates %}
-    <option value="{{ dt }}">{{ dt }}</option>
-    {% endfor %}
-  </select>
-  {% endif %}
-
-  {% if show_day_filter and game_days %}
-  <label for="filter-day">Day:</label>
-  <select id="filter-day" onchange="applyFilters()">
-    <option value="">All</option>
-    {% for day in game_days %}
-    <option value="{{ day }}">{{ day }}</option>
+    {% for opt in game_date_options %}
+    <option value="{{ opt.value }}">{{ opt.label }}</option>
     {% endfor %}
   </select>
   {% endif %}
@@ -855,21 +845,12 @@
     </select>
     <label for="fv-filter-search">Search:</label>
     <input type="text" id="fv-filter-search" placeholder="Team name..." oninput="applyFvFilters()">
-    {% if fv_dates %}
+    {% if fv_date_options %}
     <label for="fv-filter-date">Date:</label>
     <select id="fv-filter-date" onchange="applyFvFilters()">
       <option value="">All</option>
-      {% for dt in fv_dates %}
-      <option value="{{ dt }}">{{ dt }}</option>
-      {% endfor %}
-    </select>
-    {% endif %}
-    {% if fv_days %}
-    <label for="fv-filter-day">Day:</label>
-    <select id="fv-filter-day" onchange="applyFvFilters()">
-      <option value="">All</option>
-      {% for day in fv_days %}
-      <option value="{{ day }}">{{ day }}</option>
+      {% for opt in fv_date_options %}
+      <option value="{{ opt.value }}">{{ opt.label }}</option>
       {% endfor %}
     </select>
     {% endif %}
@@ -1123,8 +1104,6 @@ function applyFilters() {
   var maxSeed = parseInt(document.getElementById('filter-seed').value);
   var search = document.getElementById('filter-search').value.toLowerCase();
   var showEliminated = document.getElementById('filter-eliminated').checked;
-  var dayEl = document.getElementById('filter-day');
-  var day = dayEl ? dayEl.value : '';
   var dateEl = document.getElementById('filter-date');
   var dateVal = dateEl ? dateEl.value : '';
 
@@ -1138,7 +1117,6 @@ function applyFilters() {
     if (parseInt(row.dataset.seed) > maxSeed) show = false;
     if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
     if (!showEliminated && row.dataset.eliminated === 'true') show = false;
-    if (day && row.dataset.day !== day) show = false;
     if (dateVal && row.dataset.date !== dateVal) show = false;
     row.style.display = show ? '' : 'none';
   });
@@ -1223,8 +1201,6 @@ function applyFvFilters() {
   var search = document.getElementById('fv-filter-search').value.toLowerCase();
   var dateEl = document.getElementById('fv-filter-date');
   var dateVal = dateEl ? dateEl.value : '';
-  var dayEl = document.getElementById('fv-filter-day');
-  var dayVal = dayEl ? dayEl.value : '';
   var signEl = document.getElementById('fv-filter-sign');
   var signVal = signEl ? signEl.value : '';
 
@@ -1238,7 +1214,6 @@ function applyFvFilters() {
     if (parseInt(row.dataset.fvSeed) > maxSeed) show = false;
     if (search && !(row.dataset.fvTeam || '').toLowerCase().includes(search)) show = false;
     if (dateVal && row.dataset.fvDate !== dateVal) show = false;
-    if (dayVal && row.dataset.fvDay !== dayVal) show = false;
     if (signVal === 'use-now' && parseFloat(row.dataset.fvVal || '0') < 0) show = false;
     if (signVal === 'save-later' && parseFloat(row.dataset.fvVal || '0') >= 0) show = false;
     row.style.display = show ? '' : 'none';

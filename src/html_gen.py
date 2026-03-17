@@ -283,30 +283,43 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     # Sort by FV descending — highest FV = "use now" at top
     fv_rows.sort(key=lambda r: r["fv"], reverse=True)
 
-    # Collect unique game days for the day-of-week filter (R64/R32 only)
-    show_day_filter = current_round in ("R64", "R32")
-    # Ordered list of unique days preserving natural weekday order
-    _DAY_ORDER = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]
-    game_days_set = {r["game_day"] for r in rows if r["game_day"]}
-    game_days = [d for d in _DAY_ORDER if d in game_days_set]
+    # Date filter options for main and FV tables.
+    # Value remains raw date ("Mar 19") for filtering, while label includes
+    # weekday ("Mar 19 Thurs") for readability.
+    _DAY_LABEL = {
+        "Tue": "Tues",
+        "Wed": "Wed",
+        "Thu": "Thurs",
+        "Fri": "Fri",
+        "Sat": "Sat",
+        "Sun": "Sun",
+        "Mon": "Mon",
+    }
 
-    # Unique game dates for display (keep sorted)
-    game_dates_set = {r["game_date"] for r in rows if r["game_date"]}
     # Sort by month-day; entries look like "Mar 19", "Apr 4"
     _MONTH_ORDER = {"Mar": 3, "Apr": 4}
-    game_dates = sorted(
-        game_dates_set,
-        key=lambda d: (_MONTH_ORDER.get(d.split()[0], 0), int(d.split()[1])),
-    )
 
-    # FV table filter options
-    fv_days_set = {r["game_day"] for r in fv_rows if r["game_day"]}
-    fv_days = [d for d in _DAY_ORDER if d in fv_days_set]
-    fv_dates_set = {r["game_date"] for r in fv_rows if r["game_date"]}
-    fv_dates = sorted(
-        fv_dates_set,
-        key=lambda d: (_MONTH_ORDER.get(d.split()[0], 0), int(d.split()[1])),
-    )
+    def _build_date_options(items: list[dict]) -> list[dict[str, str]]:
+        date_to_day: dict[str, str] = {}
+        for item in items:
+            dt = item.get("game_date")
+            if dt and dt not in date_to_day:
+                date_to_day[dt] = item.get("game_day", "")
+
+        sorted_dates = sorted(
+            date_to_day.keys(),
+            key=lambda d: (_MONTH_ORDER.get(d.split()[0], 0), int(d.split()[1])),
+        )
+        return [
+            {
+                "value": dt,
+                "label": f"{dt} {_DAY_LABEL.get(date_to_day.get(dt, ''), date_to_day.get(dt, ''))}".strip(),
+            }
+            for dt in sorted_dates
+        ]
+
+    game_date_options = _build_date_options(rows)
+    fv_date_options = _build_date_options(fv_rows)
     # Format survival probability for display
     # Build a lookup: team_name → round_urls dict for suggested-series links
     _team_urls = {to.team.name: to.round_urls for to in odds}
@@ -344,12 +357,9 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         team_count=len([r for r in rows if not r["eliminated"]]),
         suggested_series=suggested_series,
         show_date_column=show_date_column,
-        show_day_filter=show_day_filter,
-        game_days=game_days,
-        game_dates=game_dates,
+        game_date_options=game_date_options,
         fv_rows=fv_rows,
-        fv_days=fv_days,
-        fv_dates=fv_dates,
+        fv_date_options=fv_date_options,
         fv_future_headers=fv_future_headers,
     )
 
