@@ -4,8 +4,8 @@ All data comes from Kalshi prediction markets:
 
 1. **Per-game markets** (``KXNCAAMBGAME`` series)
    Each game has two binary markets (one per team).  Prices are in dollars
-   (0.00–1.00).  We take the midpoint of yes_bid / yes_ask as the implied
-   win probability.
+   (0.00–1.00).  We use the last traded price as the implied win
+   probability, falling back to the best bid when no trade has occurred.
 
 2. **Tournament futures** (``KXMARMADROUND`` + ``KXMARMAD`` series)
    Per-team, per-round advancement markets — e.g. "Will Duke qualify for
@@ -174,31 +174,55 @@ class TeamOdds:
 
 # ── Price → probability ────────────────────────────────────────────────────────
 
+def _normalize_price(val) -> float | None:
+    """Convert a price value (dollars or cents) to a 0.0–1.0 probability."""
+    if val is None:
+        return None
+    v = float(val)
+    if v <= 0:
+        return None
+    # Cents (>1) → dollars
+    return v / 100 if v > 1 else v
+
+
 def price_to_prob(market: dict) -> float:
     """Convert Kalshi market prices to implied probability.
 
-    Strategy: midpoint of yes_bid / yes_ask. Fallback to last_price.
-    Kalshi prices are in dollars (0.00–1.00).
+    Strategy: prefer **last_price** (most recent trade, matches what Kalshi
+    displays on their website).  Fall back to **yes_bid** (current best bid),
+    then to the bid/ask midpoint as a last resort.
+
+    The previous midpoint-first approach systematically inflated favourites
+    because at price extremes (e.g. yes_bid=0.99, yes_ask=1.00) the ask
+    hits the $1 ceiling, pulling the midpoint above the true market price.
+
+    Kalshi prices are in dollars (0.00–1.00).  Cent-denominated values (>1)
+    are auto-normalised.
     """
-    # New API uses dollar-denominated fields
-    yes_bid = market.get("yes_bid_dollars") or market.get("yes_bid")
-    yes_ask = market.get("yes_ask_dollars") or market.get("yes_ask")
+    # ── Dollar-denominated fields (pykalshi 0.4.0+) ─────────────────────
+    last_price_raw = market.get("last_price_dollars") or market.get("last_price")
+    yes_bid_raw = market.get("yes_bid_dollars") or market.get("yes_bid")
+    yes_ask_raw = market.get("yes_ask_dollars") or market.get("yes_ask")
 
-    # Dollar prices are 0.00–1.00 already
-    if yes_bid is not None and yes_ask is not None:
-        bid = float(yes_bid)
-        ask = float(yes_ask)
-        if bid > 0 and ask > 0:
-            # If values look like cents (>1), divide by 100
-            if bid > 1 or ask > 1:
-                return (bid + ask) / 2 / 100
-            return (bid + ask) / 2
+    last = _normalize_price(last_price_raw)
+    bid = _normalize_price(yes_bid_raw)
+    ask = _normalize_price(yes_ask_raw)
 
-    last_price = market.get("last_price_dollars") or market.get("last_price", 0)
-    if last_price:
-        lp = float(last_price)
-        if lp > 0:
-            return lp / 100 if lp > 1 else lp
+    # 1. Last traded price — actual market activity, closest to display price
+    if last is not None:
+        return last
+
+    # 2. Best bid — what someone will actually pay right now
+    if bid is not None:
+        return bid
+
+    # 3. Midpoint — only when no last price or bid available
+    if bid is not None and ask is not None:
+        return (bid + ask) / 2
+
+    # 4. Ask alone (very illiquid market)
+    if ask is not None:
+        return ask
 
     return 0.0
 

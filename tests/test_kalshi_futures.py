@@ -21,10 +21,14 @@ def test_futures_series_constants():
 
 
 def test_price_to_prob_futures_format():
-    """Futures markets use dollar-denomination just like per-game markets."""
+    """Futures markets use dollar-denomination — prefers bid when no last_price."""
     market = {"yes_bid_dollars": "0.5900", "yes_ask_dollars": "0.6100"}
     prob = price_to_prob(market)
-    assert abs(prob - 0.60) < 0.01
+    assert prob == 0.59  # yes_bid preferred over midpoint
+
+    # With last_price, that takes priority
+    market_with_last = {"yes_bid_dollars": "0.5900", "yes_ask_dollars": "0.6100", "last_price_dollars": "0.6000"}
+    assert price_to_prob(market_with_last) == 0.60
 
 
 def test_price_to_prob_low_prob_futures():

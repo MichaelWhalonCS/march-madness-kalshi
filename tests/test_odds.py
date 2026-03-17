@@ -4,20 +4,33 @@ from src.odds import TeamOdds, _parse_ticker, price_to_prob
 from src.teams import Team
 
 
-def test_price_to_prob_dollar_midpoint():
-    """Midpoint of dollar bid/ask (new API format)."""
-    market = {"yes_bid_dollars": 0.60, "yes_ask_dollars": 0.70}
-    assert abs(price_to_prob(market) - 0.65) < 1e-9
-
-
-def test_price_to_prob_cents_fallback():
-    """Cents-based bid/ask (>1) auto-divided by 100."""
-    market = {"yes_bid": 60, "yes_ask": 70}
+def test_price_to_prob_prefers_last_price():
+    """last_price_dollars is the primary source (matches Kalshi display)."""
+    market = {"yes_bid_dollars": 0.60, "yes_ask_dollars": 0.70, "last_price_dollars": 0.65}
     assert price_to_prob(market) == 0.65
 
 
-def test_price_to_prob_last_price_fallback():
-    """Falls back to last_price when no bid/ask."""
+def test_price_to_prob_last_price_over_midpoint():
+    """last_price is preferred even when bid/ask midpoint differs."""
+    # Duke-style: bid=0.99, ask=1.00, last=0.99 → should return 0.99 not 0.995
+    market = {"yes_bid_dollars": 0.99, "yes_ask_dollars": 1.00, "last_price_dollars": 0.99}
+    assert price_to_prob(market) == 0.99
+
+
+def test_price_to_prob_bid_fallback():
+    """Falls back to yes_bid when no last_price."""
+    market = {"yes_bid_dollars": 0.60, "yes_ask_dollars": 0.70}
+    assert price_to_prob(market) == 0.60
+
+
+def test_price_to_prob_cents_normalized():
+    """Cents-based values (>1) auto-divided by 100."""
+    market = {"last_price": 65}
+    assert price_to_prob(market) == 0.65
+
+
+def test_price_to_prob_last_price_only():
+    """Works with only last_price, no bid/ask."""
     market = {"yes_bid_dollars": 0.0, "yes_ask_dollars": 0.0, "last_price_dollars": 0.45}
     assert price_to_prob(market) == 0.45
 
