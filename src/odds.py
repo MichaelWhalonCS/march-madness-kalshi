@@ -129,7 +129,9 @@ class TeamOdds:
                 prev = self.round_probs.get(prev_rnd)
                 curr = self.round_probs.get(rnd)
                 if prev and prev > 0 and curr is not None:
-                    result[rnd] = curr / prev
+                    # Clamp to [0, 1] — thin/illiquid markets can cause
+                    # monotonicity violations where curr > prev.
+                    result[rnd] = min(curr / prev, 1.0)
                 else:
                     result[rnd] = None
         return result
@@ -616,6 +618,7 @@ def best_survivor_series(
                     "seed": to.team.seed,
                     "region": to.team.region,
                     "cond_prob": cp,
+                    "round_url": to.round_urls.get(rnd),
                 }]
                 new_used = used | {to.team.name}
                 next_beam.append((new_neg_log, new_picks, new_used))

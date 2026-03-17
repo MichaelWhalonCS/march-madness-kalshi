@@ -95,6 +95,19 @@ def test_team_odds_empty():
     assert odds.game_day is None
 
 
+def test_conditional_prob_clamped_at_one():
+    """Monotonicity violations in thin markets should be clamped to 1.0."""
+    team = Team(name="Queens", seed=15, region="West")
+    # E8=0.04, S16=0.01 → raw conditional = 4.0, should be clamped to 1.0
+    odds = TeamOdds(
+        team=team,
+        round_probs={"R64": 0.04, "R32": 0.01, "S16": 0.01, "E8": 0.04},
+    )
+    conds = odds.conditional_probs()
+    assert conds["S16"] == 1.0  # 0.01/0.01 = 1.0
+    assert conds["E8"] == 1.0   # 0.04/0.01 → clamped to 1.0
+
+
 def test_parse_ticker_extracts_day():
     """_parse_ticker returns (abbr, round_code, day_of_week)."""
     abbr, rnd, day = _parse_ticker("KXNCAAMBGAME-26MAR19SIEDUKE-DUKE")

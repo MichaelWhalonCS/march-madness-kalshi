@@ -247,6 +247,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "team": to.team.name,
             "seed": to.team.seed,
             "region": to.team.region,
+            "kalshi_url": to.kalshi_url,
             "win_current": fv_data["win_current"],
             "win_current_display": _prob_display(fv_data["win_current"]),
             "win_current_bg": _prob_color(fv_data["win_current"]),
@@ -263,6 +264,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
                     "display": _prob_display(t["prob"]),
                     "weighted": f"{t['weight'] * (t['prob'] or 0):.2f}",
                     "weighted_val": t["weight"] * (t["prob"] or 0),
+                    "url": to.round_urls.get(t["round"]),
                 }
                 for t in fv_data["future_terms"]
             ],
@@ -277,11 +279,17 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     game_days_set = {r["game_day"] for r in rows if r["game_day"]}
     game_days = [d for d in _DAY_ORDER if d in game_days_set]
     # Format survival probability for display
+    # Build a lookup: team_name → round_urls dict for suggested-series links
+    _team_urls = {to.team.name: to.round_urls for to in odds}
+
     for i, series in enumerate(suggested_series):
         for pick in series:
             pick["cond_display"] = _prob_display(pick["cond_prob"])
             pick["cond_bg"] = _prob_color(pick["cond_prob"])
             pick["cond_text"] = _prob_text_color(pick["cond_prob"])
+            # Ensure round_url is present (beam search already sets it)
+            if "round_url" not in pick:
+                pick["round_url"] = _team_urls.get(pick["team"], {}).get(pick["round"])
         survival = series[0]["survival"] if series else 0
         for pick in series:
             pick["survival_display"] = f"{survival:.1%}"

@@ -429,6 +429,12 @@
     margin-top: 0.15rem;
   }
 
+  .series-pick-team a:hover,
+  .series-pick-prob a:hover,
+  .fv-term a:hover {
+    text-decoration: underline;
+  }
+
   @media (max-width: 768px) {
     .series-picks {
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -698,9 +704,21 @@
         {% for pick in series %}
         <div class="series-pick">
           <span class="series-pick-round">{{ round_labels[pick.round] }}</span>
-          <span class="series-pick-team">{{ pick.team }}</span>
+          <span class="series-pick-team">
+            {% if pick.round_url %}
+            <a href="{{ pick.round_url }}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">{{ pick.team }}</a>
+            {% else %}
+            {{ pick.team }}
+            {% endif %}
+          </span>
           <span class="series-pick-meta">({{ pick.seed }}) {{ pick.region }}</span>
-          <span class="series-pick-prob" style="background: {{ pick.cond_bg }}; color: {{ pick.cond_text }};">{{ pick.cond_display }}</span>
+          <span class="series-pick-prob" style="background: {{ pick.cond_bg }}; color: {{ pick.cond_text }};">
+            {% if pick.round_url %}
+            <a href="{{ pick.round_url }}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">{{ pick.cond_display }}</a>
+            {% else %}
+            {{ pick.cond_display }}
+            {% endif %}
+          </span>
         </div>
         {% endfor %}
       </div>
@@ -769,11 +787,19 @@
           <td class="col-seed">{{ fv.seed }}</td>
           <td class="col-region"><span class="region-chip region-{{ fv.region }}">{{ fv.region }}</span></td>
           <td class="prob-cell" style="background: {{ fv.win_current_bg }}; color: {{ fv.win_current_text }};">
+            {% if fv.kalshi_url %}
+            <a href="{{ fv.kalshi_url }}" target="_blank" rel="noopener" style="color: {{ fv.win_current_text }}; text-decoration: none;">{{ fv.win_current_display }}</a>
+            {% else %}
             {{ fv.win_current_display }}
+            {% endif %}
           </td>
           {% for t in fv.future_terms %}
           <td class="fv-term" data-ftval="{{ t.weighted_val }}">
+            {% if t.url %}
+            <a href="{{ t.url }}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">{{ t.display }}<span class="fv-weighted-small"> ({{ t.weighted }})</span></a>
+            {% else %}
             {{ t.display }}<span class="fv-weighted-small"> ({{ t.weighted }})</span>
+            {% endif %}
           </td>
           {% endfor %}
           <td class="fv-weighted-sum">{{ fv.future_weighted_display }}</td>
