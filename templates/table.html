@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>March Madness Survivor Tool — Kalshi Odds</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏀</text></svg>">
 <style>
   :root {
     --bg: #0d1117;
@@ -655,6 +656,16 @@
   <label for="filter-search">Search:</label>
   <input type="text" id="filter-search" placeholder="Team name..." oninput="applyFilters()">
 
+  {% if show_date_column and game_dates %}
+  <label for="filter-date">Date:</label>
+  <select id="filter-date" onchange="applyFilters()">
+    <option value="">All</option>
+    {% for dt in game_dates %}
+    <option value="{{ dt }}">{{ dt }}</option>
+    {% endfor %}
+  </select>
+  {% endif %}
+
   {% if show_day_filter and game_days %}
   <label for="filter-day">Day:</label>
   <select id="filter-day" onchange="applyFilters()">
@@ -679,12 +690,12 @@
         <th data-col="team" onclick="sortTable('team')">Team <span class="sort-arrow">&#9650;</span></th>
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
-        {% if show_day_filter %}
-        <th data-col="day" onclick="sortTable('day')">Day <span class="sort-arrow">&#9650;</span></th>
+        {% if show_date_column %}
+        <th data-col="date" onclick="sortTable('date')">Date <span class="sort-arrow">&#9650;</span></th>
         {% endif %}
         <th data-col="kalshi" onclick="sortTable('kalshi')">
           Kalshi ({{ current_round }})
-          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the {{ current_round }} game. This reflects real-money market sentiment — compare with the BPI model column to spot value.">
+          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the {{ current_round }} game. Based on the last traded price, reflecting real-money market sentiment.">
             <span class="info-icon">i</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
@@ -722,12 +733,13 @@
           data-region="{{ row.region }}"
           data-eliminated="{{ row.eliminated|lower }}"
           data-day="{{ row.game_day }}"
+          data-date="{{ row.game_date }}"
           data-best-sort="{{ row.best_pick_sort }}">
         <td><strong>{{ row.team }}</strong></td>
         <td class="col-seed">{{ row.seed }}</td>
         <td class="col-region"><span class="region-chip region-{{ row.region }}">{{ row.region }}</span></td>
-        {% if show_day_filter %}
-        <td class="col-day">{{ row.game_day }}</td>
+        {% if show_date_column %}
+        <td class="col-day">{{ row.game_date }}</td>
         {% endif %}
         <td class="prob-cell"
             data-kalshi="{{ row.kalshi_prob if row.kalshi_prob is not none else '' }}"
@@ -823,6 +835,27 @@
     <strong>Positive FV</strong> → team is most useful <em>this</em> round (use now).
     <strong>Negative FV</strong> → team has significant future value (consider saving).
   </p>
+  <div class="filters" style="max-width: 100%;">
+    <label for="fv-filter-region">Region:</label>
+    <select id="fv-filter-region" onchange="applyFvFilters()">
+      <option value="">All</option>
+      <option value="East">East</option>
+      <option value="West">West</option>
+      <option value="South">South</option>
+      <option value="Midwest">Midwest</option>
+    </select>
+    <label for="fv-filter-seed">Seed ≤</label>
+    <select id="fv-filter-seed" onchange="applyFvFilters()">
+      <option value="16">All</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="4">4</option>
+      <option value="6">6</option>
+      <option value="8">8</option>
+    </select>
+    <label for="fv-filter-search">Search:</label>
+    <input type="text" id="fv-filter-search" placeholder="Team name..." oninput="applyFvFilters()">
+  </div>
   <div class="table-wrap">
     <table id="fv-table">
       <thead>
@@ -1018,10 +1051,16 @@ function sortTable(col) {
       va = a.dataset.region;
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
-    } else if (col === 'day') {
-      var dayOrder = {'Tue':0,'Wed':1,'Thu':2,'Fri':3,'Sat':4,'Sun':5,'Mon':6};
-      va = a.dataset.day ? (dayOrder[a.dataset.day] !== undefined ? dayOrder[a.dataset.day] : 99) : 99;
-      vb = b.dataset.day ? (dayOrder[b.dataset.day] !== undefined ? dayOrder[b.dataset.day] : 99) : 99;
+    } else if (col === 'date') {
+      // Sort by date string — "Mar 19" etc.  Parse to comparable number.
+      var monthVal = {'Mar':3,'Apr':4};
+      function dateToNum(d) {
+        if (!d) return 9999;
+        var parts = d.split(' ');
+        return (monthVal[parts[0]] || 0) * 100 + parseInt(parts[1] || '0');
+      }
+      va = dateToNum(a.dataset.date);
+      vb = dateToNum(b.dataset.date);
     } else if (col === 'kalshi') {
       var kA = a.querySelector('[data-kalshi]');
       var kB = b.querySelector('[data-kalshi]');
@@ -1061,6 +1100,8 @@ function applyFilters() {
   var showEliminated = document.getElementById('filter-eliminated').checked;
   var dayEl = document.getElementById('filter-day');
   var day = dayEl ? dayEl.value : '';
+  var dateEl = document.getElementById('filter-date');
+  var dateVal = dateEl ? dateEl.value : '';
 
   var table = document.getElementById('odds-table');
   if (!table) return;
@@ -1073,6 +1114,7 @@ function applyFilters() {
     if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
     if (!showEliminated && row.dataset.eliminated === 'true') show = false;
     if (day && row.dataset.day !== day) show = false;
+    if (dateVal && row.dataset.date !== dateVal) show = false;
     row.style.display = show ? '' : 'none';
   });
 }
@@ -1147,6 +1189,25 @@ function sortFvTable(col) {
   });
 
   rows.forEach(function(r) { tbody.appendChild(r); });
+}
+
+// ── FV table filtering ─────────────────────────────────────────────
+function applyFvFilters() {
+  var region = document.getElementById('fv-filter-region').value;
+  var maxSeed = parseInt(document.getElementById('fv-filter-seed').value);
+  var search = document.getElementById('fv-filter-search').value.toLowerCase();
+
+  var table = document.getElementById('fv-table');
+  if (!table) return;
+  var rows = table.querySelectorAll('tbody tr');
+
+  rows.forEach(function(row) {
+    var show = true;
+    if (region && row.dataset.fvRegion !== region) show = false;
+    if (parseInt(row.dataset.fvSeed) > maxSeed) show = false;
+    if (search && !(row.dataset.fvTeam || '').toLowerCase().includes(search)) show = false;
+    row.style.display = show ? '' : 'none';
+  });
 }
 
 // ── Floating tooltip for info icons ────────────────────────────────

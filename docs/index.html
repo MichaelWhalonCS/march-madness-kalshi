@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>March Madness Survivor Tool — Kalshi Odds</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏀</text></svg>">
 <style>
   :root {
     --bg: #0d1117;
@@ -578,7 +579,7 @@
 <div class="header">
   <h1>🏀 March Madness Survivor — Kalshi Odds</h1>
   <div class="meta">
-    <span>Last updated: 2026-03-17 16:46 UTC</span>
+    <span>Last updated: 2026-03-17 17:00 UTC</span>
     <span>68 teams</span>
     <span>Source: <a href="https://kalshi.com/category/sports/basketball/cbb-tournament/futures" style="color:var(--accent)" target="_blank" rel="noopener">Kalshi NCAA Tournament Markets</a></span>
   </div>
@@ -656,6 +657,22 @@
   <input type="text" id="filter-search" placeholder="Team name..." oninput="applyFilters()">
 
   
+  <label for="filter-date">Date:</label>
+  <select id="filter-date" onchange="applyFilters()">
+    <option value="">All</option>
+    
+    <option value="Mar 17">Mar 17</option>
+    
+    <option value="Mar 18">Mar 18</option>
+    
+    <option value="Mar 19">Mar 19</option>
+    
+    <option value="Mar 20">Mar 20</option>
+    
+  </select>
+  
+
+  
   <label for="filter-day">Day:</label>
   <select id="filter-day" onchange="applyFilters()">
     <option value="">All</option>
@@ -686,11 +703,11 @@
         <th data-col="seed" class="col-seed" onclick="sortTable('seed')">Seed <span class="sort-arrow">&#9650;</span></th>
         <th data-col="region" onclick="sortTable('region')">Region <span class="sort-arrow">&#9650;</span></th>
         
-        <th data-col="day" onclick="sortTable('day')">Day <span class="sort-arrow">&#9650;</span></th>
+        <th data-col="date" onclick="sortTable('date')">Date <span class="sort-arrow">&#9650;</span></th>
         
         <th data-col="kalshi" onclick="sortTable('kalshi')">
           Kalshi (R64)
-          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the R64 game. This reflects real-money market sentiment — compare with the BPI model column to spot value.">
+          <span class="info-tip" data-tip="Kalshi prediction market odds for winning the R64 game. Based on the last traded price, reflecting real-money market sentiment.">
             <span class="info-icon">i</span>
           </span>
           <span class="sort-arrow">&#9650;</span>
@@ -768,12 +785,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
-          data-best-sort="30.791044776119403">
+          data-date="Mar 19"
+          data-best-sort="30.779411764705884">
         <td><strong>Duke</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.99"
@@ -813,19 +831,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.67"
-            title="Game win: 78.8%"
-            style="background: rgb(132,206,60); color: #1a1a1a;">
+            data-prob="0.68"
+            title="Game win: 80.0%"
+            style="background: rgb(129,205,60); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">67.0%</a>
+             title="View on Kalshi">68.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.53"
-            title="Game win: 79.1%"
+            title="Game win: 77.9%"
             style="background: rgb(171,217,51); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener"
@@ -856,7 +874,7 @@
           
         </td>
         
-        <td class="col-best">E8 (79.1%)</td>
+        <td class="col-best">E8 (77.9%)</td>
       </tr>
       
       <tr class=""
@@ -865,12 +883,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
-          data-best-sort="10.70103092783505">
+          data-date="Mar 20"
+          data-best-sort="0.97">
         <td><strong>UConn</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.97"
@@ -882,9 +901,9 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.2899999999999999"
-            style="background: rgb(196,152,54); color: #1a1a1a;">
-          29.0%
+            data-winout="0.29999999999999993"
+            style="background: rgb(196,155,54); color: #1a1a1a;">
+          30.0%
         </td>
         
         <td class="prob-cell"
@@ -899,19 +918,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.68"
-            title="Game win: 70.1%"
-            style="background: rgb(129,205,60); color: #1a1a1a;">
+            data-prob="0.67"
+            title="Game win: 69.1%"
+            style="background: rgb(132,206,60); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">68.0%</a>
+             title="View on Kalshi">67.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.4"
-            title="Game win: 58.8%"
+            title="Game win: 59.7%"
             style="background: rgb(188,188,52); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
@@ -953,7 +972,7 @@
           
         </td>
         
-        <td class="col-best">R32 (70.1%)</td>
+        <td class="col-best">R64 (97.0%)</td>
       </tr>
       
       <tr class=""
@@ -962,12 +981,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.91">
         <td><strong>Michigan St.</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.93"
@@ -1059,12 +1079,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.91">
         <td><strong>Kansas</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.9"
@@ -1156,12 +1177,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.84">
         <td><strong>St. John&#39;s</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.85"
@@ -1253,12 +1275,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="40.75">
         <td><strong>Louisville</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.68"
@@ -1270,25 +1293,25 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.35000000000000003"
-            style="background: rgb(192,172,53); color: #1a1a1a;">
-          35.0%
+            data-winout="0.36000000000000004"
+            style="background: rgb(191,175,52); color: #1a1a1a;">
+          36.0%
         </td>
         
         <td class="prob-cell"
-            data-prob="0.66"
-            title="Game win: 66.0%"
-            style="background: rgb(135,207,59); color: #1a1a1a;">
+            data-prob="0.67"
+            title="Game win: 67.0%"
+            style="background: rgb(132,206,60); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">66.0%</a>
+             title="View on Kalshi">67.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.31"
-            title="Game win: 47.0%"
+            title="Game win: 46.3%"
             style="background: rgb(195,159,53); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
@@ -1350,12 +1373,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.7">
         <td><strong>UCLA</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.7"
@@ -1447,12 +1471,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="40.666666666666664">
         <td><strong>Ohio St.</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.58"
@@ -1544,20 +1569,21 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="20.5">
         <td><strong>TCU</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
-            data-kalshi="0.43"
-            style="background: rgb(185,197,51); color: #1a1a1a;">
+            data-kalshi="0.42"
+            style="background: rgb(186,194,51); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19tcuosu" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">43.0%</a>
+             title="View on Kalshi">42.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -1641,12 +1667,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="30.666666666666668">
         <td><strong>UCF</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.32"
@@ -1738,12 +1765,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="20.416666666666668">
         <td><strong>South Florida</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.34"
@@ -1835,12 +1863,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="10.294117647058824">
         <td><strong>Northern Iowa</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.17"
@@ -1932,12 +1961,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="20.333333333333332">
         <td><strong>Cal Baptist</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.1"
@@ -2029,12 +2059,13 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="20.5">
         <td><strong>N. Dakota St.</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.08"
@@ -2126,20 +2157,21 @@
           data-region="East"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="10.142857142857142">
         <td><strong>Furman</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
-            data-kalshi="0.03"
-            style="background: rgb(217,69,59); color: #ffffff;">
+            data-kalshi="0.04"
+            style="background: rgb(216,72,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20furconn" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">3.0%</a>
+             title="View on Kalshi">4.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -2223,20 +2255,21 @@
           data-region="East"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="10.5">
         <td><strong>Siena</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-East">East</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
-            data-kalshi="0.02"
-            style="background: rgb(218,66,59); color: #ffffff;">
+            data-kalshi="0.01"
+            style="background: rgb(219,63,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sieduke" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">2.0%</a>
+             title="View on Kalshi">1.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -2320,6 +2353,7 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day=""
+          data-date=""
           data-best-sort="30.75">
         <td><strong>Michigan</strong></td>
         <td class="col-seed">1</td>
@@ -2415,12 +2449,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
-          data-best-sort="10.777777777777779">
+          data-date="Mar 20"
+          data-best-sort="10.767676767676768">
         <td><strong>Iowa St.</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.96"
@@ -2432,9 +2467,9 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.21999999999999997"
-            style="background: rgb(202,130,55); color: #1a1a1a;">
-          22.0%
+            data-winout="0.22999999999999998"
+            style="background: rgb(201,133,55); color: #1a1a1a;">
+          23.0%
         </td>
         
         <td class="prob-cell"
@@ -2449,19 +2484,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.77"
-            title="Game win: 77.8%"
-            style="background: rgb(104,198,66); color: #1a1a1a;">
+            data-prob="0.76"
+            title="Game win: 76.8%"
+            style="background: rgb(107,199,65); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">77.0%</a>
+             title="View on Kalshi">76.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.52"
-            title="Game win: 67.5%"
+            title="Game win: 68.4%"
             style="background: rgb(174,218,51); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
@@ -2503,7 +2538,7 @@
           
         </td>
         
-        <td class="col-best">R32 (77.8%)</td>
+        <td class="col-best">R32 (76.8%)</td>
       </tr>
       
       <tr class=""
@@ -2512,12 +2547,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.95">
         <td><strong>Virginia</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.95"
@@ -2609,12 +2645,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.86">
         <td><strong>Alabama</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.87"
@@ -2706,12 +2743,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="40.75">
         <td><strong>Texas Tech</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.75"
@@ -2803,6 +2841,7 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day=""
+          data-date=""
           data-best-sort="0.72">
         <td><strong>Tennessee</strong></td>
         <td class="col-seed">6</td>
@@ -2898,12 +2937,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.62">
         <td><strong>Kentucky</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.6"
@@ -2943,19 +2983,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.09"
-            title="Game win: 50.0%"
-            style="background: rgb(212,88,58); color: #ffffff;">
+            data-prob="0.08"
+            title="Game win: 44.4%"
+            style="background: rgb(213,85,58); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">9.0%</a>
+             title="View on Kalshi">8.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.02"
-            title="Game win: 22.2%"
+            title="Game win: 25.0%"
             style="background: rgb(218,66,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener"
@@ -2995,20 +3035,21 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.56">
         <td><strong>Georgia</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
-            data-kalshi="0.58"
-            style="background: rgb(157,213,54); color: #1a1a1a;">
+            data-kalshi="0.57"
+            style="background: rgb(160,214,54); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sluuga" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">58.0%</a>
+             title="View on Kalshi">57.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -3092,12 +3133,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="30.5">
         <td><strong>Saint Louis</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.43"
@@ -3189,12 +3231,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="50.5">
         <td><strong>Santa Clara</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.41"
@@ -3286,20 +3329,21 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Wed"
+          data-date="Mar 18"
           data-best-sort="20.666666666666668">
         <td><strong>Miami (OH)</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Wed</td>
+        <td class="col-day">Mar 18</td>
         
         <td class="prob-cell"
-            data-kalshi="0.28"
-            style="background: rgb(197,149,54); color: #1a1a1a;">
+            data-kalshi="0.29"
+            style="background: rgb(196,152,54); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar18mohsmu" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">28.0%</a>
+             title="View on Kalshi">29.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -3383,12 +3427,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Wed"
+          data-date="Mar 18"
           data-best-sort="30.5">
         <td><strong>SMU</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Wed</td>
+        <td class="col-day">Mar 18</td>
         
         <td class="prob-cell"
             data-kalshi="0.73"
@@ -3480,12 +3525,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="30.5">
         <td><strong>Akron</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.26"
@@ -3577,12 +3623,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
-          data-best-sort="10.4">
+          data-date="Mar 20"
+          data-best-sort="20.333333333333332">
         <td><strong>Hofstra</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.15"
@@ -3594,9 +3641,9 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.09"
-            style="background: rgb(212,88,58); color: #ffffff;">
-          9.0%
+            data-winout="0.12"
+            style="background: rgb(210,98,57); color: #ffffff;">
+          12.0%
         </td>
         
         <td class="prob-cell"
@@ -3611,19 +3658,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.06"
-            title="Game win: 40.0%"
-            style="background: rgb(215,79,58); color: #ffffff;">
+            data-prob="0.03"
+            title="Game win: 20.0%"
+            style="background: rgb(217,69,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">6.0%</a>
+             title="View on Kalshi">3.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.01"
-            title="Game win: 16.7%"
+            title="Game win: 33.3%"
             style="background: rgb(219,63,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
@@ -3665,7 +3712,7 @@
           
         </td>
         
-        <td class="col-best best-risky">R32 (40.0%)</td>
+        <td class="col-best best-risky">S16 (33.3%)</td>
       </tr>
       
       <tr class=""
@@ -3674,12 +3721,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="10.11111111111111">
         <td><strong>Wright St.</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.07"
@@ -3771,12 +3819,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="50.5">
         <td><strong>Tennessee St.</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.04"
@@ -3868,12 +3917,13 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Tue"
+          data-date="Mar 17"
           data-best-sort="10.5">
         <td><strong>UMBC</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Tue</td>
+        <td class="col-day">Mar 17</td>
         
         <td class="prob-cell"
             data-kalshi="0.51"
@@ -3965,20 +4015,21 @@
           data-region="Midwest"
           data-eliminated="false"
           data-day="Tue"
+          data-date="Mar 17"
           data-best-sort="10.5">
         <td><strong>Howard</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
         
-        <td class="col-day">Tue</td>
+        <td class="col-day">Mar 17</td>
         
         <td class="prob-cell"
-            data-kalshi="0.5"
-            style="background: rgb(180,220,50); color: #1a1a1a;">
+            data-kalshi="0.51"
+            style="background: rgb(177,219,50); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar17umbchow" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">50.0%</a>
+             title="View on Kalshi">51.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -4062,7 +4113,8 @@
           data-region="South"
           data-eliminated="false"
           data-day=""
-          data-best-sort="20.728395061728396">
+          data-date=""
+          data-best-sort="20.71604938271605">
         <td><strong>Florida</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
@@ -4105,19 +4157,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.59"
-            title="Game win: 72.8%"
-            style="background: rgb(154,212,55); color: #1a1a1a;">
+            data-prob="0.58"
+            title="Game win: 71.6%"
+            style="background: rgb(157,213,54); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">59.0%</a>
+             title="View on Kalshi">58.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.37"
-            title="Game win: 62.7%"
+            title="Game win: 63.8%"
             style="background: rgb(190,178,52); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener"
@@ -4138,17 +4190,17 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.1"
-            title="Game win: 47.6%"
-            style="background: rgb(212,92,58); color: #ffffff;">
+            data-prob="0.09"
+            title="Game win: 42.9%"
+            style="background: rgb(212,88,58); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">10.0%</a>
+             title="View on Kalshi">9.0%</a>
           
         </td>
         
-        <td class="col-best">S16 (72.8%)</td>
+        <td class="col-best">S16 (71.6%)</td>
       </tr>
       
       <tr class=""
@@ -4157,12 +4209,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
-          data-best-sort="10.785714285714286">
+          data-date="Mar 19"
+          data-best-sort="10.775510204081632">
         <td><strong>Houston</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.98"
@@ -4174,9 +4227,9 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.20999999999999996"
-            style="background: rgb(203,127,55); color: #1a1a1a;">
-          21.0%
+            data-winout="0.21999999999999997"
+            style="background: rgb(202,130,55); color: #1a1a1a;">
+          22.0%
         </td>
         
         <td class="prob-cell"
@@ -4191,19 +4244,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.77"
-            title="Game win: 78.6%"
-            style="background: rgb(104,198,66); color: #1a1a1a;">
+            data-prob="0.76"
+            title="Game win: 77.6%"
+            style="background: rgb(107,199,65); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">77.0%</a>
+             title="View on Kalshi">76.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.49"
-            title="Game win: 63.6%"
+            title="Game win: 64.5%"
             style="background: rgb(180,216,50); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
@@ -4245,7 +4298,7 @@
           
         </td>
         
-        <td class="col-best">R32 (78.6%)</td>
+        <td class="col-best">R32 (77.6%)</td>
       </tr>
       
       <tr class=""
@@ -4254,12 +4307,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="10.8125">
         <td><strong>Illinois</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.97"
@@ -4351,12 +4405,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.87">
         <td><strong>Nebraska</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.89"
@@ -4368,9 +4423,9 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.45"
-            style="background: rgb(184,204,51); color: #1a1a1a;">
-          45.0%
+            data-winout="0.46"
+            style="background: rgb(183,207,50); color: #1a1a1a;">
+          46.0%
         </td>
         
         <td class="prob-cell"
@@ -4385,19 +4440,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.42"
-            title="Game win: 48.3%"
-            style="background: rgb(186,194,51); color: #1a1a1a;">
+            data-prob="0.41"
+            title="Game win: 47.1%"
+            style="background: rgb(187,191,51); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">42.0%</a>
+             title="View on Kalshi">41.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.14"
-            title="Game win: 33.3%"
+            title="Game win: 34.1%"
             style="background: rgb(208,104,57); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
@@ -4448,12 +4503,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.82">
         <td><strong>Vanderbilt</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.85"
@@ -4545,12 +4601,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.57">
         <td><strong>North Carolina</strong></td>
         <td class="col-seed">6</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.57"
@@ -4642,20 +4699,21 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.57">
         <td><strong>Saint Mary&#39;s</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
-            data-kalshi="0.61"
-            style="background: rgb(149,211,56); color: #1a1a1a;">
+            data-kalshi="0.6"
+            style="background: rgb(152,212,56); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19txamsmc" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">61.0%</a>
+             title="View on Kalshi">60.0%</a>
           
         </td>
         <td class="prob-cell"
@@ -4739,12 +4797,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.45">
         <td><strong>Clemson</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.44"
@@ -4836,12 +4895,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.58">
         <td><strong>Iowa</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.57"
@@ -4933,12 +4993,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="50.5">
         <td><strong>Texas A&amp;M</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.41"
@@ -5030,12 +5091,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.41">
         <td><strong>VCU</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.43"
@@ -5127,12 +5189,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="30.5">
         <td><strong>McNeese</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.16"
@@ -5224,12 +5287,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="20.333333333333332">
         <td><strong>Troy</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.12"
@@ -5321,12 +5385,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
-          data-best-sort="10.142857142857142">
+          data-date="Mar 19"
+          data-best-sort="20.5">
         <td><strong>Penn</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.04"
@@ -5338,9 +5403,9 @@
           
         </td>
         <td class="prob-cell"
-            data-winout="0.060000000000000005"
-            style="background: rgb(215,79,58); color: #ffffff;">
-          6.0%
+            data-winout="0.05"
+            style="background: rgb(216,76,59); color: #ffffff;">
+          5.0%
         </td>
         
         <td class="prob-cell"
@@ -5355,19 +5420,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.01"
-            title="Game win: 14.3%"
-            style="background: rgb(219,63,59); color: #ffffff;">
+            data-prob="0.02"
+            title="Game win: 28.6%"
+            style="background: rgb(218,66,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">1.0%</a>
+             title="View on Kalshi">2.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.01"
-            title="Game win: —"
+            title="Game win: 50.0%"
             style="background: rgb(219,63,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
@@ -5409,7 +5474,7 @@
           
         </td>
         
-        <td class="col-best best-risky">R32 (14.3%)</td>
+        <td class="col-best best-risky">S16 (50.0%)</td>
       </tr>
       
       <tr class=""
@@ -5418,12 +5483,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="10.25">
         <td><strong>Idaho</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.03"
@@ -5515,12 +5581,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Wed"
+          data-date="Mar 18"
           data-best-sort="10.5">
         <td><strong>Prairie View A&amp;M</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Wed</td>
+        <td class="col-day">Mar 18</td>
         
         <td class="prob-cell"
             data-kalshi="0.41"
@@ -5612,12 +5679,13 @@
           data-region="South"
           data-eliminated="false"
           data-day="Wed"
+          data-date="Mar 18"
           data-best-sort="10.333333333333334">
         <td><strong>Lehigh</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-South">South</span></td>
         
-        <td class="col-day">Wed</td>
+        <td class="col-day">Mar 18</td>
         
         <td class="prob-cell"
             data-kalshi="0.6"
@@ -5709,12 +5777,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
-          data-best-sort="30.75">
+          data-date="Mar 20"
+          data-best-sort="30.760563380281692">
         <td><strong>Arizona</strong></td>
         <td class="col-seed">1</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.99"
@@ -5754,19 +5823,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.72"
-            title="Game win: 80.9%"
-            style="background: rgb(118,202,63); color: #1a1a1a;">
+            data-prob="0.71"
+            title="Game win: 79.8%"
+            style="background: rgb(121,203,62); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener"
              style="color: #1a1a1a; text-decoration: none;"
-             title="View on Kalshi">72.0%</a>
+             title="View on Kalshi">71.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.54"
-            title="Game win: 75.0%"
+            title="Game win: 76.1%"
             style="background: rgb(168,216,52); color: #1a1a1a;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener"
@@ -5797,7 +5866,7 @@
           
         </td>
         
-        <td class="col-best">E8 (75.0%)</td>
+        <td class="col-best">E8 (76.1%)</td>
       </tr>
       
       <tr class=""
@@ -5806,12 +5875,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="10.783505154639176">
         <td><strong>Purdue</strong></td>
         <td class="col-seed">2</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.98"
@@ -5903,12 +5973,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.97">
         <td><strong>Gonzaga</strong></td>
         <td class="col-seed">3</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.96"
@@ -6000,12 +6071,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.93">
         <td><strong>Arkansas</strong></td>
         <td class="col-seed">4</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.91"
@@ -6097,12 +6169,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="0.82">
         <td><strong>Wisconsin</strong></td>
         <td class="col-seed">5</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.81"
@@ -6153,19 +6226,19 @@
         </td>
         
         <td class="prob-cell"
-            data-prob="0.06"
-            title="Game win: 50.0%"
-            style="background: rgb(215,79,58); color: #ffffff;">
+            data-prob="0.05"
+            title="Game win: 41.7%"
+            style="background: rgb(216,76,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener"
              style="color: #ffffff; text-decoration: none;"
-             title="View on Kalshi">6.0%</a>
+             title="View on Kalshi">5.0%</a>
           
         </td>
         
         <td class="prob-cell"
             data-prob="0.03"
-            title="Game win: 50.0%"
+            title="Game win: 60.0%"
             style="background: rgb(217,69,59); color: #ffffff;">
           
           <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2" target="_blank" rel="noopener"
@@ -6194,6 +6267,7 @@
           data-region="West"
           data-eliminated="false"
           data-day=""
+          data-date=""
           data-best-sort="40.666666666666664">
         <td><strong>BYU</strong></td>
         <td class="col-seed">6</td>
@@ -6289,12 +6363,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.56">
         <td><strong>Miami (FL)</strong></td>
         <td class="col-seed">7</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.54"
@@ -6386,12 +6461,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="30.5">
         <td><strong>Villanova</strong></td>
         <td class="col-seed">8</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.46"
@@ -6483,12 +6559,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.56">
         <td><strong>Utah St.</strong></td>
         <td class="col-seed">9</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.57"
@@ -6580,12 +6657,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="0.47">
         <td><strong>Missouri</strong></td>
         <td class="col-seed">10</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.47"
@@ -6677,12 +6755,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Tue"
+          data-date="Mar 17"
           data-best-sort="30.5">
         <td><strong>Texas</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Tue</td>
+        <td class="col-day">Mar 17</td>
         
         <td class="prob-cell"
             data-kalshi="0.5"
@@ -6774,12 +6853,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Tue"
+          data-date="Mar 17"
           data-best-sort="20.5">
         <td><strong>NC State</strong></td>
         <td class="col-seed">11</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Tue</td>
+        <td class="col-day">Mar 17</td>
         
         <td class="prob-cell"
             data-kalshi="0.52"
@@ -6871,12 +6951,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="20.25">
         <td><strong>High Point</strong></td>
         <td class="col-seed">12</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.2"
@@ -6966,12 +7047,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="20.333333333333332">
         <td><strong>Hawai&#39;i</strong></td>
         <td class="col-seed">13</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.1"
@@ -7063,12 +7145,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Thu"
+          data-date="Mar 19"
           data-best-sort="10.142857142857142">
         <td><strong>Kennesaw St.</strong></td>
         <td class="col-seed">14</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Thu</td>
+        <td class="col-day">Mar 19</td>
         
         <td class="prob-cell"
             data-kalshi="0.06"
@@ -7160,12 +7243,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="10.333333333333334">
         <td><strong>Queens</strong></td>
         <td class="col-seed">15</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.03"
@@ -7257,12 +7341,13 @@
           data-region="West"
           data-eliminated="false"
           data-day="Fri"
+          data-date="Mar 20"
           data-best-sort="10.5">
         <td><strong>LIU</strong></td>
         <td class="col-seed">16</td>
         <td class="col-region"><span class="region-chip region-West">West</span></td>
         
-        <td class="col-day">Fri</td>
+        <td class="col-day">Mar 20</td>
         
         <td class="prob-cell"
             data-kalshi="0.01"
@@ -7365,6 +7450,27 @@
     <strong>Positive FV</strong> → team is most useful <em>this</em> round (use now).
     <strong>Negative FV</strong> → team has significant future value (consider saving).
   </p>
+  <div class="filters" style="max-width: 100%;">
+    <label for="fv-filter-region">Region:</label>
+    <select id="fv-filter-region" onchange="applyFvFilters()">
+      <option value="">All</option>
+      <option value="East">East</option>
+      <option value="West">West</option>
+      <option value="South">South</option>
+      <option value="Midwest">Midwest</option>
+    </select>
+    <label for="fv-filter-seed">Seed ≤</label>
+    <select id="fv-filter-seed" onchange="applyFvFilters()">
+      <option value="16">All</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="4">4</option>
+      <option value="6">6</option>
+      <option value="8">8</option>
+    </select>
+    <label for="fv-filter-search">Search:</label>
+    <input type="text" id="fv-filter-search" placeholder="Team name..." oninput="applyFvFilters()">
+  </div>
   <div class="table-wrap">
     <table id="fv-table">
       <thead>
@@ -8175,8 +8281,8 @@
         
         <tr data-fv-team="Kentucky" data-fv-seed="7" data-fv-region="Midwest"
             data-fv-win="0.62"
-            data-fv-fvw="0.76"
-            data-fv-val="-0.14">
+            data-fv-fvw="0.74"
+            data-fv-val="-0.12">
           <td><strong>Kentucky</strong></td>
           <td class="col-seed">7</td>
           <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
@@ -8192,9 +8298,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="0.18">
+          <td class="fv-term" data-ftval="0.16">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">9.0%<span class="fv-weighted-small"> (0.18)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">8.0%<span class="fv-weighted-small"> (0.16)</span></a>
             
           </td>
           
@@ -8216,9 +8322,9 @@
             
           </td>
           
-          <td class="fv-weighted-sum">0.76</td>
+          <td class="fv-weighted-sum">0.74</td>
           <td class="fv-score fv-negative">
-            -0.14
+            -0.12
           </td>
         </tr>
         
@@ -8418,6 +8524,55 @@
           </td>
         </tr>
         
+        <tr data-fv-team="Hofstra" data-fv-seed="13" data-fv-region="Midwest"
+            data-fv-win="0.15"
+            data-fv-fvw="0.32999999999999996"
+            data-fv-val="-0.17999999999999997">
+          <td><strong>Hofstra</strong></td>
+          <td class="col-seed">13</td>
+          <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
+          <td class="prob-cell" style="background: rgb(208,108,57); color: #1a1a1a;">
+            
+            <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20hofala" target="_blank" rel="noopener" style="color: #1a1a1a; text-decoration: none;">15.0%</a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.03">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">3.0%<span class="fv-weighted-small"> (0.03)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.02">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.02)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.04">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.04)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.08">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.08)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.16">
+            
+            <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.16)</span></a>
+            
+          </td>
+          
+          <td class="fv-weighted-sum">0.33</td>
+          <td class="fv-score fv-negative">
+            -0.18
+          </td>
+        </tr>
+        
         <tr data-fv-team="Troy" data-fv-seed="13" data-fv-region="South"
             data-fv-win="0.13"
             data-fv-fvw="0.32999999999999996"
@@ -8513,55 +8668,6 @@
           <td class="fv-weighted-sum">0.52</td>
           <td class="fv-score fv-negative">
             -0.20
-          </td>
-        </tr>
-        
-        <tr data-fv-team="Hofstra" data-fv-seed="13" data-fv-region="Midwest"
-            data-fv-win="0.15"
-            data-fv-fvw="0.36"
-            data-fv-val="-0.21">
-          <td><strong>Hofstra</strong></td>
-          <td class="col-seed">13</td>
-          <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
-          <td class="prob-cell" style="background: rgb(208,108,57); color: #1a1a1a;">
-            
-            <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20hofala" target="_blank" rel="noopener" style="color: #1a1a1a; text-decoration: none;">15.0%</a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.06">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">6.0%<span class="fv-weighted-small"> (0.06)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.02">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.02)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.04">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.04)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.08">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.08)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.16">
-            
-            <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.16)</span></a>
-            
-          </td>
-          
-          <td class="fv-weighted-sum">0.36</td>
-          <td class="fv-score fv-negative">
-            -0.21
           </td>
         </tr>
         
@@ -8859,55 +8965,6 @@
           </td>
         </tr>
         
-        <tr data-fv-team="Penn" data-fv-seed="14" data-fv-region="South"
-            data-fv-win="0.07"
-            data-fv-fvw="0.31000000000000005"
-            data-fv-val="-0.24000000000000005">
-          <td><strong>Penn</strong></td>
-          <td class="col-seed">14</td>
-          <td class="col-region"><span class="region-chip region-South">South</span></td>
-          <td class="prob-cell" style="background: rgb(214,82,58); color: #ffffff;">
-            
-            <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19pennill" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: none;">7.0%</a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.01">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.01)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.02">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.02)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.04">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.04)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.08">
-            
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.08)</span></a>
-            
-          </td>
-          
-          <td class="fv-term" data-ftval="0.16">
-            
-            <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.16)</span></a>
-            
-          </td>
-          
-          <td class="fv-weighted-sum">0.31</td>
-          <td class="fv-score fv-negative">
-            -0.24
-          </td>
-        </tr>
-        
         <tr data-fv-team="Kennesaw St." data-fv-seed="14" data-fv-region="West"
             data-fv-win="0.07"
             data-fv-fvw="0.31000000000000005"
@@ -8954,6 +9011,55 @@
           <td class="fv-weighted-sum">0.31</td>
           <td class="fv-score fv-negative">
             -0.24
+          </td>
+        </tr>
+        
+        <tr data-fv-team="Penn" data-fv-seed="14" data-fv-region="South"
+            data-fv-win="0.07"
+            data-fv-fvw="0.32"
+            data-fv-val="-0.25">
+          <td><strong>Penn</strong></td>
+          <td class="col-seed">14</td>
+          <td class="col-region"><span class="region-chip region-South">South</span></td>
+          <td class="prob-cell" style="background: rgb(214,82,58); color: #ffffff;">
+            
+            <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19pennill" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: none;">7.0%</a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.02">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">2.0%<span class="fv-weighted-small"> (0.02)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.02">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.02)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.04">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.04)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.08">
+            
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.08)</span></a>
+            
+          </td>
+          
+          <td class="fv-term" data-ftval="0.16">
+            
+            <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">1.0%<span class="fv-weighted-small"> (0.16)</span></a>
+            
+          </td>
+          
+          <td class="fv-weighted-sum">0.32</td>
+          <td class="fv-score fv-negative">
+            -0.25
           </td>
         </tr>
         
@@ -9498,8 +9604,8 @@
         
         <tr data-fv-team="Nebraska" data-fv-seed="4" data-fv-region="South"
             data-fv-win="0.87"
-            data-fv-fvw="1.2599999999999998"
-            data-fv-val="-0.3899999999999998">
+            data-fv-fvw="1.2499999999999998"
+            data-fv-val="-0.3799999999999998">
           <td><strong>Nebraska</strong></td>
           <td class="col-seed">4</td>
           <td class="col-region"><span class="region-chip region-South">South</span></td>
@@ -9509,9 +9615,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="0.42">
+          <td class="fv-term" data-ftval="0.41">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">42.0%<span class="fv-weighted-small"> (0.42)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">41.0%<span class="fv-weighted-small"> (0.41)</span></a>
             
           </td>
           
@@ -9539,9 +9645,9 @@
             
           </td>
           
-          <td class="fv-weighted-sum">1.26</td>
+          <td class="fv-weighted-sum">1.25</td>
           <td class="fv-score fv-negative">
-            -0.39
+            -0.38
           </td>
         </tr>
         
@@ -9694,8 +9800,8 @@
         
         <tr data-fv-team="Wisconsin" data-fv-seed="5" data-fv-region="West"
             data-fv-win="0.82"
-            data-fv-fvw="1.2899999999999998"
-            data-fv-val="-0.46999999999999986">
+            data-fv-fvw="1.2499999999999998"
+            data-fv-val="-0.4299999999999998">
           <td><strong>Wisconsin</strong></td>
           <td class="col-seed">5</td>
           <td class="col-region"><span class="region-chip region-West">West</span></td>
@@ -9717,9 +9823,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="0.24">
+          <td class="fv-term" data-ftval="0.2">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">6.0%<span class="fv-weighted-small"> (0.24)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">5.0%<span class="fv-weighted-small"> (0.20)</span></a>
             
           </td>
           
@@ -9735,22 +9841,22 @@
             
           </td>
           
-          <td class="fv-weighted-sum">1.29</td>
+          <td class="fv-weighted-sum">1.25</td>
           <td class="fv-score fv-negative">
-            -0.47
+            -0.43
           </td>
         </tr>
         
         <tr data-fv-team="Louisville" data-fv-seed="6" data-fv-region="East"
-            data-fv-win="0.66"
+            data-fv-win="0.67"
             data-fv-fvw="1.17"
-            data-fv-val="-0.5099999999999999">
+            data-fv-val="-0.4999999999999999">
           <td><strong>Louisville</strong></td>
           <td class="col-seed">6</td>
           <td class="col-region"><span class="region-chip region-East">East</span></td>
-          <td class="prob-cell" style="background: rgb(135,207,59); color: #1a1a1a;">
+          <td class="prob-cell" style="background: rgb(132,206,60); color: #1a1a1a;">
             
-            <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19usflou" target="_blank" rel="noopener" style="color: #1a1a1a; text-decoration: none;">66.0%</a>
+            <a href="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19usflou" target="_blank" rel="noopener" style="color: #1a1a1a; text-decoration: none;">67.0%</a>
             
           </td>
           
@@ -9786,7 +9892,7 @@
           
           <td class="fv-weighted-sum">1.17</td>
           <td class="fv-score fv-negative">
-            -0.51
+            -0.50
           </td>
         </tr>
         
@@ -10331,8 +10437,8 @@
         
         <tr data-fv-team="UConn" data-fv-seed="2" data-fv-region="East"
             data-fv-win="0.97"
-            data-fv-fvw="3.16"
-            data-fv-val="-2.1900000000000004">
+            data-fv-fvw="3.1500000000000004"
+            data-fv-val="-2.1800000000000006">
           <td><strong>UConn</strong></td>
           <td class="col-seed">2</td>
           <td class="col-region"><span class="region-chip region-East">East</span></td>
@@ -10342,9 +10448,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="0.68">
+          <td class="fv-term" data-ftval="0.67">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">68.0%<span class="fv-weighted-small"> (0.68)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">67.0%<span class="fv-weighted-small"> (0.67)</span></a>
             
           </td>
           
@@ -10372,9 +10478,9 @@
             
           </td>
           
-          <td class="fv-weighted-sum">3.16</td>
+          <td class="fv-weighted-sum">3.15</td>
           <td class="fv-score fv-negative">
-            -2.19
+            -2.18
           </td>
         </tr>
         
@@ -10478,8 +10584,8 @@
         
         <tr data-fv-team="Iowa St." data-fv-seed="2" data-fv-region="Midwest"
             data-fv-win="0.99"
-            data-fv-fvw="4.53"
-            data-fv-val="-3.54">
+            data-fv-fvw="4.52"
+            data-fv-val="-3.5299999999999994">
           <td><strong>Iowa St.</strong></td>
           <td class="col-seed">2</td>
           <td class="col-region"><span class="region-chip region-Midwest">Midwest</span></td>
@@ -10489,9 +10595,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="0.77">
+          <td class="fv-term" data-ftval="0.76">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">77.0%<span class="fv-weighted-small"> (0.77)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">76.0%<span class="fv-weighted-small"> (0.76)</span></a>
             
           </td>
           
@@ -10519,16 +10625,16 @@
             
           </td>
           
-          <td class="fv-weighted-sum">4.53</td>
+          <td class="fv-weighted-sum">4.52</td>
           <td class="fv-score fv-negative">
-            -3.54
+            -3.53
           </td>
         </tr>
         
         <tr data-fv-team="Houston" data-fv-seed="2" data-fv-region="South"
             data-fv-win="0.98"
-            data-fv-fvw="5.03"
-            data-fv-val="-4.050000000000001">
+            data-fv-fvw="5.0200000000000005"
+            data-fv-val="-4.040000000000001">
           <td><strong>Houston</strong></td>
           <td class="col-seed">2</td>
           <td class="col-region"><span class="region-chip region-South">South</span></td>
@@ -10538,9 +10644,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="0.77">
+          <td class="fv-term" data-ftval="0.76">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">77.0%<span class="fv-weighted-small"> (0.77)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">76.0%<span class="fv-weighted-small"> (0.76)</span></a>
             
           </td>
           
@@ -10568,16 +10674,16 @@
             
           </td>
           
-          <td class="fv-weighted-sum">5.03</td>
+          <td class="fv-weighted-sum">5.02</td>
           <td class="fv-score fv-negative">
-            -4.05
+            -4.04
           </td>
         </tr>
         
         <tr data-fv-team="Florida" data-fv-seed="1" data-fv-region="South"
             data-fv-win="0.99"
-            data-fv-fvw="6.75"
-            data-fv-val="-5.76">
+            data-fv-fvw="6.57"
+            data-fv-val="-5.58">
           <td><strong>Florida</strong></td>
           <td class="col-seed">1</td>
           <td class="col-region"><span class="region-chip region-South">South</span></td>
@@ -10593,9 +10699,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="1.18">
+          <td class="fv-term" data-ftval="1.16">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">59.0%<span class="fv-weighted-small"> (1.18)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">58.0%<span class="fv-weighted-small"> (1.16)</span></a>
             
           </td>
           
@@ -10611,22 +10717,22 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="1.6">
+          <td class="fv-term" data-ftval="1.44">
             
-            <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">10.0%<span class="fv-weighted-small"> (1.60)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmad/kxmarmad-26" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">9.0%<span class="fv-weighted-small"> (1.44)</span></a>
             
           </td>
           
-          <td class="fv-weighted-sum">6.75</td>
+          <td class="fv-weighted-sum">6.57</td>
           <td class="fv-score fv-negative">
-            -5.76
+            -5.58
           </td>
         </tr>
         
         <tr data-fv-team="Arizona" data-fv-seed="1" data-fv-region="West"
             data-fv-win="0.99"
-            data-fv-fvw="9.850000000000001"
-            data-fv-val="-8.860000000000001">
+            data-fv-fvw="9.830000000000002"
+            data-fv-val="-8.840000000000002">
           <td><strong>Arizona</strong></td>
           <td class="col-seed">1</td>
           <td class="col-region"><span class="region-chip region-West">West</span></td>
@@ -10642,9 +10748,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="1.44">
+          <td class="fv-term" data-ftval="1.42">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">72.0%<span class="fv-weighted-small"> (1.44)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">71.0%<span class="fv-weighted-small"> (1.42)</span></a>
             
           </td>
           
@@ -10666,9 +10772,9 @@
             
           </td>
           
-          <td class="fv-weighted-sum">9.85</td>
+          <td class="fv-weighted-sum">9.83</td>
           <td class="fv-score fv-negative">
-            -8.86
+            -8.84
           </td>
         </tr>
         
@@ -10723,8 +10829,8 @@
         
         <tr data-fv-team="Duke" data-fv-seed="1" data-fv-region="East"
             data-fv-win="0.99"
-            data-fv-fvw="9.990000000000002"
-            data-fv-val="-9.000000000000002">
+            data-fv-fvw="10.010000000000002"
+            data-fv-val="-9.020000000000001">
           <td><strong>Duke</strong></td>
           <td class="col-seed">1</td>
           <td class="col-region"><span class="region-chip region-East">East</span></td>
@@ -10740,9 +10846,9 @@
             
           </td>
           
-          <td class="fv-term" data-ftval="1.34">
+          <td class="fv-term" data-ftval="1.36">
             
-            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">67.0%<span class="fv-weighted-small"> (1.34)</span></a>
+            <a href="https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">68.0%<span class="fv-weighted-small"> (1.36)</span></a>
             
           </td>
           
@@ -10764,9 +10870,9 @@
             
           </td>
           
-          <td class="fv-weighted-sum">9.99</td>
+          <td class="fv-weighted-sum">10.01</td>
           <td class="fv-score fv-negative">
-            -9.00
+            -9.02
           </td>
         </tr>
         
@@ -10895,10 +11001,16 @@ function sortTable(col) {
       va = a.dataset.region;
       vb = b.dataset.region;
       return currentSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
-    } else if (col === 'day') {
-      var dayOrder = {'Tue':0,'Wed':1,'Thu':2,'Fri':3,'Sat':4,'Sun':5,'Mon':6};
-      va = a.dataset.day ? (dayOrder[a.dataset.day] !== undefined ? dayOrder[a.dataset.day] : 99) : 99;
-      vb = b.dataset.day ? (dayOrder[b.dataset.day] !== undefined ? dayOrder[b.dataset.day] : 99) : 99;
+    } else if (col === 'date') {
+      // Sort by date string — "Mar 19" etc.  Parse to comparable number.
+      var monthVal = {'Mar':3,'Apr':4};
+      function dateToNum(d) {
+        if (!d) return 9999;
+        var parts = d.split(' ');
+        return (monthVal[parts[0]] || 0) * 100 + parseInt(parts[1] || '0');
+      }
+      va = dateToNum(a.dataset.date);
+      vb = dateToNum(b.dataset.date);
     } else if (col === 'kalshi') {
       var kA = a.querySelector('[data-kalshi]');
       var kB = b.querySelector('[data-kalshi]');
@@ -10938,6 +11050,8 @@ function applyFilters() {
   var showEliminated = document.getElementById('filter-eliminated').checked;
   var dayEl = document.getElementById('filter-day');
   var day = dayEl ? dayEl.value : '';
+  var dateEl = document.getElementById('filter-date');
+  var dateVal = dateEl ? dateEl.value : '';
 
   var table = document.getElementById('odds-table');
   if (!table) return;
@@ -10950,6 +11064,7 @@ function applyFilters() {
     if (search && !row.dataset.team.toLowerCase().includes(search)) show = false;
     if (!showEliminated && row.dataset.eliminated === 'true') show = false;
     if (day && row.dataset.day !== day) show = false;
+    if (dateVal && row.dataset.date !== dateVal) show = false;
     row.style.display = show ? '' : 'none';
   });
 }
@@ -11024,6 +11139,25 @@ function sortFvTable(col) {
   });
 
   rows.forEach(function(r) { tbody.appendChild(r); });
+}
+
+// ── FV table filtering ─────────────────────────────────────────────
+function applyFvFilters() {
+  var region = document.getElementById('fv-filter-region').value;
+  var maxSeed = parseInt(document.getElementById('fv-filter-seed').value);
+  var search = document.getElementById('fv-filter-search').value.toLowerCase();
+
+  var table = document.getElementById('fv-table');
+  if (!table) return;
+  var rows = table.querySelectorAll('tbody tr');
+
+  rows.forEach(function(row) {
+    var show = true;
+    if (region && row.dataset.fvRegion !== region) show = false;
+    if (parseInt(row.dataset.fvSeed) > maxSeed) show = false;
+    if (search && !(row.dataset.fvTeam || '').toLowerCase().includes(search)) show = false;
+    row.style.display = show ? '' : 'none';
+  });
 }
 
 // ── Floating tooltip for info icons ────────────────────────────────

@@ -173,6 +173,11 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     current_idx = ROUNDS.index(current_round) if current_round in ROUNDS else 0
     visible_rounds = ROUNDS[current_idx:]
 
+    # Show the game-date / day-of-week column when individual games happen
+    # on distinct calendar days (R64, R32).  Later rounds (S16+) have all
+    # games on the same day(s) so the column adds no information.
+    show_date_column = current_round in ("R64", "R32")
+
     # "Win & Out" = P(advance past current round) - P(advance past next round)
     # i.e. wins the current game but loses the following one
     win_rnd = current_round  # the round being played now
@@ -217,6 +222,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "region": to.team.region,
             "eliminated": to.team.eliminated,
             "game_day": to.game_day or "",
+            "game_date": to.game_date or "",
             "kalshi_prob": to.kalshi_prob,
             "kalshi_url": to.kalshi_url,
             "kalshi_display": _prob_display(to.kalshi_prob),
@@ -281,6 +287,15 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     _DAY_ORDER = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]
     game_days_set = {r["game_day"] for r in rows if r["game_day"]}
     game_days = [d for d in _DAY_ORDER if d in game_days_set]
+
+    # Unique game dates for display (keep sorted)
+    game_dates_set = {r["game_date"] for r in rows if r["game_date"]}
+    # Sort by month-day; entries look like "Mar 19", "Apr 4"
+    _MONTH_ORDER = {"Mar": 3, "Apr": 4}
+    game_dates = sorted(
+        game_dates_set,
+        key=lambda d: (_MONTH_ORDER.get(d.split()[0], 0), int(d.split()[1])),
+    )
     # Format survival probability for display
     # Build a lookup: team_name → round_urls dict for suggested-series links
     _team_urls = {to.team.name: to.round_urls for to in odds}
@@ -317,8 +332,10 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         updated_at=now.strftime("%Y-%m-%d %H:%M UTC"),
         team_count=len([r for r in rows if not r["eliminated"]]),
         suggested_series=suggested_series,
+        show_date_column=show_date_column,
         show_day_filter=show_day_filter,
         game_days=game_days,
+        game_dates=game_dates,
         fv_rows=fv_rows,
         fv_future_headers=fv_future_headers,
     )

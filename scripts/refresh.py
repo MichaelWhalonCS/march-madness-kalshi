@@ -42,21 +42,35 @@ def save_snapshot(snapshot: list[dict], snapshot_dir: Path) -> Path:
     return path
 
 
+MIN_TEAMS_WITH_FUTURES = 10  # Below this → data is empty/sample; don't push
+
+
 def main():
     logger.info("Starting refresh", base_url=settings.kalshi_base_url)
 
     # 1. Fetch odds from Kalshi
     odds = fetch_odds()
-    logger.info("Odds fetched", teams=len(odds))
+    teams_with_futures = sum(1 for o in odds if o.round_probs)
+    logger.info("Odds fetched", teams=len(odds), with_futures=teams_with_futures)
 
-    # 2. Generate static HTML
-    html_path = Path(settings.html_output_path)
-    generate_html(odds, html_path)
-
-    # 3. Save snapshot
+    # 2. Save snapshot (always, even for diagnostic purposes)
     snapshot = odds_to_snapshot(odds)
     snapshot_dir = Path(settings.snapshot_dir)
     save_snapshot(snapshot, snapshot_dir)
+
+    # 3. Guard: don't overwrite the live HTML with empty/sample data
+    html_path = Path(settings.html_output_path)
+    if teams_with_futures < MIN_TEAMS_WITH_FUTURES:
+        logger.warning(
+            "Too few teams with futures data — skipping HTML overwrite to "
+            "preserve the existing page.  Snapshot still saved for diagnostics.",
+            teams_with_futures=teams_with_futures,
+            threshold=MIN_TEAMS_WITH_FUTURES,
+        )
+        return
+
+    # 4. Generate static HTML
+    generate_html(odds, html_path)
 
     logger.info("Refresh complete", html=str(html_path))
 

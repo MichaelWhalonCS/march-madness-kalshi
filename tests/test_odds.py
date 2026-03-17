@@ -110,17 +110,19 @@ def test_conditional_prob_none_on_monotonicity_violation():
 
 
 def test_parse_ticker_extracts_day():
-    """_parse_ticker returns (abbr, round_code, day_of_week)."""
-    abbr, rnd, day = _parse_ticker("KXNCAAMBGAME-26MAR19SIEDUKE-DUKE")
+    """_parse_ticker returns (abbr, round_code, day_of_week, game_date)."""
+    abbr, rnd, day, date = _parse_ticker("KXNCAAMBGAME-26MAR19SIEDUKE-DUKE")
     assert abbr == "DUKE"
     assert rnd == "R64"
     assert day == "Thu"
+    assert date == "Mar 19"
 
-    abbr2, rnd2, day2 = _parse_ticker("KXNCAAMBGAME-26MAR21DUKEALA-ALA")
+    abbr2, rnd2, day2, date2 = _parse_ticker("KXNCAAMBGAME-26MAR21DUKEALA-ALA")
     assert abbr2 == "ALA"
     assert rnd2 == "R32"
     assert day2 == "Sat"
+    assert date2 == "Mar 21"
 
     # Invalid ticker
-    a, r, d = _parse_ticker("BADTICKER")
-    assert a is None and r is None and d is None
+    a, r, d, dt = _parse_ticker("BADTICKER")
+    assert a is None and r is None and d is None and dt is None

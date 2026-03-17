@@ -72,6 +72,22 @@ _DATE_TO_DAY: dict[str, str] = {
     "APR06": "Mon",
 }
 
+# Dates → human-readable display string for the "Game Date" column.
+_DATE_TO_DISPLAY: dict[str, str] = {
+    "MAR17": "Mar 17",
+    "MAR18": "Mar 18",
+    "MAR19": "Mar 19",
+    "MAR20": "Mar 20",
+    "MAR21": "Mar 21",
+    "MAR22": "Mar 22",
+    "MAR26": "Mar 26",
+    "MAR27": "Mar 27",
+    "MAR28": "Mar 28",
+    "MAR29": "Mar 29",
+    "APR04": "Apr 4",
+    "APR06": "Apr 6",
+}
+
 # ── Futures configuration ──────────────────────────────────────────────────────
 
 FUTURES_SERIES = "KXMARMADROUND"       # per-round advancement futures
@@ -108,6 +124,8 @@ class TeamOdds:
     kalshi_url: str | None = None
     # Day of week for the team's current-round game (e.g. "Thu", "Fri")
     game_day: str | None = None
+    # Human-readable game date (e.g. "Mar 19")
+    game_date: str | None = None
 
     # Minimum conditional win probability to consider a round "safe" for survivor
     SAFE_THRESHOLD: float = 0.70
@@ -228,11 +246,7 @@ def price_to_prob(market: dict) -> float:
     if bid is not None:
         return bid
 
-    # 3. Midpoint — only when no last price or bid available
-    if bid is not None and ask is not None:
-        return (bid + ask) / 2
-
-    # 4. Ask alone (very illiquid market)
+    # 3. Ask alone (very illiquid market)
     if ask is not None:
         return ask
 
@@ -241,30 +255,32 @@ def price_to_prob(market: dict) -> float:
 
 # ── Market parsing ─────────────────────────────────────────────────────────────
 
-def _parse_ticker(ticker: str) -> tuple[str | None, str | None, str | None]:
-    """Extract (kalshi_abbr, round_code, day_of_week) from a Kalshi market ticker.
+def _parse_ticker(ticker: str) -> tuple[str | None, str | None, str | None, str | None]:
+    """Extract (kalshi_abbr, round_code, day_of_week, game_date) from a Kalshi market ticker.
 
     Ticker format: KXNCAAMBGAME-26MAR19SIEDUKE-DUKE
                    ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^  ^^^^
                    series        date+matchup      team abbr
 
-    Returns (team_kalshi_abbr, round_code, day_of_week) or (None, None, None).
+    Returns (team_kalshi_abbr, round_code, day_of_week, game_date) or
+    (None, None, None, None).
     """
     parts = ticker.split("-")
     if len(parts) < 3 or parts[0] != SERIES_TICKER:
-        return None, None, None
+        return None, None, None, None
 
     team_abbr = parts[-1]  # Last segment is the team abbreviation
     game_part = parts[1]   # e.g. "26MAR19SIEDUKE"
 
     # Extract date: first 7 chars = "26MAR19" → take chars 2..7 = "MAR19"
     if len(game_part) < 7:
-        return None, None, None
+        return None, None, None, None
     date_str = game_part[2:7]  # e.g. "MAR19"
 
     round_code = _DATE_TO_ROUND.get(date_str)
     day_of_week = _DATE_TO_DAY.get(date_str)
-    return team_abbr, round_code, day_of_week
+    game_date = _DATE_TO_DISPLAY.get(date_str)
+    return team_abbr, round_code, day_of_week, game_date
 
 
 # ── Main fetch function ────────────────────────────────────────────────────────
@@ -294,14 +310,15 @@ def _is_closed(mdict: dict) -> bool:
     return status_str.lower() in _CLOSED_STATUSES
 
 
-def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str], dict[str, str]]:
+def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str], dict[str, str], dict[str, str]]:
     """Fetch current-round Kalshi market probabilities, keyed by team name.
 
     Returns:
-        (probs, urls, days) where:
+        (probs, urls, days, dates) where:
             probs: dict team_name → implied probability (0.0–1.0)
             urls:  dict team_name → Kalshi market page URL
             days:  dict team_name → day-of-week abbreviation ("Thu", "Fri", etc.)
+            dates: dict team_name → human-readable game date ("Mar 19", etc.)
         All empty if Kalshi API is unreachable or has no markets.
     """
     try:
@@ -313,11 +330,12 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str], dict[str, s
             markets = markets.to_dicts()
     except Exception:
         logger.warning("Could not fetch Kalshi per-game markets")
-        return {}, {}, {}
+        return {}, {}, {}, {}
 
     probs: dict[str, float] = {}
     urls: dict[str, str] = {}
     days: dict[str, str] = {}
+    dates: dict[str, str] = {}
     skipped = 0
     for market in markets:
         mdict = _market_to_dict(market)
@@ -328,7 +346,7 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str], dict[str, s
 
         ticker = mdict.get("ticker", "")
         event_ticker = mdict.get("event_ticker", "")
-        team_abbr, round_code, day_of_week = _parse_ticker(ticker)
+        team_abbr, round_code, day_of_week, game_date = _parse_ticker(ticker)
         if not team_abbr:
             continue
 
@@ -343,10 +361,12 @@ def _fetch_kalshi_probs() -> tuple[dict[str, float], dict[str, str], dict[str, s
                 urls[team_obj.name] = f"{_KALSHI_MARKET_URL_BASE}/{event_ticker.lower()}"
             if day_of_week:
                 days[team_obj.name] = day_of_week
+            if game_date:
+                dates[team_obj.name] = game_date
             logger.debug("Kalshi market", team=team_obj.name, prob=f"{prob:.1%}", ticker=ticker)
 
     logger.info("Kalshi per-game markets fetched", parsed=len(probs), skipped_closed=skipped)
-    return probs, urls, days
+    return probs, urls, days, dates
 
 
 # ── Kalshi tournament futures ──────────────────────────────────────────────────
@@ -479,7 +499,7 @@ def fetch_odds() -> list[TeamOdds]:
         return _generate_sample_odds()
 
     # 2. Kalshi per-game — current round market prices
-    kalshi_probs, kalshi_urls, kalshi_days = _fetch_kalshi_probs()
+    kalshi_probs, kalshi_urls, kalshi_days, kalshi_dates = _fetch_kalshi_probs()
 
     # 3. Build TeamOdds for every team
     result: list[TeamOdds] = []
@@ -489,6 +509,7 @@ def fetch_odds() -> list[TeamOdds]:
         kalshi_prob = kalshi_probs.get(team.name)
         kalshi_url = kalshi_urls.get(team.name)
         game_day = kalshi_days.get(team.name)
+        game_date = kalshi_dates.get(team.name)
 
         result.append(TeamOdds(
             team=team,
@@ -497,6 +518,7 @@ def fetch_odds() -> list[TeamOdds]:
             kalshi_prob=kalshi_prob,
             kalshi_url=kalshi_url,
             game_day=game_day,
+            game_date=game_date,
         ))
 
     teams_with_futures = sum(1 for to in result if to.round_probs)
@@ -674,6 +696,7 @@ def odds_to_snapshot(odds: list[TeamOdds]) -> list[dict]:
             "kalshi_prob": to.kalshi_prob,
             "kalshi_url": to.kalshi_url,
             "game_day": to.game_day,
+            "game_date": to.game_date,
             "best_pick_round": to.best_pick_round,
             "best_pick_prob": to.best_pick_prob,
         })
