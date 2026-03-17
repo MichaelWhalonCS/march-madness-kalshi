@@ -659,7 +659,13 @@
             data-prob="{{ cell.prob if cell.prob is not none else '' }}"
             title="Game win: {{ cell.cond_display }}"
             style="background: {{ cell.bg_color }}; color: {{ cell.text_color }};">
+          {% if cell.url %}
+          <a href="{{ cell.url }}" target="_blank" rel="noopener"
+             style="color: {{ cell.text_color }}; text-decoration: none;"
+             title="View on Kalshi">{{ cell.display }}</a>
+          {% else %}
           {{ cell.display }}
+          {% endif %}
         </td>
         {% endfor %}
         <td class="col-best{% if not row.best_pick_is_safe %} best-risky{% endif %}">{{ row.best_pick }}</td>

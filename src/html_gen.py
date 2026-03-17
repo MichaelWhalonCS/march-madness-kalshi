@@ -197,6 +197,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
                 "cond_display": _prob_display(cond_prob),
                 "bg_color": _prob_color(cum_prob),
                 "text_color": _prob_text_color(cum_prob),
+                "url": to.round_urls.get(rnd),
             })
 
         # "Win & Out" = P(Make next round) - P(Make round after that)

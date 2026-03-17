@@ -99,6 +99,8 @@ class TeamOdds:
     team: Team
     round_probs: dict[str, float | None] = field(default_factory=dict)
     # round_probs maps round code → implied probability (0.0–1.0), None if no market
+    round_urls: dict[str, str] = field(default_factory=dict)
+    # round_urls maps round code → Kalshi market page URL for that round
 
     # Kalshi per-game market probability for the current round (None if no market)
     kalshi_prob: float | None = None
@@ -356,12 +358,13 @@ def _fetch_all_markets(client, **kwargs) -> list[dict]:
     return [_market_to_dict(m) for m in raw]
 
 
-def _fetch_kalshi_futures() -> dict[str, dict[str, float]]:
+def _fetch_kalshi_futures() -> tuple[dict[str, dict[str, float]], dict[str, dict[str, str]]]:
     """Fetch Kalshi tournament futures and return cumulative round probabilities.
 
     Combines the KXMARMADROUND series (R64 → F4) with the KXMARMAD-26
-    championship event to build a dict:
-        team_name → {round_code → probability (0.0–1.0)}
+    championship event to build:
+        probs: team_name → {round_code → probability (0.0–1.0)}
+        urls:  team_name → {round_code → Kalshi market URL}
 
     This replaces ESPN BPI as the source for multi-round advancement data.
     """
@@ -369,7 +372,7 @@ def _fetch_kalshi_futures() -> dict[str, dict[str, float]]:
         client = get_client()
     except Exception:
         logger.warning("Could not initialise Kalshi client for futures")
-        return {}
+        return {}, {}
 
     # ── 1. Fetch KXMARMADROUND advancement markets ─────────────────────────
     try:
@@ -379,12 +382,14 @@ def _fetch_kalshi_futures() -> dict[str, dict[str, float]]:
         round_markets = []
 
     result: dict[str, dict[str, float]] = {}
+    urls: dict[str, dict[str, str]] = {}
 
     for mdict in round_markets:
         if _is_closed(mdict):
             continue
 
         ticker = mdict.get("ticker", "")
+        event_ticker = mdict.get("event_ticker", "")
         # KXMARMADROUND-26RO32-UGA → parts = ["KXMARMADROUND", "26RO32", "UGA"]
         parts = ticker.split("-")
         if len(parts) < 3:
@@ -404,6 +409,10 @@ def _fetch_kalshi_futures() -> dict[str, dict[str, float]]:
         prob = price_to_prob(mdict)
         if prob > 0:
             result.setdefault(team_obj.name, {})[round_code] = prob
+            if event_ticker:
+                urls.setdefault(team_obj.name, {})[round_code] = (
+                    f"{_KALSHI_FUTURES_URL_BASE}/{event_ticker.lower()}"
+                )
 
     # ── 2. Fetch KXMARMAD-26 championship markets ──────────────────────────
     try:
@@ -430,13 +439,18 @@ def _fetch_kalshi_futures() -> dict[str, dict[str, float]]:
         prob = price_to_prob(mdict)
         if prob > 0:
             result.setdefault(team_obj.name, {})["Championship"] = prob
+            event_ticker = mdict.get("event_ticker", "")
+            if event_ticker:
+                urls.setdefault(team_obj.name, {})["Championship"] = (
+                    f"https://kalshi.com/markets/kxmarmad/{event_ticker.lower()}"
+                )
 
     logger.info(
         "Kalshi futures fetched",
         teams_with_futures=len(result),
         rounds_found=sorted({r for probs in result.values() for r in probs}),
     )
-    return result
+    return result, urls
 
 
 def fetch_odds() -> list[TeamOdds]:
@@ -448,7 +462,7 @@ def fetch_odds() -> list[TeamOdds]:
     """
 
     # 1. Kalshi futures — multi-round cumulative advancement probabilities
-    futures_data = _fetch_kalshi_futures()  # dict: team_name → {round → prob}
+    futures_data, futures_urls = _fetch_kalshi_futures()
 
     if not futures_data:
         logger.warning("No Kalshi futures data — falling back to sample odds")
@@ -461,6 +475,7 @@ def fetch_odds() -> list[TeamOdds]:
     result: list[TeamOdds] = []
     for team in get_all_teams():
         round_probs = futures_data.get(team.name, {})
+        round_urls = futures_urls.get(team.name, {})
         kalshi_prob = kalshi_probs.get(team.name)
         kalshi_url = kalshi_urls.get(team.name)
         game_day = kalshi_days.get(team.name)
@@ -468,6 +483,7 @@ def fetch_odds() -> list[TeamOdds]:
         result.append(TeamOdds(
             team=team,
             round_probs=round_probs,
+            round_urls=round_urls,
             kalshi_prob=kalshi_prob,
             kalshi_url=kalshi_url,
             game_day=game_day,
@@ -643,6 +659,7 @@ def odds_to_snapshot(odds: list[TeamOdds]) -> list[dict]:
             "round_probs": {
                 rnd: prob for rnd, prob in to.round_probs.items()
             },
+            "round_urls": dict(to.round_urls),
             "kalshi_prob": to.kalshi_prob,
             "kalshi_url": to.kalshi_url,
             "game_day": to.game_day,
