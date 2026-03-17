@@ -1,0 +1,1836 @@
+[
+  {
+    "team": "Duke",
+    "seed": 1,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.99,
+      "F4": 0.33,
+      "E8": 0.54,
+      "S16": 0.67,
+      "R32": 0.86,
+      "Championship": 0.2
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.99,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sieduke",
+    "game_day": "Thu",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.8059701492537313
+  },
+  {
+    "team": "UConn",
+    "seed": 2,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.97,
+      "F4": 0.07,
+      "E8": 0.15,
+      "S16": 0.4,
+      "R32": 0.67,
+      "Championship": 0.04
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.96,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20furconn",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.97
+  },
+  {
+    "team": "Michigan St.",
+    "seed": 3,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.95,
+      "F4": 0.05,
+      "E8": 0.11,
+      "S16": 0.33,
+      "R32": 0.58,
+      "Championship": 0.02
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.94,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19ndsumsu",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.95
+  },
+  {
+    "team": "Kansas",
+    "seed": 4,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.91,
+      "F4": 0.03,
+      "E8": 0.06,
+      "S16": 0.13,
+      "R32": 0.45,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.9,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20cbuku",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.91
+  },
+  {
+    "team": "St. John's",
+    "seed": 5,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.85,
+      "F4": 0.04,
+      "E8": 0.09,
+      "S16": 0.16,
+      "R32": 0.5,
+      "Championship": 0.02
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.84,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20unisju",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.85
+  },
+  {
+    "team": "Louisville",
+    "seed": 6,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.67,
+      "F4": 0.03,
+      "E8": 0.05,
+      "S16": 0.14,
+      "R32": 0.31,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.67,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19usflou",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.67
+  },
+  {
+    "team": "UCLA",
+    "seed": 7,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.7,
+      "F4": 0.02,
+      "E8": 0.04,
+      "S16": 0.13,
+      "R32": 0.27,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.69,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20ucfucla",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.7
+  },
+  {
+    "team": "Ohio St.",
+    "seed": 8,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.59,
+      "F4": 0.02,
+      "E8": 0.03,
+      "S16": 0.05,
+      "R32": 0.11,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.58,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19tcuosu",
+    "game_day": "Thu",
+    "best_pick_round": "F4",
+    "best_pick_prob": 0.6666666666666667
+  },
+  {
+    "team": "TCU",
+    "seed": 9,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.45,
+      "F4": 0.01,
+      "E8": 0.02,
+      "S16": 0.02,
+      "R32": 0.06,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.44,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19tcuosu",
+    "game_day": "Thu",
+    "best_pick_round": "F4",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "UCF",
+    "seed": 10,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.32,
+      "R32": 0.08,
+      "S16": 0.03,
+      "E8": 0.02,
+      "F4": 0.02,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.32,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20ucfucla",
+    "game_day": "Fri",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.6666666666666667
+  },
+  {
+    "team": "South Florida",
+    "seed": 11,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.05,
+      "R32": 0.12,
+      "R64": 0.37,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.35,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19usflou",
+    "game_day": "Thu",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.4166666666666667
+  },
+  {
+    "team": "Northern Iowa",
+    "seed": 12,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.05,
+      "R64": 0.17,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.17,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20unisju",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.29411764705882354
+  },
+  {
+    "team": "Cal Baptist",
+    "seed": 13,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.14,
+      "R32": 0.03,
+      "S16": 0.01,
+      "E8": 0.01,
+      "F4": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.11,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20cbuku",
+    "game_day": "Fri",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.33333333333333337
+  },
+  {
+    "team": "N. Dakota St.",
+    "seed": 14,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.02,
+      "R64": 0.09,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.08,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19ndsumsu",
+    "game_day": "Thu",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Furman",
+    "seed": 15,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.07,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.04,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20furconn",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.14285714285714285
+  },
+  {
+    "team": "Siena",
+    "seed": 16,
+    "region": "East",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.02,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.02,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sieduke",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Arizona",
+    "seed": 1,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.99,
+      "F4": 0.33,
+      "E8": 0.53,
+      "S16": 0.71,
+      "R32": 0.89,
+      "Championship": 0.17
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.99,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20liuariz",
+    "game_day": "Fri",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.7464788732394367
+  },
+  {
+    "team": "Purdue",
+    "seed": 2,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.96,
+      "F4": 0.11,
+      "E8": 0.2,
+      "S16": 0.49,
+      "R32": 0.75,
+      "Championship": 0.05
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.98,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20qucpur",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.78125
+  },
+  {
+    "team": "Gonzaga",
+    "seed": 3,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.97,
+      "F4": 0.04,
+      "E8": 0.1,
+      "S16": 0.3,
+      "R32": 0.63,
+      "Championship": 0.02
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.96,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19kenngonz",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.97
+  },
+  {
+    "team": "Arkansas",
+    "seed": 4,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.92,
+      "F4": 0.02,
+      "E8": 0.09,
+      "S16": 0.18,
+      "R32": 0.57,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.91,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19hawark",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.92
+  },
+  {
+    "team": "Wisconsin",
+    "seed": 5,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.82,
+      "F4": 0.02,
+      "E8": 0.07,
+      "S16": 0.12,
+      "R32": 0.41,
+      "Championship": 0.02
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.81,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19hpwis",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.82
+  },
+  {
+    "team": "BYU",
+    "seed": 6,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.56,
+      "F4": 0.02,
+      "E8": 0.03,
+      "S16": 0.12,
+      "R32": 0.24,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": null,
+    "kalshi_url": null,
+    "game_day": null,
+    "best_pick_round": "F4",
+    "best_pick_prob": 0.6666666666666667
+  },
+  {
+    "team": "Miami (FL)",
+    "seed": 7,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.56,
+      "F4": 0.01,
+      "E8": 0.02,
+      "S16": 0.07,
+      "R32": 0.16,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.55,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20mizzmia",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.56
+  },
+  {
+    "team": "Villanova",
+    "seed": 8,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.46,
+      "F4": 0.02,
+      "E8": 0.01,
+      "S16": 0.02,
+      "R32": 0.05,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.46,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20usuvill",
+    "game_day": "Fri",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Utah St.",
+    "seed": 9,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R32": 0.08,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.03,
+      "R64": 0.57,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.57,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20usuvill",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.57
+  },
+  {
+    "team": "Missouri",
+    "seed": 10,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.48,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.05,
+      "R32": 0.11,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.47,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20mizzmia",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.48
+  },
+  {
+    "team": "Texas",
+    "seed": 11,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.22,
+      "F4": 0.06,
+      "E8": 0.01,
+      "S16": 0.02,
+      "R32": 0.09,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.51,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar17texncst",
+    "game_day": "Tue",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "NC State",
+    "seed": 11,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.24,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.04,
+      "R32": 0.08,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.51,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar17texncst",
+    "game_day": "Tue",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "High Point",
+    "seed": 12,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.21,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.04
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16"
+    },
+    "kalshi_prob": 0.2,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19hpwis",
+    "game_day": "Thu",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.25
+  },
+  {
+    "team": "Hawai'i",
+    "seed": 13,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.1,
+      "R32": 0.03,
+      "S16": 0.01,
+      "E8": 0.01,
+      "F4": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.1,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19hawark",
+    "game_day": "Thu",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.33333333333333337
+  },
+  {
+    "team": "Kennesaw St.",
+    "seed": 14,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.09,
+      "R32": 0.01,
+      "S16": 0.01,
+      "E8": 0.01,
+      "F4": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.06,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19kenngonz",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.11111111111111112
+  },
+  {
+    "team": "Queens",
+    "seed": 15,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.04,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.04,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.03,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20qucpur",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.25
+  },
+  {
+    "team": "LIU",
+    "seed": 16,
+    "region": "West",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.02,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.02,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20liuariz",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Florida",
+    "seed": 1,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.99,
+      "F4": 0.21,
+      "E8": 0.37,
+      "S16": 0.58,
+      "R32": 0.81,
+      "Championship": 0.1
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": null,
+    "kalshi_url": null,
+    "game_day": null,
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.7160493827160492
+  },
+  {
+    "team": "Houston",
+    "seed": 2,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.98,
+      "F4": 0.15,
+      "E8": 0.28,
+      "S16": 0.48,
+      "R32": 0.77,
+      "Championship": 0.07
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.97,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19idhohou",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.7857142857142857
+  },
+  {
+    "team": "Illinois",
+    "seed": 3,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.96,
+      "F4": 0.12,
+      "E8": 0.2,
+      "S16": 0.41,
+      "R32": 0.78,
+      "Championship": 0.04
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.97,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19pennill",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.8125000000000001
+  },
+  {
+    "team": "Nebraska",
+    "seed": 4,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.02,
+      "E8": 0.06,
+      "S16": 0.14,
+      "R32": 0.42,
+      "R64": 0.87,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.9,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19troyneb",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.87
+  },
+  {
+    "team": "Vanderbilt",
+    "seed": 5,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.86,
+      "F4": 0.05,
+      "E8": 0.1,
+      "S16": 0.22,
+      "R32": 0.55,
+      "Championship": 0.02
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.85,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19mcnsvan",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.86
+  },
+  {
+    "team": "North Carolina",
+    "seed": 6,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.57,
+      "F4": 0.05,
+      "E8": 0.02,
+      "S16": 0.04,
+      "R32": 0.14,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.57,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19vcuunc",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.57
+  },
+  {
+    "team": "Saint Mary's",
+    "seed": 7,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.57,
+      "F4": 0.01,
+      "E8": 0.02,
+      "S16": 0.05,
+      "R32": 0.16,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.61,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19txamsmc",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.57
+  },
+  {
+    "team": "Clemson",
+    "seed": 8,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.45,
+      "F4": 0.04,
+      "E8": 0.01,
+      "S16": 0.03,
+      "R32": 0.08,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.45,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20iowaclem",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.45
+  },
+  {
+    "team": "Iowa",
+    "seed": 9,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.58,
+      "F4": 0.01,
+      "E8": 0.02,
+      "S16": 0.05,
+      "R32": 0.13,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.57,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20iowaclem",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.58
+  },
+  {
+    "team": "Texas A&M",
+    "seed": 10,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.43,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.03,
+      "R32": 0.1,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.41,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19txamsmc",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.43
+  },
+  {
+    "team": "VCU",
+    "seed": 11,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.46,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.03,
+      "R32": 0.09,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.45,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19vcuunc",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.46
+  },
+  {
+    "team": "McNeese",
+    "seed": 12,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.16,
+      "F4": 0.06,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.05,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.16,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19mcnsvan",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.3125
+  },
+  {
+    "team": "Troy",
+    "seed": 13,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.03,
+      "R64": 0.14,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.11,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19troyneb",
+    "game_day": "Thu",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.33333333333333337
+  },
+  {
+    "team": "Penn",
+    "seed": 14,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.06,
+      "R32": 0.01,
+      "S16": 0.01,
+      "E8": 0.01,
+      "F4": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.04,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19pennill",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.16666666666666669
+  },
+  {
+    "team": "Idaho",
+    "seed": 15,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.04,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.04,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.03,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19idhohou",
+    "game_day": "Thu",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.25
+  },
+  {
+    "team": "Prairie View A&M",
+    "seed": 16,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.02,
+      "R32": 0.01,
+      "S16": 0.01,
+      "E8": 0.03,
+      "F4": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.41,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar18pvleh",
+    "game_day": "Wed",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Lehigh",
+    "seed": 16,
+    "region": "South",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.03,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.61,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar18pvleh",
+    "game_day": "Wed",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.33333333333333337
+  },
+  {
+    "team": "Michigan",
+    "seed": 1,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.99,
+      "F4": 0.33,
+      "E8": 0.54,
+      "S16": 0.72,
+      "R32": 0.88,
+      "Championship": 0.18
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": null,
+    "kalshi_url": null,
+    "game_day": null,
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.7500000000000001
+  },
+  {
+    "team": "Iowa St.",
+    "seed": 2,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.99,
+      "F4": 0.12,
+      "E8": 0.24,
+      "S16": 0.52,
+      "R32": 0.77,
+      "Championship": 0.05
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.98,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20tnstisu",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.7777777777777778
+  },
+  {
+    "team": "Virginia",
+    "seed": 3,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.95,
+      "F4": 0.03,
+      "E8": 0.09,
+      "S16": 0.22,
+      "R32": 0.54,
+      "Championship": 0.02
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.95,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20wrstuva",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.95
+  },
+  {
+    "team": "Alabama",
+    "seed": 4,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.84,
+      "F4": 0.03,
+      "E8": 0.06,
+      "S16": 0.16,
+      "R32": 0.54,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.87,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20hofala",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.84
+  },
+  {
+    "team": "Texas Tech",
+    "seed": 5,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.74,
+      "F4": 0.03,
+      "E8": 0.04,
+      "S16": 0.08,
+      "R32": 0.34,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.73,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20akrttu",
+    "game_day": "Fri",
+    "best_pick_round": "F4",
+    "best_pick_prob": 0.75
+  },
+  {
+    "team": "Tennessee",
+    "seed": 6,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.72,
+      "F4": 0.03,
+      "E8": 0.06,
+      "S16": 0.17,
+      "R32": 0.4,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": null,
+    "kalshi_url": null,
+    "game_day": null,
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.72
+  },
+  {
+    "team": "Kentucky",
+    "seed": 7,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.62,
+      "F4": 0.02,
+      "E8": 0.02,
+      "S16": 0.09,
+      "R32": 0.18,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.61,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20scuuk",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.62
+  },
+  {
+    "team": "Georgia",
+    "seed": 8,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.02,
+      "R32": 0.09,
+      "R64": 0.6,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.59,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sluuga",
+    "game_day": "Thu",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.6
+  },
+  {
+    "team": "Saint Louis",
+    "seed": 9,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.02,
+      "R32": 0.06,
+      "R64": 0.43,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.42,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19sluuga",
+    "game_day": "Thu",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Santa Clara",
+    "seed": 10,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.02,
+      "E8": 0.01,
+      "S16": 0.03,
+      "R32": 0.09,
+      "R64": 0.42,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.4,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20scuuk",
+    "game_day": "Fri",
+    "best_pick_round": "Championship",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Miami (OH)",
+    "seed": 11,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.02,
+      "E8": 0.01,
+      "S16": 0.02,
+      "R32": 0.03,
+      "R64": 0.06,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.29,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar18mohsmu",
+    "game_day": "Wed",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.6666666666666667
+  },
+  {
+    "team": "SMU",
+    "seed": 11,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.25,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.02,
+      "R32": 0.08,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.73,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar18mohsmu",
+    "game_day": "Wed",
+    "best_pick_round": "E8",
+    "best_pick_prob": 0.5
+  },
+  {
+    "team": "Akron",
+    "seed": 12,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R32": 0.07,
+      "S16": 0.01,
+      "E8": 0.01,
+      "F4": 0.01,
+      "R64": 0.29,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.29,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20akrttu",
+    "game_day": "Fri",
+    "best_pick_round": "R64",
+    "best_pick_prob": 0.29
+  },
+  {
+    "team": "Hofstra",
+    "seed": 13,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.18,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.04,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.15,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20hofala",
+    "game_day": "Fri",
+    "best_pick_round": "S16",
+    "best_pick_prob": 0.25
+  },
+  {
+    "team": "Wright St.",
+    "seed": 14,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.09,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.06,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20wrstuva",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.11111111111111112
+  },
+  {
+    "team": "Tennessee St.",
+    "seed": 15,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.06,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.03,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar20tnstisu",
+    "game_day": "Fri",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.16666666666666669
+  },
+  {
+    "team": "UMBC",
+    "seed": 16,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "F4": 0.01,
+      "E8": 0.04,
+      "S16": 0.01,
+      "R32": 0.01,
+      "R64": 0.03,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.53,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar17umbchow",
+    "game_day": "Tue",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.33333333333333337
+  },
+  {
+    "team": "Howard",
+    "seed": 16,
+    "region": "Midwest",
+    "eliminated": false,
+    "round_probs": {
+      "R64": 0.02,
+      "F4": 0.01,
+      "E8": 0.01,
+      "S16": 0.01,
+      "R32": 0.01,
+      "Championship": 0.01
+    },
+    "round_urls": {
+      "R64": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26ro32",
+      "F4": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26t2",
+      "E8": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26f4",
+      "S16": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26e8",
+      "R32": "https://kalshi.com/markets/kxmarmadround/kxmarmadround-26s16",
+      "Championship": "https://kalshi.com/markets/kxmarmad/kxmarmad-26"
+    },
+    "kalshi_prob": 0.48,
+    "kalshi_url": "https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar17umbchow",
+    "game_day": "Tue",
+    "best_pick_round": "R32",
+    "best_pick_prob": 0.5
+  }
+]

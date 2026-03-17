@@ -129,9 +129,17 @@ class TeamOdds:
                 prev = self.round_probs.get(prev_rnd)
                 curr = self.round_probs.get(rnd)
                 if prev and prev > 0 and curr is not None:
-                    # Clamp to [0, 1] — thin/illiquid markets can cause
-                    # monotonicity violations where curr > prev.
-                    result[rnd] = min(curr / prev, 1.0)
+                    ratio = curr / prev
+                    if ratio >= 1.0:
+                        # Monotonicity violation (curr > prev) or equal
+                        # cumulative probs — both indicate unreliable
+                        # market data.  Equal probs typically occur at
+                        # the 1¢ minimum tick where the market can't
+                        # express differences between rounds.  Return
+                        # None so downstream consumers skip this round.
+                        result[rnd] = None
+                    else:
+                        result[rnd] = ratio
                 else:
                     result[rnd] = None
         return result

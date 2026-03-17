@@ -95,17 +95,18 @@ def test_team_odds_empty():
     assert odds.game_day is None
 
 
-def test_conditional_prob_clamped_at_one():
-    """Monotonicity violations in thin markets should be clamped to 1.0."""
+def test_conditional_prob_none_on_monotonicity_violation():
+    """Monotonicity violations and equal cumulative probs yield None (unreliable data)."""
     team = Team(name="Queens", seed=15, region="West")
-    # E8=0.04, S16=0.01 → raw conditional = 4.0, should be clamped to 1.0
+    # E8=0.04 > S16=0.01 → violation, conditional should be None
+    # S16=0.01 == R32=0.01 → equal (1¢ tick artifact), also None
     odds = TeamOdds(
         team=team,
         round_probs={"R64": 0.04, "R32": 0.01, "S16": 0.01, "E8": 0.04},
     )
     conds = odds.conditional_probs()
-    assert conds["S16"] == 1.0  # 0.01/0.01 = 1.0
-    assert conds["E8"] == 1.0   # 0.04/0.01 → clamped to 1.0
+    assert conds["S16"] is None  # 0.01/0.01 = 1.0 → equal probs, unreliable
+    assert conds["E8"] is None   # 0.04/0.01 = 4.0 → monotonicity violation
 
 
 def test_parse_ticker_extracts_day():
