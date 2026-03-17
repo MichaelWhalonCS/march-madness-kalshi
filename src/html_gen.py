@@ -256,6 +256,8 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "team": to.team.name,
             "seed": to.team.seed,
             "region": to.team.region,
+            "game_day": to.game_day or "",
+            "game_date": to.game_date or "",
             "kalshi_url": to.kalshi_url,
             "win_current": fv_data["win_current"],
             "win_current_display": _prob_display(fv_data["win_current"]),
@@ -294,6 +296,15 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     _MONTH_ORDER = {"Mar": 3, "Apr": 4}
     game_dates = sorted(
         game_dates_set,
+        key=lambda d: (_MONTH_ORDER.get(d.split()[0], 0), int(d.split()[1])),
+    )
+
+    # FV table filter options
+    fv_days_set = {r["game_day"] for r in fv_rows if r["game_day"]}
+    fv_days = [d for d in _DAY_ORDER if d in fv_days_set]
+    fv_dates_set = {r["game_date"] for r in fv_rows if r["game_date"]}
+    fv_dates = sorted(
+        fv_dates_set,
         key=lambda d: (_MONTH_ORDER.get(d.split()[0], 0), int(d.split()[1])),
     )
     # Format survival probability for display
@@ -337,6 +348,8 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         game_days=game_days,
         game_dates=game_dates,
         fv_rows=fv_rows,
+        fv_days=fv_days,
+        fv_dates=fv_dates,
         fv_future_headers=fv_future_headers,
     )
 

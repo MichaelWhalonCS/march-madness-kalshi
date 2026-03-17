@@ -855,6 +855,30 @@
     </select>
     <label for="fv-filter-search">Search:</label>
     <input type="text" id="fv-filter-search" placeholder="Team name..." oninput="applyFvFilters()">
+    {% if fv_dates %}
+    <label for="fv-filter-date">Date:</label>
+    <select id="fv-filter-date" onchange="applyFvFilters()">
+      <option value="">All</option>
+      {% for dt in fv_dates %}
+      <option value="{{ dt }}">{{ dt }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+    {% if fv_days %}
+    <label for="fv-filter-day">Day:</label>
+    <select id="fv-filter-day" onchange="applyFvFilters()">
+      <option value="">All</option>
+      {% for day in fv_days %}
+      <option value="{{ day }}">{{ day }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+    <label for="fv-filter-sign">Profile:</label>
+    <select id="fv-filter-sign" onchange="applyFvFilters()">
+      <option value="">All</option>
+      <option value="use-now">Use now (FV ≥ 0)</option>
+      <option value="save-later">Save for later (FV &lt; 0)</option>
+    </select>
   </div>
   <div class="table-wrap">
     <table id="fv-table">
@@ -898,6 +922,7 @@
       <tbody>
         {% for fv in fv_rows %}
         <tr data-fv-team="{{ fv.team }}" data-fv-seed="{{ fv.seed }}" data-fv-region="{{ fv.region }}"
+          data-fv-day="{{ fv.game_day }}" data-fv-date="{{ fv.game_date }}"
             data-fv-win="{{ fv.win_current if fv.win_current is not none else '' }}"
             data-fv-fvw="{{ fv.future_weighted }}"
             data-fv-val="{{ fv.fv }}">
@@ -1196,6 +1221,12 @@ function applyFvFilters() {
   var region = document.getElementById('fv-filter-region').value;
   var maxSeed = parseInt(document.getElementById('fv-filter-seed').value);
   var search = document.getElementById('fv-filter-search').value.toLowerCase();
+  var dateEl = document.getElementById('fv-filter-date');
+  var dateVal = dateEl ? dateEl.value : '';
+  var dayEl = document.getElementById('fv-filter-day');
+  var dayVal = dayEl ? dayEl.value : '';
+  var signEl = document.getElementById('fv-filter-sign');
+  var signVal = signEl ? signEl.value : '';
 
   var table = document.getElementById('fv-table');
   if (!table) return;
@@ -1206,9 +1237,15 @@ function applyFvFilters() {
     if (region && row.dataset.fvRegion !== region) show = false;
     if (parseInt(row.dataset.fvSeed) > maxSeed) show = false;
     if (search && !(row.dataset.fvTeam || '').toLowerCase().includes(search)) show = false;
+    if (dateVal && row.dataset.fvDate !== dateVal) show = false;
+    if (dayVal && row.dataset.fvDay !== dayVal) show = false;
+    if (signVal === 'use-now' && parseFloat(row.dataset.fvVal || '0') < 0) show = false;
+    if (signVal === 'save-later' && parseFloat(row.dataset.fvVal || '0') >= 0) show = false;
     row.style.display = show ? '' : 'none';
   });
 }
+
+applyFvFilters();
 
 // ── Floating tooltip for info icons ────────────────────────────────
 (function() {
