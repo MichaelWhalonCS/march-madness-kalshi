@@ -7,7 +7,6 @@ Usage:
 
 import json
 import sys
-from datetime import UTC, datetime
 from pathlib import Path
 
 # Add project root to path
@@ -15,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import structlog
 
-from src.config import settings
+from src.config import now_in_app_tz, settings
 from src.html_gen import generate_html
 from src.odds import fetch_odds, odds_to_snapshot
 
@@ -34,7 +33,7 @@ logger = structlog.get_logger()
 def save_snapshot(snapshot: list[dict], snapshot_dir: Path) -> Path:
     """Save odds snapshot as JSON file with timestamp."""
     snapshot_dir.mkdir(parents=True, exist_ok=True)
-    now = datetime.now(UTC)
+    now = now_in_app_tz()
     filename = now.strftime("%Y-%m-%dT%H-%M") + ".json"
     path = snapshot_dir / filename
     path.write_text(json.dumps(snapshot, indent=2), encoding="utf-8")

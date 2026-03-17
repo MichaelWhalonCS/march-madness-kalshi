@@ -1,10 +1,30 @@
 """Application configuration using pydantic-settings."""
 
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, tzinfo
 from pathlib import Path
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import model_validator
 from pydantic_settings import BaseSettings
+
+
+APP_TZ_NAME = "America/Chicago"
+
+
+def _resolve_app_timezone() -> tzinfo:
+    """Return Central Time zone, falling back to UTC if tzdata is unavailable."""
+    try:
+        return ZoneInfo(APP_TZ_NAME)
+    except ZoneInfoNotFoundError:
+        return UTC
+
+
+APP_TZ = _resolve_app_timezone()
+
+
+def now_in_app_tz() -> datetime:
+    """Current datetime in app timezone (Central when available)."""
+    return datetime.now(APP_TZ)
 
 # Round start dates for the 2026 NCAA Tournament.
 # Each tuple: (round_code, first game date for that round).
@@ -19,8 +39,8 @@ _ROUND_SCHEDULE = [
 
 
 def _detect_current_round() -> str:
-    """Determine the current tournament round based on today's date (UTC)."""
-    today = datetime.now(UTC).date()
+    """Determine the current tournament round based on today's date (Central time)."""
+    today = now_in_app_tz().date()
     result = "R64"  # default before or at tournament start
     for round_code, start_date in _ROUND_SCHEDULE:
         if today >= start_date:

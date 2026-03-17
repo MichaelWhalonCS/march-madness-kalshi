@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import datetime
 from pathlib import Path
 
 import jinja2
 import structlog
 
-from .config import settings
+from .config import now_in_app_tz, settings
 from .odds import TeamOdds, best_survivor_series
 from .teams import ROUND_LABELS, ROUNDS
 
@@ -166,7 +166,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     # Sort by region, then seed
     sorted_odds = sorted(odds, key=lambda o: (o.team.region, o.team.seed))
 
-    now = datetime.now(UTC)
+    now = now_in_app_tz()
 
     # Determine which rounds to show based on current round
     current_round = settings.current_round
@@ -329,7 +329,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         rounds=visible_rounds,
         current_round=current_round,
         win_out_label=win_out_label,
-        updated_at=now.strftime("%Y-%m-%d %H:%M UTC"),
+        updated_at=now.strftime("%Y-%m-%d %I:%M %p %Z"),
         team_count=len([r for r in rows if not r["eliminated"]]),
         suggested_series=suggested_series,
         show_date_column=show_date_column,
