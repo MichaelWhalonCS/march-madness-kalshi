@@ -3,9 +3,9 @@
 import tempfile
 from pathlib import Path
 
-from src.html_gen import _prob_color, _prob_display, generate_html
+from src.html_gen import _compute_future_value, _prob_color, _prob_display, generate_html
 from src.odds import TeamOdds
-from src.teams import Team
+from src.teams import ROUNDS, Team
 
 
 def test_prob_display():
@@ -51,6 +51,8 @@ def test_generate_html_creates_file():
         assert "kalshi.com/markets/kxncaambgame/kxncaambgame-26mar19test" in content
         # Day column should show for R64
         assert "Thu" in content
+        # FV table should appear for teams with data
+        assert "Future Value" in content
         # Info section should have methodology explanations
         assert "Tournament Futures" in content
         assert "Per-Game Markets" in content
@@ -64,3 +66,45 @@ def test_generate_html_empty_odds():
         assert output.exists()
         content = output.read_text(encoding="utf-8")
         assert "No odds data yet" in content
+
+
+def test_compute_future_value_r64():
+    """FV for R64: cond_R64 - (cum_R32 + 2*cum_S16 + 4*cum_E8 + 8*cum_F4 + 16*cum_Champ)."""
+    team = Team(name="Duke", seed=1, region="East")
+    to = TeamOdds(
+        team=team,
+        round_probs={
+            "R64": 0.97, "R32": 0.85, "S16": 0.65,
+            "E8": 0.40, "F4": 0.20, "Championship": 0.10,
+        },
+    )
+    visible = ROUNDS  # all rounds from R64
+    fv = _compute_future_value(to, "R64", visible)
+
+    assert fv["win_current"] == 0.97  # conditional R64 = cumulative R64
+    expected_fw = 0.85 + 2 * 0.65 + 4 * 0.40 + 8 * 0.20 + 16 * 0.10
+    assert abs(fv["future_weighted"] - expected_fw) < 1e-9
+    assert abs(fv["fv"] - (0.97 - expected_fw)) < 1e-9
+    assert len(fv["future_terms"]) == 5  # R32, S16, E8, F4, Championship
+
+
+def test_compute_future_value_later_round():
+    """FV adapts when current round is R32 — fewer future terms."""
+    team = Team(name="Duke", seed=1, region="East")
+    to = TeamOdds(
+        team=team,
+        round_probs={
+            "R64": 0.97, "R32": 0.85, "S16": 0.65,
+            "E8": 0.40, "F4": 0.20, "Championship": 0.10,
+        },
+    )
+    visible = ROUNDS[1:]  # R32 onward
+    fv = _compute_future_value(to, "R32", visible)
+
+    # cond R32 = cum_R32 / cum_R64 = 0.85 / 0.97
+    cond_r32 = 0.85 / 0.97
+    assert abs(fv["win_current"] - cond_r32) < 0.001
+    # Future: S16, E8, F4, Championship with weights 1, 2, 4, 8
+    expected_fw = 0.65 + 2 * 0.40 + 4 * 0.20 + 8 * 0.10
+    assert abs(fv["future_weighted"] - expected_fw) < 1e-9
+    assert len(fv["future_terms"]) == 4

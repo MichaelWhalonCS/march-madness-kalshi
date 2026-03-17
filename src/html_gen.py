@@ -17,6 +17,12 @@ logger = structlog.get_logger()
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "templates"
 
 
+# ── Future Value weights ───────────────────────────────────────────────────────
+# Each subsequent future round is weighted 2× more than the previous one,
+# reflecting increasing survivor-pool value of advancing deeper.
+_FV_BASE = 2  # multiplier base — future_round_i gets weight _FV_BASE^i
+
+
 def _prob_display(prob: float | None) -> str:
     """Format probability for display."""
     if prob is None:
@@ -93,6 +99,60 @@ def _best_pick_sort_value(team_odds: TeamOdds) -> float:
     idx = ROUNDS.index(rnd) if rnd in ROUNDS else 0
     # Round index (0-5) * 10 + probability gives a good sort
     return idx * 10 + prob
+
+
+def _compute_future_value(
+    to: TeamOdds,
+    current_round: str,
+    visible_rounds: list[str],
+) -> dict:
+    """Compute the Weighted Future Value for a team.
+
+    FV = %win_next_rd − (1×cum_future1 + 2×cum_future2 + 4×cum_future3 + …)
+
+    A **high** (positive) FV means the team is useful now but doesn't contribute
+    much to future rounds → use them this round.
+    A **low** (negative) FV means the team has significant remaining value →
+    consider saving them for a later round.
+
+    Returns a dict with:
+      win_current: conditional win probability for the current round
+      future_weighted: the weighted sum of future cumulative probabilities
+      fv: the Future Value score
+      future_terms: list of (round_label, weight, cumulative_prob) tuples
+    """
+    conds = to.conditional_probs()
+    win_current = conds.get(current_round)
+
+    # Future rounds = all visible rounds after the current one
+    current_idx_in_visible = visible_rounds.index(current_round) if current_round in visible_rounds else 0
+    future_rounds = visible_rounds[current_idx_in_visible + 1:]
+
+    future_weighted = 0.0
+    future_terms = []
+    for i, rnd in enumerate(future_rounds):
+        weight = _FV_BASE ** i  # 1, 2, 4, 8, 16 …
+        cum_prob = to.round_probs.get(rnd)
+        prob_val = cum_prob if cum_prob is not None else 0.0
+        future_weighted += weight * prob_val
+        future_terms.append({
+            "round": rnd,
+            "label": ROUND_LABELS.get(rnd, rnd),
+            "weight": weight,
+            "prob": cum_prob,
+        })
+
+    if win_current is not None:
+        fv = win_current - future_weighted
+    else:
+        fv = None
+
+    return {
+        "win_current": win_current,
+        "future_weighted": future_weighted,
+        "fv": fv,
+        "future_terms": future_terms,
+    }
 
 
 def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
@@ -174,6 +234,41 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     # ── Suggested pick series ──────────────────────────────────────────
     suggested_series = best_survivor_series(odds, visible_rounds, top_n=3)
 
+    # ── Future Value table ─────────────────────────────────────────────
+    fv_rows = []
+    for to in sorted_odds:
+        if to.team.eliminated:
+            continue
+        fv_data = _compute_future_value(to, current_round, visible_rounds)
+        if fv_data["fv"] is None:
+            continue
+        fv_rows.append({
+            "team": to.team.name,
+            "seed": to.team.seed,
+            "region": to.team.region,
+            "win_current": fv_data["win_current"],
+            "win_current_display": _prob_display(fv_data["win_current"]),
+            "win_current_bg": _prob_color(fv_data["win_current"]),
+            "win_current_text": _prob_text_color(fv_data["win_current"]),
+            "future_weighted": fv_data["future_weighted"],
+            "future_weighted_display": f"{fv_data['future_weighted']:.2f}",
+            "fv": fv_data["fv"],
+            "fv_display": f"{fv_data['fv']:+.2f}",
+            "future_terms": [
+                {
+                    "label": t["label"],
+                    "weight": t["weight"],
+                    "prob": t["prob"],
+                    "display": _prob_display(t["prob"]),
+                    "weighted": f"{t['weight'] * (t['prob'] or 0):.2f}",
+                    "weighted_val": t["weight"] * (t["prob"] or 0),
+                }
+                for t in fv_data["future_terms"]
+            ],
+        })
+    # Sort by FV descending — highest FV = "use now" at top
+    fv_rows.sort(key=lambda r: r["fv"], reverse=True)
+
     # Collect unique game days for the day-of-week filter (R64/R32 only)
     show_day_filter = current_round in ("R64", "R32")
     # Ordered list of unique days preserving natural weekday order
@@ -191,6 +286,16 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             pick["survival_display"] = f"{survival:.1%}"
             pick["series_rank"] = i + 1
 
+    # FV table column headers (future rounds with weights)
+    fv_future_headers = []
+    current_idx_rounds = visible_rounds.index(current_round) if current_round in visible_rounds else 0
+    for i, rnd in enumerate(visible_rounds[current_idx_rounds + 1:]):
+        weight = _FV_BASE ** i
+        fv_future_headers.append({
+            "label": ROUND_LABELS.get(rnd, rnd),
+            "weight": weight,
+        })
+
     html = template.render(
         rows=rows,
         round_labels=ROUND_LABELS,
@@ -202,6 +307,8 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         suggested_series=suggested_series,
         show_day_filter=show_day_filter,
         game_days=game_days,
+        fv_rows=fv_rows,
+        fv_future_headers=fv_future_headers,
     )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
