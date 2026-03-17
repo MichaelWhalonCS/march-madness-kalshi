@@ -902,23 +902,15 @@
 <script>
 // ── Password gate ──────────────────────────────────────────────────
 (function() {
-  var PW_HASH = 'c6d8b37fdaf421cf'; // first 16 hex chars of simple hash
-  function simpleHash(s) {
-    var h = 0;
-    for (var i = 0; i < s.length; i++) {
-      h = ((h << 5) - h + s.charCodeAt(i)) | 0;
-    }
-    return (h >>> 0).toString(16).padStart(8, '0') +
-           ((h * 2654435761 >>> 0)).toString(16).padStart(8, '0');
-  }
+  var PW = 'feltindonks';
   // Check if already authenticated in this session
-  if (sessionStorage.getItem('mm_auth') === PW_HASH) {
+  if (sessionStorage.getItem('mm_auth') === '1') {
     document.getElementById('pw-overlay').classList.add('hidden');
   }
   window.checkPw = function() {
     var val = document.getElementById('pw-input').value;
-    if (simpleHash(val) === PW_HASH) {
-      sessionStorage.setItem('mm_auth', PW_HASH);
+    if (val === PW) {
+      sessionStorage.setItem('mm_auth', '1');
       document.getElementById('pw-overlay').classList.add('hidden');
     } else {
       document.getElementById('pw-error').style.display = 'block';
