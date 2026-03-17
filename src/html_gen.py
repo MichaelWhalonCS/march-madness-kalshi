@@ -232,8 +232,11 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             "best_pick_sort": _best_pick_sort_value(to),
         })
 
-    # ── Suggested pick series ──────────────────────────────────────────
-    suggested_series = best_survivor_series(odds, visible_rounds, top_n=3)
+    # ── Suggested pick series (disabled — conditional probs from thin
+    #    futures markets are too unreliable for beam search to produce
+    #    trustworthy results; pass empty list to hide the section) ───────
+    # suggested_series = best_survivor_series(odds, visible_rounds, top_n=3)
+    suggested_series: list[list[dict]] = []
 
     # ── Future Value table ─────────────────────────────────────────────
     fv_rows = []
