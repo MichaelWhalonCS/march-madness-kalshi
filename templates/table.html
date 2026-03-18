@@ -982,6 +982,8 @@ function percentToDecimalString(text) {
 
 function normalizeCsvHeader(raw) {
   var h = (raw || '').replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/ [▲▼].*/, '');
+  // Remove trailing tooltip icon artifact rendered as plain text in CSV headers.
+  h = h.replace(/\si$/, '').trim();
   return h;
 }
 
@@ -1155,7 +1157,8 @@ function exportMatchupsCsv() {
 
     var sumProbOk = '';
     if (sum !== null) {
-      sumProbOk = Math.abs(sum - 1.0) <= 0.02 ? 'true' : 'false';
+      var roundedSum = Math.round(sum * 100) / 100;
+      sumProbOk = Math.abs(roundedSum - 1.0) <= 0.0200001 ? 'true' : 'false';
     }
 
     var matchupStatus = 'set';
