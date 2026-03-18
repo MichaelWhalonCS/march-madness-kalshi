@@ -633,7 +633,8 @@
 </div>
 
 <div class="filters">
-  <button class="csv-btn" onclick="exportOddsCsv()" title="Export odds table to CSV">⬇ Export Odds CSV</button>
+  <button class="csv-btn" onclick="exportOddsCsv()" title="Export team-level odds table to CSV">⬇ Export Odds CSV</button>
+  <button class="csv-btn" onclick="exportMatchupsCsv()" title="Export game-level matchups to CSV">⬇ Export Matchups CSV</button>
   <label for="filter-region">Region:</label>
   <select id="filter-region" onchange="applyFilters()">
     <option value="">All</option>
@@ -998,6 +999,128 @@ function exportOddsCsv() {
     rows.push(cells.join(','));
   });
   downloadCsv('march_madness_odds.csv', headers.map(function(h){return '"'+h+'"';}).join(',') + '\n' + rows.join('\n'));
+}
+
+function formatDecimal(value) {
+  if (value === null || value === undefined || !isFinite(value)) return '';
+  return Number(value).toFixed(4).replace(/\.?(0+)$/, '');
+}
+
+function getEventTickerFromUrl(url) {
+  if (!url) return '';
+  var clean = url.split('?')[0].replace(/\/$/, '');
+  var parts = clean.split('/');
+  return parts.length ? parts[parts.length - 1] : '';
+}
+
+function exportMatchupsCsv() {
+  var table = document.getElementById('odds-table');
+  if (!table) return;
+
+  var matchupMap = new Map();
+
+  table.querySelectorAll('tbody tr').forEach(function(tr) {
+    if (tr.style.display === 'none') return;
+
+    var team = tr.dataset.team || '';
+    var seed = tr.dataset.seed || '';
+    var region = tr.dataset.region || '';
+    var date = tr.dataset.date || '';
+
+    var kalshiCell = tr.querySelector('[data-kalshi]');
+    var kalshiProb = null;
+    if (kalshiCell && kalshiCell.dataset.kalshi) {
+      var parsed = parseFloat(kalshiCell.dataset.kalshi);
+      kalshiProb = isFinite(parsed) ? parsed : null;
+    }
+
+    var link = kalshiCell ? kalshiCell.querySelector('a') : null;
+    var marketUrl = link ? link.getAttribute('href') : '';
+    var eventTicker = getEventTickerFromUrl(marketUrl);
+
+    var key = eventTicker || ('NO_MARKET::' + team);
+    if (!matchupMap.has(key)) matchupMap.set(key, []);
+    matchupMap.get(key).push({
+      team: team,
+      seed: seed,
+      region: region,
+      date: date,
+      kalshi_prob: kalshiProb,
+      market_url: marketUrl,
+      event_ticker: eventTicker,
+    });
+  });
+
+  var headers = [
+    'event_ticker',
+    'date',
+    'team_a',
+    'seed_a',
+    'region_a',
+    'prob_a',
+    'team_b',
+    'seed_b',
+    'region_b',
+    'prob_b',
+    'sum_prob',
+    'pair_complete',
+    'sum_prob_ok',
+    'matchup_status',
+    'market_url'
+  ];
+
+  var rows = [];
+  matchupMap.forEach(function(entries, key) {
+    entries.sort(function(a, b) {
+      var pa = (a.kalshi_prob === null) ? -1 : a.kalshi_prob;
+      var pb = (b.kalshi_prob === null) ? -1 : b.kalshi_prob;
+      return pb - pa;
+    });
+
+    var a = entries[0] || {};
+    var b = entries[1] || {};
+    var pairComplete = entries.length >= 2;
+
+    var sum = null;
+    if (a.kalshi_prob !== null && b.kalshi_prob !== null) {
+      sum = a.kalshi_prob + b.kalshi_prob;
+    }
+
+    var sumProbOk = '';
+    if (sum !== null) {
+      sumProbOk = Math.abs(sum - 1.0) <= 0.02 ? 'true' : 'false';
+    }
+
+    var matchupStatus = 'set';
+    if (!pairComplete) {
+      matchupStatus = key.indexOf('NO_MARKET::') === 0 ? 'no_market' : 'tbd_or_first_four';
+    }
+
+    var values = [
+      a.event_ticker || '',
+      a.date || b.date || '',
+      a.team || '',
+      a.seed || '',
+      a.region || '',
+      formatDecimal(a.kalshi_prob),
+      b.team || 'TBD',
+      b.seed || '',
+      b.region || '',
+      formatDecimal(b.kalshi_prob),
+      formatDecimal(sum),
+      pairComplete ? 'true' : 'false',
+      sumProbOk,
+      matchupStatus,
+      a.market_url || b.market_url || ''
+    ];
+
+    rows.push(values.map(function(v) {
+      return '"' + String(v).replace(/"/g, '""') + '"';
+    }).join(','));
+  });
+
+  var headerLine = headers.map(function(h) { return '"' + h + '"'; }).join(',');
+  downloadCsv('march_madness_matchups.csv', headerLine + '\n' + rows.join('\n'));
 }
 
 function exportFvCsv() {
