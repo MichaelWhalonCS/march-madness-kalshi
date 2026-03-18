@@ -980,6 +980,36 @@ function percentToDecimalString(text) {
   });
 }
 
+function normalizeCsvHeader(raw) {
+  var h = (raw || '').replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/ [▲▼].*/, '');
+  return h;
+}
+
+function describeOddsHeader(raw) {
+  var h = normalizeCsvHeader(raw);
+  if (h === 'Team') return 'Team Name';
+  if (h === 'Seed') return 'Seed Number';
+  if (h === 'Region') return 'Region';
+  if (h === 'Date') return 'Game Date (CT)';
+  if (h.indexOf('Kalshi (') === 0) return 'Kalshi Win Probability - Current Game (Decimal)';
+  if (h.indexOf('Win ') === 0 && h.indexOf('& Out') > 0) return 'Win Current Round, Lose Next Round Probability (Decimal)';
+  if (h.indexOf('Make ') === 0 || h === 'Win Title') return 'Cumulative Tournament Probability - ' + h + ' (Decimal)';
+  if (h === 'Best Pick') return 'Best Pick Recommendation';
+  return h;
+}
+
+function describeFvHeader(raw) {
+  var h = normalizeCsvHeader(raw);
+  if (h === 'Team') return 'Team Name';
+  if (h === 'Seed') return 'Seed Number';
+  if (h === 'Region') return 'Region';
+  if (h.indexOf('Win ') === 0) return 'Win Current Round Probability (Decimal)';
+  if (h.indexOf('×') > -1) return 'Weighted Future Term - ' + h + ' (Decimal Contribution)';
+  if (h === 'Future Weighted') return 'Future Value Weighted Sum';
+  if (h === 'Weighted FV') return 'Future Value Score (Positive = Use Now)';
+  return h;
+}
+
 function exportOddsCsv() {
   var table = document.getElementById('odds-table');
   if (!table) return;
@@ -1003,10 +1033,10 @@ function exportOddsCsv() {
 
   var headers = [];
   table.querySelectorAll('thead th').forEach(function(th) {
-    headers.push(th.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/ [▲▼].*/, ''));
+    headers.push(describeOddsHeader(th.textContent));
   });
   // Add opponent as a dedicated CSV column after Team.
-  headers.splice(1, 0, 'Opponent');
+  headers.splice(1, 0, 'Opponent Team (Same Kalshi Matchup)');
 
   var rows = [];
   visibleRows.forEach(function(tr) {
@@ -1089,21 +1119,21 @@ function exportMatchupsCsv() {
   });
 
   var headers = [
-    'event_ticker',
-    'date',
-    'team_a',
-    'seed_a',
-    'region_a',
-    'prob_a',
-    'team_b',
-    'seed_b',
-    'region_b',
-    'prob_b',
-    'sum_prob',
-    'pair_complete',
-    'sum_prob_ok',
-    'matchup_status',
-    'market_url'
+    'Kalshi Event Ticker',
+    'Game Date (CT)',
+    'Team A',
+    'Team A Seed',
+    'Team A Region',
+    'Team A Win Probability (Decimal)',
+    'Team B',
+    'Team B Seed',
+    'Team B Region',
+    'Team B Win Probability (Decimal)',
+    'Sum of Team Probabilities',
+    'Pair Complete (Two Teams Present)',
+    'Sum Within Tolerance (|sum-1| <= 0.02)',
+    'Matchup Status',
+    'Kalshi Market URL'
   ];
 
   var rows = [];
@@ -1165,7 +1195,7 @@ function exportFvCsv() {
   if (!table) return;
   var headers = [];
   table.querySelectorAll('thead th').forEach(function(th) {
-    headers.push(th.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/ [▲▼].*/, ''));
+    headers.push(describeFvHeader(th.textContent));
   });
   var rows = [];
   table.querySelectorAll('tbody tr').forEach(function(tr) {
