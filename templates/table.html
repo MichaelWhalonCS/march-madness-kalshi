@@ -983,19 +983,56 @@ function percentToDecimalString(text) {
 function exportOddsCsv() {
   var table = document.getElementById('odds-table');
   if (!table) return;
+
+  var visibleRows = Array.from(table.querySelectorAll('tbody tr')).filter(function(tr) {
+    return tr.style.display !== 'none';
+  });
+
+  // Build event -> teams map so each team row can derive an opponent.
+  var eventTeams = new Map();
+  visibleRows.forEach(function(tr) {
+    var team = tr.dataset.team || '';
+    var kalshiCell = tr.querySelector('[data-kalshi]');
+    var link = kalshiCell ? kalshiCell.querySelector('a') : null;
+    var marketUrl = link ? link.getAttribute('href') : '';
+    var eventTicker = getEventTickerFromUrl(marketUrl);
+    if (!eventTicker || !team) return;
+    if (!eventTeams.has(eventTicker)) eventTeams.set(eventTicker, []);
+    eventTeams.get(eventTicker).push(team);
+  });
+
   var headers = [];
   table.querySelectorAll('thead th').forEach(function(th) {
     headers.push(th.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/ [▲▼].*/, ''));
   });
+  // Add opponent as a dedicated CSV column after Team.
+  headers.splice(1, 0, 'Opponent');
+
   var rows = [];
-  table.querySelectorAll('tbody tr').forEach(function(tr) {
-    if (tr.style.display === 'none') return;
+  visibleRows.forEach(function(tr) {
+    var team = tr.dataset.team || '';
+    var kalshiCell = tr.querySelector('[data-kalshi]');
+    var link = kalshiCell ? kalshiCell.querySelector('a') : null;
+    var marketUrl = link ? link.getAttribute('href') : '';
+    var eventTicker = getEventTickerFromUrl(marketUrl);
+
+    var opponent = 'TBD';
+    if (eventTicker && eventTeams.has(eventTicker)) {
+      var others = eventTeams.get(eventTicker).filter(function(t) { return t !== team; });
+      if (others.length > 0) {
+        opponent = others[0];
+      } else {
+        opponent = 'TBD (First Four)';
+      }
+    }
+
     var cells = [];
     tr.querySelectorAll('td').forEach(function(td) {
       var text = td.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim();
       text = percentToDecimalString(text);
       cells.push('"' + text.replace(/"/g, '""') + '"');
     });
+    cells.splice(1, 0, '"' + opponent.replace(/"/g, '""') + '"');
     rows.push(cells.join(','));
   });
   downloadCsv('march_madness_odds.csv', headers.map(function(h){return '"'+h+'"';}).join(',') + '\n' + rows.join('\n'));
