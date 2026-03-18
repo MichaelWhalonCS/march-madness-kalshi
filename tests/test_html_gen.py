@@ -43,7 +43,9 @@ def test_generate_html_creates_file():
         assert output.exists()
         content = output.read_text(encoding="utf-8")
         assert "TestTeam" in content
-        assert "95.0%" in content
+        # In R64, the displayed R64 probability now uses Kalshi per-game odds
+        # (0.93) rather than futures "qualify for R32" (0.95).
+        assert "93.0%" in content
         assert "93.0%" in content  # Kalshi odds column
         assert "Kalshi" in content
         assert "March Madness" in content

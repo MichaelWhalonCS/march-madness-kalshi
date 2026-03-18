@@ -190,9 +190,22 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     rows = []
     for to in sorted_odds:
         conds = to.conditional_probs()
+        effective_round_probs = dict(to.round_probs)
+        effective_round_urls = dict(to.round_urls)
+
+        # For R64, per-game Kalshi markets are often cleaner than the
+        # thin "qualify for R32" futures contracts.  When available,
+        # use Kalshi game odds as the effective R64 probability for
+        # display and downstream calculations (Win & Out / FV current-win).
+        if current_round == "R64" and to.kalshi_prob is not None:
+            effective_round_probs["R64"] = to.kalshi_prob
+            if to.kalshi_url:
+                effective_round_urls["R64"] = to.kalshi_url
+            conds["R64"] = to.kalshi_prob
+
         round_cells = []
         for rnd in visible_rounds:
-            cum_prob = to.round_probs.get(rnd)
+            cum_prob = effective_round_probs.get(rnd)
             cond_prob = conds.get(rnd)
             round_cells.append({
                 "round": rnd,
@@ -202,11 +215,11 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
                 "cond_display": _prob_display(cond_prob),
                 "bg_color": _prob_color(cum_prob),
                 "text_color": _prob_text_color(cum_prob),
-                "url": to.round_urls.get(rnd),
+                "url": effective_round_urls.get(rnd),
             })
 
         # "Win & Out" = P(Make next round) - P(Make round after that)
-        win_prob = to.round_probs.get(win_rnd)
+        win_prob = effective_round_probs.get(win_rnd)
         lose_prob = to.round_probs.get(lose_rnd) if lose_rnd else None
         if win_prob is not None and lose_prob is not None:
             win_and_out = win_prob - lose_prob
@@ -250,6 +263,11 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
         if to.team.eliminated:
             continue
         fv_data = _compute_future_value(to, current_round, visible_rounds)
+
+        if current_round == "R64" and to.kalshi_prob is not None:
+            fv_data["win_current"] = to.kalshi_prob
+            fv_data["fv"] = to.kalshi_prob - fv_data["future_weighted"]
+
         if fv_data["fv"] is None:
             continue
         fv_rows.append({
