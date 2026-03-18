@@ -969,6 +969,16 @@ function downloadCsv(filename, csvContent) {
   URL.revokeObjectURL(link.href);
 }
 
+function percentToDecimalString(text) {
+  // Convert percentage tokens like "53%" or "53.0%" to decimal strings ("0.53").
+  return text.replace(/(-?\d+(?:\.\d+)?)%/g, function(_, numStr) {
+    var dec = parseFloat(numStr) / 100;
+    if (!isFinite(dec)) return numStr + '%';
+    // Trim trailing zeros for cleaner CSV values
+    return dec.toFixed(4).replace(/\.?(0+)$/, '');
+  });
+}
+
 function exportOddsCsv() {
   var table = document.getElementById('odds-table');
   if (!table) return;
@@ -982,6 +992,7 @@ function exportOddsCsv() {
     var cells = [];
     tr.querySelectorAll('td').forEach(function(td) {
       var text = td.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim();
+      text = percentToDecimalString(text);
       cells.push('"' + text.replace(/"/g, '""') + '"');
     });
     rows.push(cells.join(','));
@@ -998,9 +1009,11 @@ function exportFvCsv() {
   });
   var rows = [];
   table.querySelectorAll('tbody tr').forEach(function(tr) {
+    if (tr.style.display === 'none') return;
     var cells = [];
     tr.querySelectorAll('td').forEach(function(td) {
       var text = td.textContent.replace(/[\n\r]+/g, ' ').replace(/\s+/g, ' ').trim();
+      text = percentToDecimalString(text);
       cells.push('"' + text.replace(/"/g, '""') + '"');
     });
     rows.push(cells.join(','));
