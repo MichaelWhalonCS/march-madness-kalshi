@@ -163,8 +163,12 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     )
     template = env.get_template("table.html")
 
-    # Sort by region, then seed
-    sorted_odds = sorted(odds, key=lambda o: (o.team.region, o.team.seed))
+    # Default ordering: active teams first, then eliminated teams,
+    # while preserving region/seed ordering within each group.
+    sorted_odds = sorted(
+        odds,
+        key=lambda o: (o.team.eliminated, o.team.region, o.team.seed),
+    )
 
     now = now_in_app_tz()
 
@@ -264,7 +268,13 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
             continue
         fv_data = _compute_future_value(to, current_round, visible_rounds)
 
-        if current_round == "R64" and to.kalshi_prob is not None:
+        # When per-game odds exist, prefer them as the current-round win input
+        # for FV whenever conditional futures cannot represent this round.
+        # This commonly happens later in the tournament when earlier cumulative
+        # rounds (needed for conditional division) are no longer listed.
+        if to.kalshi_prob is not None and (
+            current_round == "R64" or fv_data["win_current"] is None
+        ):
             fv_data["win_current"] = to.kalshi_prob
             fv_data["fv"] = to.kalshi_prob - fv_data["future_weighted"]
 

@@ -110,3 +110,33 @@ def test_compute_future_value_later_round():
     expected_fw = 0.65 + 2 * 0.40 + 4 * 0.20 + 8 * 0.10
     assert abs(fv["future_weighted"] - expected_fw) < 1e-9
     assert len(fv["future_terms"]) == 4
+
+
+def test_generate_html_fv_uses_kalshi_fallback_when_prev_round_missing():
+    """FV should still render in S16 when R32 cumulative market is unavailable."""
+    team = Team(name="FallbackTeam", seed=3, region="South")
+    odds = [
+        TeamOdds(
+            team=team,
+            round_probs={"S16": 0.55, "E8": 0.30, "F4": 0.16, "Championship": 0.06},
+            kalshi_prob=0.60,
+            kalshi_url="https://kalshi.com/markets/kxncaambgame/kxncaambgame-26mar27fallback",
+            game_day="Fri",
+            game_date="Mar 27",
+        ),
+    ]
+
+    from src.html_gen import settings
+
+    original_round = settings.current_round
+    settings.current_round = "S16"
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir) / "index.html"
+            generate_html(odds, output)
+            content = output.read_text(encoding="utf-8")
+            assert "Future Value" in content
+            assert "FallbackTeam" in content
+            assert "60.0%" in content
+    finally:
+        settings.current_round = original_round
