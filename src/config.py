@@ -26,15 +26,16 @@ def now_in_app_tz() -> datetime:
     """Current datetime in app timezone (Central when available)."""
     return datetime.now(APP_TZ)
 
-# Round start dates for the 2026 NCAA Tournament.
-# Each tuple: (round_code, first game date for that round).
+# Survivor-pool round transition dates for 2026 (Central Time).
+# These are pick-window boundaries, not strictly first tipoff times.
+# Example: after R32 ends (Mar 22), we switch to S16 on Mar 23.
 _ROUND_SCHEDULE = [
-    ("R64", date(2026, 3, 17)),          # First Four Mar 17-18, R64 proper Mar 19-20
+    ("R64", date(2026, 3, 17)),
     ("R32", date(2026, 3, 21)),
-    ("S16", date(2026, 3, 26)),
+    ("S16", date(2026, 3, 23)),
     ("E8", date(2026, 3, 28)),
-    ("F4", date(2026, 4, 4)),
-    ("Championship", date(2026, 4, 6)),
+    ("F4", date(2026, 3, 30)),
+    ("Championship", date(2026, 4, 5)),
 ]
 
 

@@ -184,7 +184,7 @@ def generate_html(odds: list[TeamOdds], output_path: Path) -> None:
     next_idx = current_idx + 1
     lose_rnd = ROUNDS[next_idx] if next_idx < len(ROUNDS) else None
 
-    win_out_label = f"Win {ROUND_LABELS.get(win_rnd, win_rnd).replace('Make ', '')} & Out"
+    win_out_label = "Win This Round & Out"
 
     # Build row data for the template
     rows = []
